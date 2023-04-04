@@ -10,6 +10,9 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 \details{
 The user friendly, integrated interface \strong{rolong()} allows users to flexibly choose the fitting methods by specifying the following parameter:
 \tabular{rl}{
+slope: \tab whether to use random intercept and slope model.\cr\cr
+robust: \tab whether to use robust methods for modelling.\cr\cr
+quant: \tab to specify different quantile when using robust methods.\cr\cr
 sparse: \tab whether to use the spike-and-slab priors to impose sparsity.
 }
 

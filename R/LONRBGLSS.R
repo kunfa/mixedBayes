@@ -1,4 +1,4 @@
-LONRBGLSS <- function(y,e,g,w,z,k,max.steps,sparse, structure){
+LONRBGLSS <- function(y,e,g,w,z,k,quant,max.steps,sparse, structure){
 
   n = nrow(g)
   m = ncol(g)
@@ -10,8 +10,8 @@ LONRBGLSS <- function(y,e,g,w,z,k,max.steps,sparse, structure){
   hatSg1 = rep(1,m)
   hatSg21= rep(1,p)
   hatSg22 = rep(1,m)
-  xi1=0
-  xi2 = sqrt(2/(0.5*0.5))
+  xi1=(1-2*quant)/(quant*(1-quant))
+  xi2 = sqrt(2/(quant*(1-quant)))
   hatEtaSq1=1
   hatEtaSq2=1
   r1=1

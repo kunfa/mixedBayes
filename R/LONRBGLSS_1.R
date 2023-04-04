@@ -1,5 +1,5 @@
-LONRBGLSS_1 <- function(y,e,g,w,z,k,max.steps,sparse, structure){
-  
+LONRBGLSS_1 <- function(y,e,g,w,z,k,quant,max.steps,sparse, structure){
+
   n = nrow(g)
   m = ncol(g)
   p = ncol(w)
@@ -9,8 +9,8 @@ LONRBGLSS_1 <- function(y,e,g,w,z,k,max.steps,sparse, structure){
   hatSg1 = rep(1,m)
   hatSg21= rep(1,p)
   hatSg22 = rep(1,m)
-  xi1=0
-  xi2 = sqrt(2/(0.5*0.5))
+  xi1=(1-2*quant)/(quant*(1-quant))
+  xi2 = sqrt(2/(quant*(1-quant)))
   hatEtaSq1=1
   hatEtaSq2=1
   r1=1
@@ -32,7 +32,7 @@ LONRBGLSS_1 <- function(y,e,g,w,z,k,max.steps,sparse, structure){
   sh1=1
   sh0=1
   C = cbind(c(1:k),c(1:k)^2)
-  
+
   if(sparse){
     fit=switch (structure,
                 "group" = RBGLSS_1(y,e,C,g,w,z,max.steps,n,k,hatBeta,hatEta2,hatAlpha,hatTau,hatV,hatSg1,hatSg22,hatAta,invSigAlpha0,
@@ -48,8 +48,8 @@ LONRBGLSS_1 <- function(y,e,g,w,z,k,max.steps,sparse, structure){
                                    hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,progress)
     )
   }
-  
+
   out = list( GS.beta = fit$GS.beta,
               GS.eta = fit$GS.eta)
-  
+
 }
