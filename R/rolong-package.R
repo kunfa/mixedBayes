@@ -20,7 +20,7 @@ NULL
 #' The function rolong() returns a rolong object that contains the posterior estimates of each coefficients.
 #'
 #' @references
-#' Zhou, F., Ren, J., Ma, S. and Wu, C. (2022). The Bayesian regularized quantile varying coefficient model. (submitted)
+#' Fan, K., and Wu, C. (2022). Bayesian quantile variable selection with mixed effects model in the longitudinal study. (submitted)
 #'
 #' Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2022). Robust Bayesian variable selection for gene-environment interactions.
 #' {\emph{Biometrics}, (in press)} \doi{10.1111/biom.13670}

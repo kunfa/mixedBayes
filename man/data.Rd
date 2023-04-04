@@ -3,40 +3,35 @@
 \docType{data}
 \name{data}
 \alias{data}
+\alias{y}
+\alias{e}
+\alias{g}
+\alias{w}
+\alias{k}
 \title{simulated data for demonstrating the features of rolong}
 \format{
-The data object consists of five components: g, y, u, e and coeff. coeff contains the true values of parameters used for generating the response variable \eqn{y}.
+The data object consists of five components: y, e, g, w and k.
 }
 \description{
 Simulated gene expression data for demonstrating the features of rolong.
 }
 \details{
-\strong{The model for generating Y}
+\strong{The data and model setting}
 
-Use subscript \eqn{i} to denote the \eqn{i}th subject. Let \eqn{(\boldsymbol X_{i}, Y_{i}, V_{i}, \boldsymbol E_{i})}, (\eqn{i=1,\ldots,n}) be
-independent and identically distributed random vectors. \eqn{Y_{i}} is a continuous response variable representing the
-disease phenotype. \eqn{\boldsymbol X_{i}=(X_{i0},...,X_{ip})^\top} denotes a \eqn{(1+p)}--dimensional vector of predictors (e.g. genetic factors) with the first element \eqn{X_{i0}=1}.
-The environmental factor \eqn{V_i \in \rm I\!R^1} is a univariate index variable. \eqn{\boldsymbol E_{i}=(E_{i1},...,E_{iq})^\top} is the \eqn{q}-dimensional vector
-of clinical covariates. At a given quantile level \eqn{\tau},
-considering the following quantile varying coefficient model:
-
-\deqn{Y_{i}=\sum_{k=1}^{q} E_{ik} \beta_{k,\tau} +\sum_{j=0}^{p}\gamma_{j,\tau}(V_i)X_{ij} +\epsilon_{i,\tau},}
-where \eqn{\beta_{k,\tau}}'s are the regression coefficients for the clinical covariates and \eqn{\gamma_{j,\tau}(\cdot)}'s are unknown smooth varying-coefficient functions.
-The regression coefficients of \eqn{\boldsymbol X} vary with the univariate index variable \eqn{\boldsymbol v=(v_1,...,v_n)^\top}.
-The \eqn{\epsilon_{i,\tau}} is the random error. For simplicity of notation, the quantile level \eqn{\tau} has been suppressed hereafter.
-
-
-The true model that we used to generate Y:
-\deqn{Y_i=\gamma_0(v_i)+\gamma_1(v_i)X_{i1}+\gamma_2(v_i)X_{i2}+\gamma_3(v_i)X_{i3}+\epsilon_i,}
-where \eqn{\epsilon_i\sim N(0,1)}, \eqn{\gamma_{0}=1.5\sin(0.2\pi*v_i}), \eqn{\gamma_{1}=2\exp(0.2v_i-1)-1.5 }, \eqn{\gamma_{2}=2-2v_i } and \eqn{\gamma_3=-4+(v_i-2)^3/6}.
+Consider a longitudinal study on \eqn{n} subjects with \eqn{k} repeated measurement for each subject. Let \eqn{Y_{ij}} be the measurement for the \eqn{i}th subject at each time point \eqn{j}(\eqn{1\leq i \leq n, 1\leq j \leq k}) .We use a \eqn{m}-dimensional vector \eqn{G_{ij}} to denote the genetics factors, where\eqn{L_{ij} = (L_{ij1},...,L_{ijm})^{T}}. Also, we use \eqn{p}-dimensional vector \eqn{E_{ij}} to denote the treatment factors, where \eqn{T_{ij} = (T_{ij1},...,T_{ijp})^{T}}. \eqn{X_{ij} = (1, j, j^2)^{T}}. \eqn{Z_{ij}} is a \eqn{h \times 1} covariate associated with random effects and \eqn{\alpha_{i}} is a \eqn{h\times 1} vector of random effects.  At the beginning,  the interaction effects is modeled as the product of genomics features and treatment factor with 4 different levels. After representing the treatment factors as three dummy variables, the identification of the lipid by treatment interaction needs to be performed as group level.  Combing the genetics factors, treatment factors and their interactions that associated with the longitudinal phenotype, we have the following mixed-effects model:
+\deqn{Y_{ij} = X_{ij}^{T}\gamma_{0}+E_{ij}^{T}\gamma_{1}+G_{ij}^{T}\gamma_{2}+(G_{ij}\bigotimes E_{ij})^{T}\gamma_{3}+Z_{ij}^{T}\alpha_{i}+\epsilon_{ij}.}
+where \eqn{\gamma_{1}},\eqn{\gamma_{2}},\eqn{\gamma_{3}} are \eqn{p},\eqn{m} and \eqn{mp} dimensional vectors that represent the coefficients of the treatment effects, the genetics effects and interactions effects, respectively. Accommodating the Kronecker product of the \eqn{m} - dimensional vector \eqn{L_{ij}} and the \eqn{p}-dimensional vector \eqn{E_{ij}}, the interactions between genetics and treatment factors can be expressed as a \eqn{mp}-dimensional vector, denoted as the following form:
+\deqn{G_{ij}\bigotimes E_{ij} = [E_{ij1}E_{ij1},E_{ij2}E_{ij2},...,E_{ij1}E_{ijp},E_{ij2}E_{ij1},...,E_{ijm}E_{ijp}]^{T}.}
+When \eqn{h=1}, the model becomes a mixed-effects model with random intercept only.
 }
 \examples{
 data(data)
-g=data$g
+dim(y)
 dim(g)
-coeff=data$coeff
+dim(e)
+dim(w)
+print(k)
 print(coeff)
-
 
 }
 \seealso{
