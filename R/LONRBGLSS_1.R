@@ -1,0 +1,55 @@
+LONRBGLSS_1 <- function(y,e,g,w,z,k,max.steps,sparse, structure){
+  
+  n = nrow(g)
+  m = ncol(g)
+  p = ncol(w)
+  q = ncol(e)-1
+  hatTau=1
+  hatV = matrix(c(rep(1,n*k)),nrow=k)
+  hatSg1 = rep(1,m)
+  hatSg21= rep(1,p)
+  hatSg22 = rep(1,m)
+  xi1=0
+  xi2 = sqrt(2/(0.5*0.5))
+  hatEtaSq1=1
+  hatEtaSq2=1
+  r1=1
+  r2=1
+  a=1
+  b=1
+  hatAta=rep(1,n)
+  hatBeta = rep(1,m)
+  hatEta1 = rep(1,p)
+  hatEta2 = matrix(c(rep(1,p)),nrow=q)
+  hatAlpha = rep(1,q+3)
+  invSigAlpha0 = diag(rep(10^-3,q+3))
+  alpha1=1
+  gamma1=1
+  hatPhiSq=1
+  progress=0
+  hatPi1=1/2
+  hatPi2=1/2
+  sh1=1
+  sh0=1
+  C = cbind(c(1:k),c(1:k)^2)
+  
+  if(sparse){
+    fit=switch (structure,
+                "group" = RBGLSS_1(y,e,C,g,w,z,max.steps,n,k,hatBeta,hatEta2,hatAlpha,hatTau,hatV,hatSg1,hatSg22,hatAta,invSigAlpha0,
+                                 hatPi1,hatPi2,hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,sh1,sh0,progress),
+                "individual" = RBLSS_1(y,e,C,g,w,z,max.steps,n,k,hatBeta,hatEta1,hatAlpha,hatTau,hatV,hatSg1,hatSg21,hatAta,invSigAlpha0,
+                                     hatPi1,hatPi2,hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,sh1,sh0,progress)
+    )
+  }else{
+    fit=switch (structure,
+                "group" =  RBGL_1(y,e,C,g,w,z,max.steps,n,k,hatBeta,hatEta2,hatAlpha,hatTau,hatV,hatSg1,hatSg22,hatAta,invSigAlpha0,
+                                hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,progress),
+                "individual" = RBL_1(y,e,C,g,w,z,max.steps,n,k,hatBeta,hatEta1,hatAlpha,hatTau,hatV,hatSg1,hatSg21,hatAta,invSigAlpha0,
+                                   hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,progress)
+    )
+  }
+  
+  out = list( GS.beta = fit$GS.beta,
+              GS.eta = fit$GS.eta)
+  
+}
