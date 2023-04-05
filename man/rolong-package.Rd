@@ -3,23 +3,26 @@
 \docType{package}
 \name{rolong-package}
 \alias{rolong-package}
-\title{Bayesian quantile variable selection with mixed effects model in longitudinal study}
+\title{Bayesian Quantile Variable Selection with Mixed Effects Model in Longitudinal Study}
 \description{
-In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the intra-cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. Here, we aim at developing novel Bayesian regularized quantile mixed effect models to tackle these challenges.In this package, we have implemented the Gibbs samplers of Bayesian quantile variable selection method in the mixed effects model with the spike-and-slab priors. The Markov Chain Monte Carlo (MCMC) algorithms of the proposed and alternative models can be efficiently performed by using the package.
+In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the inner cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. Here, we aim at developing novel Bayesian regularized quantile mixed effect models to tackle these challenges.In this package, we have implemented the Gibbs samplers of Bayesian quantile variable selection method in the mixed effects model with the spike-and-slab priors. The Markov Chain Monte Carlo algorithms of the proposed and alternative models can be efficiently performed by using the package.
 }
 \details{
 The user friendly, integrated interface \strong{rolong()} allows users to flexibly choose the fitting methods by specifying the following parameter:
 \tabular{rl}{
 slope: \tab whether to use random intercept and slope model.\cr\cr
 robust: \tab whether to use robust methods for modelling.\cr\cr
-quant: \tab to specify different quantile when using robust methods.\cr\cr
+quant: \tab to specify different quantiles when using robust methods.\cr\cr
 sparse: \tab whether to use the spike-and-slab priors to impose sparsity.
 }
 
 The function rolong() returns a rolong object that contains the posterior estimates of each coefficients.
 }
 \references{
-Fan, K., and Wu, C. (2022). Bayesian quantile variable selection with mixed effects model in the longitudinal study. (submitted)
+Fan, K., Wang, W. and Wu, C. (2022). Bayesian Quantile Variable Selection with Mixed Effects Model in the Longitudinal Study. (to be submitted)
+
+Zhou, F., Ren, J.,  Li, G., Jiang, Y., Li, X., Wang, W. and Wu, C. (2019). Penalized Variable Selection for Lipid-Environment Interactions in a Longitudinal Lipidomics Study.
+{\emph{Genes}, 10(12), 1002} \doi{10.3390/genes10121002}
 
 Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2022). Robust Bayesian variable selection for gene-environment interactions.
 {\emph{Biometrics}, (in press)} \doi{10.1111/biom.13670}
@@ -39,14 +42,10 @@ R package version 0.1.0. \url{https://CRAN.R-project.org/package=spinBayes}
 Wu, C., Jiang, Y., Ren, J., Cui, Y. and Ma, S. (2018). Dissecting gene-environment interactions: A penalized robust approach accounting for hierarchical structures.
 {\emph{Statistics in Medicine}, 37:437–456} \doi{10.1002/sim.7518}
 
-Wu, C., Shi, X., Cui, Y. and Ma, S. (2015). A penalized robust semiparametric approach for gene-environment interactions.
-{\emph{Statistics in Medicine}, 34 (30): 4016–4030} \doi{10.1002/sim.6609}
 
 Wu, C., Cui, Y., and Ma, S. (2014). Integrative analysis of gene–environment interactions under a multi–response partially linear varying coefficient model.
 {\emph{Statistics in Medicine}, 33(28), 4988–4998} \doi{10.1002/sim.6287}
 
-Wu, C., Zhong, P.S. and Cui, Y. (2018). Additive varying–coefficient model for nonlinear gene–environment interactions.
-{\emph{Statistical Applications in Genetics and Molecular Biology}, 17(2)} \doi{10.1515/sagmb-2017-0008}
 
 Wu, C., Zhong, P.S. and Cui, Y. (2013). High dimensional variable selection for gene-environment interactions.
 {\emph{Technical Report. Michigan State University.}}

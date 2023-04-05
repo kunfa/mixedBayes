@@ -71,16 +71,20 @@ Please check the references for more details about the prior distributions.
 data(data)
 
 ## default method
-fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group"))
+fit=rolong(y,e,g,w,k,structure=c("group"))
 fit$coefficient
 
 \donttest{
 ## alternative: robust individual selection
-fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("individual"))
+fit=rolong(y,e,g,w,k,structure=c("individual"))
 fit$coefficient
 
 ## alternative: non-robust group selection
-fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=FALSE, sparse=TRUE, structure=c("group"))
+fit=rolong(y,e,g,w,k,robust=FALSE, structure=c("group"))
+fit$coefficient
+
+## alternative: robust group selection under random intercept model
+fit=rolong(y,e,g,w,k,slope=FALSE, structure=c("group"))
 fit$coefficient
 
 }

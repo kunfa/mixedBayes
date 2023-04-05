@@ -5,8 +5,8 @@
 #' @docType data
 #' @keywords datasets
 #' @name data
-#' @aliases data y e g w k
-#' @format The data object consists of five components: y, e, g, w and k.
+#' @aliases data y e g w k coeff
+#' @format The data object consists of six components: y, e, g, w ,k and coeff. coeff contains the true values of parameters used for generating Y.
 #'
 #' @details
 #'

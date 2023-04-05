@@ -8,9 +8,10 @@
 \alias{g}
 \alias{w}
 \alias{k}
+\alias{coeff}
 \title{simulated data for demonstrating the features of rolong}
 \format{
-The data object consists of five components: y, e, g, w and k.
+The data object consists of six components: y, e, g, w ,k and coeff. coeff contains the true values of parameters used for generating Y.
 }
 \description{
 Simulated gene expression data for demonstrating the features of rolong.

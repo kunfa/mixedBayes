@@ -9,10 +9,10 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 //using namespace R;
-//' @export
+
 // [[Rcpp::export()]]
 
-Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: vec z,int maxSteps, int n, int k,arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta,arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq,double aStar, double bStar, double alpha, double gamma, double alpha1,double gamma1)
+Rcpp::List BGL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::vec z,int maxSteps, int n, int k,arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta,arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq,double aStar, double bStar, double alpha, double gamma,double alpha1,double gamma1)
 {
   unsigned int q = e.n_cols-1,m = g.n_cols,p = w.n_cols;
   arma::mat gsAlpha(maxSteps, q+3),
@@ -20,7 +20,7 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
   gseta(maxSteps,p),
   gsAta(maxSteps,n),
   gsInvTauSq1(maxSteps,m),
-  gsInvTauSq2(maxSteps, p);
+  gsInvTauSq2(maxSteps, m);
 
 
   arma::vec
@@ -28,6 +28,8 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
     gsLambdaStar2(maxSteps),
     gsPhiSq(maxSteps),
     gsSigmaSq(maxSteps);
+
+
 
 
   arma::mat mat0,mat1,mat2,ei,gi,wi;
@@ -38,7 +40,6 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
 
   double meanb;
   double varb;
-
 
 
   for (int t = 0; t < maxSteps; t++) {
@@ -79,6 +80,7 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
 
     }
 
+
     gsAlpha.row(t) = hatAlpha.t();
 
     // ata|
@@ -107,7 +109,6 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
 
 
     // Beta|
-
     for(unsigned int j=0;j<m;j++){
       arma::vec res2, res22;
       double A1;
@@ -141,33 +142,40 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
 
     // eta|
 
-    double meane,varcove;
+    arma::vec meane;
+    arma::mat varcove(q,q);
 
-    for(unsigned int j=0;j<p;j++){
+    arma:: mat Tau(q,q);
+    Tau = Tau.eye();
+
+
+    for(unsigned int j=0;j<m;j++){
+      arma::mat A2(q,q);
+      A2 = A2.zeros();
+      arma:: vec B2;
+      B2 = zeros<vec>(q);
+
       arma::vec res3, res33;
-      double A2;
-      A2=0;
-      double B2;
-      B2=0;
 
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
         ei.insert_cols(2, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
-        arma::vec twwDiag = sum(square(wi),0).t();
-        A2 = A2+twwDiag(j);
+
+        A2 = A2+wi.cols((j*q),(j*q+q-1)).t()*wi.cols((j*q),(j*q+q-1));
         res3 = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*hatEta-z*hatAta(i);
-        res33 = res3+wi.col(j)*hatEta(j);
-        B2 = B2+ arma::as_scalar(wi.col(j).t()*res33);
+        res33 = res3+wi.cols((j*q),(j*q+q-1))*hatEta.subvec((j*q),(j*q+q-1));
+        B2 = B2+wi.cols((j*q),(j*q+q-1)).t()*res33;
 
       }
 
+      meane = arma::inv(hatInvTauSq2(j)*Tau+A2)*B2;
 
-      meane = arma::as_scalar(B2/(hatInvTauSq2(j)+A2));
-      varcove = arma::as_scalar(hatSigmaSq/(hatInvTauSq2(j)+A2));
+      varcove = hatSigmaSq*arma::inv(hatInvTauSq2(j)*Tau+A2);
 
-      hatEta(j)=R::rnorm(meane,sqrt(varcove));
+
+      hatEta.subvec((j*q),(j*q+q-1)) = mvrnormCpp(meane,varcove);
 
 
     }
@@ -175,7 +183,36 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
     gseta.row(t) = hatEta.t();
 
 
+    // invTAUsq.star1|
+
+    double lInvTauSq1;
+    lInvTauSq1   = hatLambdaSqStar1;
+    arma::vec muInvTauSq1;
+    muInvTauSq1 = arma::sqrt(hatLambdaSqStar1 * hatSigmaSq / arma::square(hatBeta));
+    for(unsigned int j = 0; j<m; j++){
+      hatInvTauSq1(j) = rinvgaussian(muInvTauSq1(j), lInvTauSq1);
+    }
+
+
+    gsInvTauSq1.row(t) = hatInvTauSq1.t();
+
+    // invTAUsq.star2|
+    double lInvTauSq2;
+    arma:: mat matRStar;
+    arma:: vec tRsRs, muInvTauSq2;
+    lInvTauSq2 = q*hatLambdaSqStar2;
+    matRStar = arma::reshape(hatEta, q, m);
+    tRsRs = sum(arma::square(matRStar), 0).t();
+    muInvTauSq2 = arma::sqrt(q * hatLambdaSqStar2 * hatSigmaSq / tRsRs);
+    for(unsigned int j = 0; j<m; j++){
+      hatInvTauSq2(j) = rinvgaussian(muInvTauSq2(j), lInvTauSq2);
+    }
+
+    gsInvTauSq2.row(t) = hatInvTauSq2.t();
+
+
     // sigma.sq|
+    arma:: vec repInvTauSq;
     double shapeSig, rateSig;
     shapeSig = alpha + n*k/2 + m/2+ p/2;
     double ress;
@@ -189,7 +226,8 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
       res4 = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*hatEta-z*hatAta(i);
       ress = ress+arma::accu(arma::square(res4));
     }
-    rateSig = gamma + 0.5*(ress +arma::accu(square(hatBeta)%hatInvTauSq1)+ arma::accu(square(hatEta) % hatInvTauSq2));
+    repInvTauSq = arma::vectorise(arma::repelem(hatInvTauSq2.t(), q, 1), 0);
+    rateSig = gamma + 0.5*(ress +arma::accu(square(hatBeta)%hatInvTauSq1)+ arma::accu(square(hatEta) % repInvTauSq));
 
     hatSigmaSq = 1/R::rgamma(shapeSig, 1/rateSig);
     gsSigmaSq(t) = hatSigmaSq;
@@ -203,36 +241,6 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
     hatPhiSq = 1/R::rgamma(shapePhi, 1/ratePhi);
     gsPhiSq(t) = hatPhiSq;
 
-    // invTAUsq.star1|
-
-    double lInvTauSq1;
-    lInvTauSq1   = hatLambdaSqStar1;
-    arma::vec muInvTauSq1;
-    muInvTauSq1 = arma::sqrt(hatLambdaSqStar1 * hatSigmaSq / arma::square(hatBeta));
-    for(unsigned int j = 0; j<m; j++){
-
-      hatInvTauSq1(j) = rinvgaussian(muInvTauSq1(j), lInvTauSq1);
-    }
-
-
-
-    gsInvTauSq1.row(t) = hatInvTauSq1.t();
-
-    // invTAUsq.star2|
-
-    double lInvTauSq2;
-    lInvTauSq2 = hatLambdaSqStar2;
-    arma::vec muInvTauSq2;
-    muInvTauSq2= arma::sqrt(hatLambdaSqStar2 * hatSigmaSq / arma::square(hatEta));
-    for(unsigned int j = 0; j<p; j++){
-
-      hatInvTauSq2(j) = rinvgaussian(muInvTauSq2(j), lInvTauSq2);
-    }
-
-
-
-    gsInvTauSq2.row(t) = hatInvTauSq2.t();
-
     // lambda.star1|
     double shapeS1;
     shapeS1= aStar + m;
@@ -243,9 +251,9 @@ Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat
 
     // lambda.star2|
     double shapeS2;
-    shapeS2= aStar + p;
+    shapeS2= aStar + m*(q+1)/2;
     double rateS2;
-    rateS2= bStar + arma::accu(1/hatInvTauSq2)/2;
+    rateS2= bStar + q*arma::accu(1/hatInvTauSq2)/2;
     hatLambdaSqStar2 = R::rgamma(shapeS2, 1/rateS2);
     gsLambdaStar2(t) = hatLambdaSqStar2;
 

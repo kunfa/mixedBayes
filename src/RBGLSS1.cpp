@@ -7,7 +7,7 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 //using namespace R;
-//' @export
+
 // [[Rcpp::export()]]
 
 Rcpp::List RBGLSS_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: vec z,int maxSteps, int n, int k,arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, double hatTau, arma::vec hatV, arma::vec hatSg1,arma::vec hatSg2,arma::vec hatAta, arma::vec invSigAlpha0,double hatPi1,double hatPi2, double hatEtaSq1, double hatEtaSq2,double xi1, double xi2, double r1,double r2,double hatPhiSq,double a, double b, double alpha1,double gamma1, double sh1, double sh0, int progress)
