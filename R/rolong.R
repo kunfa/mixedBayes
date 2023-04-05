@@ -5,6 +5,7 @@
 #' @param y the matrix of response variable. The current version of rolong only supports continuous response.
 #' @param e the matrix of a group of dummy environmental factors variables.
 #' @param w the matrix of interactions between genetic factors and environmental factors.
+#' @param k the total number of time points.
 #' @param iterations the number of MCMC iterations.
 #' @param burn.in the number of iterations for burn-in.
 #' @param slope logical flag. If TRUE, random intercept and slope model will be used.
@@ -40,19 +41,16 @@
 #' ## default method
 
 #' fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group"))
-#' fit$main
-#' fit$inter
+#' fit$coefficient
 #'
 #' \donttest{
 #' ## alternative: robust individual selection
 #' fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("individual"))
-#' fit$main
-#' fit$inter
+#' fit$coefficient
 #'
 #' ## alternative: non-robust group selection
-#' fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=FLASE, sparse=TRUE, structure=c("group"))
-#' fit$main
-#' fit$inter
+#' fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=FALSE, sparse=TRUE, structure=c("group"))
+#' fit$coefficient
 #'
 #' }
 #'

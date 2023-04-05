@@ -28,6 +28,8 @@ rolong(
 
 \item{w}{the matrix of interactions between genetic factors and environmental factors.}
 
+\item{k}{the total number of time points.}
+
 \item{iterations}{the number of MCMC iterations.}
 
 \item{burn.in}{the number of iterations for burn-in.}
@@ -70,19 +72,16 @@ data(data)
 
 ## default method
 fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group"))
-fit$main
-fit$inter
+fit$coefficient
 
 \donttest{
 ## alternative: robust individual selection
 fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("individual"))
-fit$main
-fit$inter
+fit$coefficient
 
 ## alternative: non-robust group selection
-fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=FLASE, sparse=TRUE, structure=c("group"))
-fit$main
-fit$inter
+fit=rolong(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=FALSE, sparse=TRUE, structure=c("group"))
+fit$coefficient
 
 }
 
