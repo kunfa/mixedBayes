@@ -38,7 +38,7 @@ rolong(
 
 \item{robust}{logical flag. If TRUE, robust methods will be used.}
 
-\item{quant}{specify different quantile when applying robust methods.}
+\item{quant}{specify different quantiles when applying robust methods.}
 
 \item{sparse}{logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly.}
 
@@ -74,6 +74,13 @@ data(data)
 fit=rolong(y,e,g,w,k,structure=c("group"))
 fit$coefficient
 
+## Compute TP and FP
+b = selection(fit,sparse=TRUE)
+index = which(coeff!=0)
+pos = which(b != 0)
+tp = length(intersect(index, pos))
+fp = length(pos) - tp
+list(tp=tp, fp=fp)
 \donttest{
 ## alternative: robust individual selection
 fit=rolong(y,e,g,w,k,structure=c("individual"))

@@ -3,8 +3,8 @@ Type: Package
 Title: Bayesian Quantile Variable Selection with Mixed Effects Model in Longitudinal Study
 Version: 1.0
 Date: 2023-04-03
-Author: Kun Fan, Cen Wu
-Maintainer: Kun Fan <kfan@ksu.edu>
+Authors@R: c( person("Kun", "Fan", role = c("aut", "cre") , email = "kfan@ksu.edu"),
+              person("Cen", "Wu", role = "aut"))
 Description: In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the inner cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. Here, we aim at developing novel Bayesian regularized quantile mixed effect models to tackle these challenges.In this package, we have implemented the Gibbs samplers of Bayesian quantile variable selection method in the mixed effects model with the spike-and-slab priors. The Markov Chain Monte Carlo algorithms of the proposed and alternative models can be efficiently performed by using the package.
 Depends: R (>= 4.2.0)
 License: GPL-2

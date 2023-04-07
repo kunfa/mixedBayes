@@ -10,7 +10,7 @@
 #' @param burn.in the number of iterations for burn-in.
 #' @param slope logical flag. If TRUE, random intercept and slope model will be used.
 #' @param robust logical flag. If TRUE, robust methods will be used.
-#' @param quant specify different quantile when applying robust methods.
+#' @param quant specify different quantiles when applying robust methods.
 #' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly.
 #' @param structure structure for interaction effects, two choices are available. "group" for selection on group-level only. "individual" for selection on individual-level only.
 #'
@@ -43,6 +43,14 @@
 #' fit=rolong(y,e,g,w,k,structure=c("group"))
 #' fit$coefficient
 #'
+#'## Compute TP and FP
+#'b = selection(fit,sparse=TRUE)
+#'index = which(coeff!=0)
+#'pos = which(b != 0)
+#'tp = length(intersect(index, pos))
+#'fp = length(pos) - tp
+#'list(tp=tp, fp=fp)
+
 #' \donttest{
 #' ## alternative: robust individual selection
 #' fit=rolong(y,e,g,w,k,structure=c("individual"))
@@ -63,7 +71,6 @@
 rolong <- function(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
 {
   structure = match.arg(structure)
-  this.call = match.call()
 
   if(iterations<1) stop("iterations must be a positive integer.")
   if(is.null(burn.in)){
@@ -96,8 +103,7 @@ rolong <- function(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust
 
   coefficient = list(main=coeff.main, inter=coeff.interaction)
 
-  fit = list(call = this.call, posterior = out, coefficient=coefficient, burn.in = BI, iterations=iterations)
+  fit = list(posterior = out, coefficient=coefficient, burn.in = BI, iterations=iterations)
 
-  class(fit)=c("rolong", class(out))
   fit
 }

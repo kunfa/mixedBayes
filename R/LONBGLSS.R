@@ -45,4 +45,5 @@ LONBGLSS <- function(y,e,g,w,z,k,max.steps,sparse, structure){
   }
   out = list( GS.beta = fit$GS.beta,
               GS.eta = fit$GS.eta)
+  out
 }
