@@ -1,4 +1,4 @@
-LONRBGLSS <- function(y,e,g,w,z,k,quant,max.steps,sparse, structure){
+LONRBGLSS <- function(y,e,C,g,w,z,k,quant,max.steps,sparse, structure){
 
   n = nrow(g)
   m = ncol(g)
@@ -32,7 +32,7 @@ LONRBGLSS <- function(y,e,g,w,z,k,quant,max.steps,sparse, structure){
   hatPi2=1/2
   sh1=1
   sh0=1
-  C = cbind(c(1:k),c(1:k)^2)
+  #C = cbind(c(1:k),c(1:k)^2)
 
   if(sparse){
     fit=switch (structure,

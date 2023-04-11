@@ -2,12 +2,12 @@
 % Please edit documentation in R/selection.R
 \name{selection}
 \alias{selection}
-\title{Variable selection for a rolong object}
+\title{Variable selection for a BayesQBVSML object}
 \usage{
 selection(obj, sparse)
 }
 \arguments{
-\item{obj}{rolong object.}
+\item{obj}{BayesQBVSML object.}
 
 \item{sparse}{logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly..}
 }
@@ -16,33 +16,34 @@ an object of class `selection' is returned, which is a list with component:
 \item{inde}{a vector of indicators of selected effects.}
 }
 \description{
-Variable selection for a rolong object
+Variable selection for a BayesQBVSML object
 }
 \details{
-For class `Sparse', the median probability model (MPM) (Barbieri and Berger, 2004) is used to identify predictors that are significantly associated
-with the response variable. For class `NonSparse', variable selection is based on 95\% credible interval.
+If sparse, the median probability model (MPM) (Barbieri and Berger, 2004) is used to identify predictors that are significantly associated
+with the response variable. Otherwise, variable selection is based on 95\% credible interval.
 Please check the references for more details about the variable selection.
 }
 \examples{
 data(data)
 ## sparse
-fit=rolong(y,e,g,w,k,structure=c("group"))
+fit=BayesQBVSML(y,e,C,g,w,k,structure=c("group"))
 selected=selection(fit,sparse=TRUE)
 selected
 
 \donttest{
 ## non-sparse
-fit=rolong(y,e,g,w,k,sparse=FALSE,structure=c("group"))
+fit=BayesQBVSML(y,e,C,g,w,k,sparse=FALSE,structure=c("group"))
 selected=selection(fit,sparse=FALSE)
 selected
 }
 
 }
 \references{
-Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2020). Robust Bayesian variable selection for gene-environment interactions.
+Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2022). Robust Bayesian variable selection for gene-environment interactions.
+{\emph{Biometrics}, (in press)} \doi{10.1111/biom.13670}
 
 Barbieri, M.M. and Berger, J.O. (2004). Optimal predictive model selection. {\emph{Ann. Statist}, 32(3):870–897}
 }
 \seealso{
-\code{\link{rolong}}
+\code{\link{BayesQBVSML}}
 }

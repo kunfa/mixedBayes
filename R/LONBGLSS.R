@@ -1,4 +1,4 @@
-LONBGLSS <- function(y,e,g,w,z,k,max.steps,sparse, structure){
+LONBGLSS <- function(y,e,C,g,w,z,k,max.steps,sparse, structure){
   n = nrow(g)
   m = ncol(g)
   p = ncol(w)
@@ -26,7 +26,7 @@ LONBGLSS <- function(y,e,g,w,z,k,max.steps,sparse, structure){
   gamma1=1
   mu0=1
   nu0=1
-  C = cbind(c(1:k),c(1:k)^2)
+  #C = cbind(c(1:k),c(1:k)^2)
 
   if(sparse){
     fit=switch (structure,

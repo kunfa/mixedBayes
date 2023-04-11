@@ -1,23 +1,27 @@
-#' @useDynLib rolong, .registration = TRUE
+#' @useDynLib BayesQBVSML, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
 #' @docType package
 #' @keywords overview
-#' @name rolong-package
-#' @title Bayesian Quantile Variable Selection with Mixed Effects Model in Longitudinal Study
-#' @aliases rolong-package
-#' @description In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the inner cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. Here, we aim at developing novel Bayesian regularized quantile mixed effect models to tackle these challenges. In this package, we have implemented the Gibbs samplers of Bayesian quantile variable selection method in the mixed effects model with the spike-and-slab priors. The Markov Chain Monte Carlo algorithms of the proposed and alternative models can be efficiently performed by using the package.
-#'
-#' @details The user friendly, integrated interface \strong{rolong()} allows users to flexibly choose the fitting methods by specifying the following parameter:
+#' @name BayesQBVSML-package
+#' @title Bayesian Quantile Variable Selection with Mixed Effects Model for Gene - Environment Interactions in Longitudinal Studies
+#' @aliases BayesQBVSML-package
+#' @description In this package, we provide a set of Bayesian quantile variable selection methods in the mixed effect models (random intercept and slope model, random intercept model) to dissect important gene - environment interactions for longitudinal studies. A Bayesian quantile regression has been adopted to accommodate data contamination and heavy-tailed distributions in the response/ phenotype. The default method (the proposed method) conducts variable selection by accounting the group level selection on the interaction effects under random intercept and slope model. In particular, the spike--and--slab priors are imposed on both individual and group levels to identify important main and interaction effects.
+#' In addition to the default method, users can also choose different selection structures for the interaction effects (group-level or individual-level), random intercept model, methods without spike--and--slab priors and non-robust methods. In total, \emph{BayesQBVSML} provides 16 different methods (8 robust and 8 non-robust) under both mixed effects models. Among them, robust methods with spike--and--slab priors and the robust method for both individual level selection and group level selection under both mixed effects models have been developed for the first time. Please read the Details below for how to configure the method used.
+
+#' @details The user friendly, integrated interface \strong{BayesQBVSML()} allows users to flexibly choose the fitting methods by specifying the following parameter:
 #' \tabular{rl}{
 #' slope: \tab whether to use random intercept and slope model.\cr\cr
 #' robust: \tab whether to use robust methods for modelling.\cr\cr
 #' quant: \tab to specify different quantiles when using robust methods.\cr\cr
+#' structure: \tab structure for interaction effects.\cr\cr
 #' sparse: \tab whether to use the spike-and-slab priors to impose sparsity.
 #' }
 #'
-#' The function rolong() returns a rolong object that contains the posterior estimates of each coefficients.
+#' The function BayesQBVSML() returns a BayesQBVSML object that contains the posterior estimates of each coefficients.
+#' S3 generic functions selection()and print() are implemented for BayesQBVSML objects.
+#' selection() takes a BayesQBVSML object and returns the variable selection results.
 #'
 #' @references
 #' Fan, K., Wang, W. and Wu, C. (2022). Bayesian Quantile Variable Selection with Mixed Effects Model in the Longitudinal Study. (to be submitted)
@@ -27,6 +31,9 @@ NULL
 #'
 #' Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2022). Robust Bayesian variable selection for gene-environment interactions.
 #' {\emph{Biometrics}, (in press)} \doi{10.1111/biom.13670}
+#'
+#' Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2020). roben: Robust Bayesian Variable Selection for Gene-Environment Interactions.
+#' R package version 0.1.1. \url{https://CRAN.R-project.org/package=roben}
 #'
 #' Wu, C., and Ma, S. (2015). A selective review of robust variable selection with applications in bioinformatics.
 #' {\emph{Briefings in Bioinformatics}, 16(5), 873–883} \doi{10.1093/bib/bbu046}
@@ -51,5 +58,5 @@ NULL
 #' Wu, C., Zhong, P.S. and Cui, Y. (2013). High dimensional variable selection for gene-environment interactions.
 #' {\emph{Technical Report. Michigan State University.}}
 #'
-#' @seealso \code{\link{rolong}}
+#' @seealso \code{\link{BayesQBVSML}}
 NULL

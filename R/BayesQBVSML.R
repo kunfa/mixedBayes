@@ -1,9 +1,10 @@
-#' fit a Bayesian quantile variable selection with mixed effects model in longitudinal study
+#' fit a Bayesian quantile variable selection with mixed effects model for gene - environment interactions in longitudinal studies
 #'
 #' @keywords models
 #' @param g the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
-#' @param y the matrix of response variable. The current version of rolong only supports continuous response.
+#' @param y the matrix of response variable. The current version of BayesQBVSML only supports continuous response.
 #' @param e the matrix of a group of dummy environmental factors variables.
+#' @param C the matrix of time effects.
 #' @param w the matrix of interactions between genetic factors and environmental factors.
 #' @param k the total number of time points.
 #' @param iterations the number of MCMC iterations.
@@ -13,6 +14,11 @@
 #' @param quant specify different quantiles when applying robust methods.
 #' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly.
 #' @param structure structure for interaction effects, two choices are available. "group" for selection on group-level only. "individual" for selection on individual-level only.
+#' @return an object of class `BayesQBVSML' is returned, which is a list with component:
+#' \item{posterior}{the posteriors of coefficients.}
+#' \item{coefficient}{the estimated coefficients.}
+#' \item{burn.in}{the total number of burn-ins.}
+#' \item{iterations}{the total number of iterations.}
 #'
 #' @details Consider the data model described in "\code{\link{data}}":
 #' \deqn{Y_{ij} = X_{ij}^{T}\gamma_{0}+E_{ij}^{T}\gamma_{1}+\sum_{l=1}^{p}G_{ijl}\gamma_{2l}+\sum_{l=1}^{p}W_{ijl}^{T}\gamma_{3l}+Z_{ij}^{T}\alpha_{i}+\epsilon_{ij}.}
@@ -40,7 +46,7 @@
 #'
 #' ## default method
 
-#' fit=rolong(y,e,g,w,k,structure=c("group"))
+#' fit=BayesQBVSML(y,e,C,g,w,k,structure=c("group"))
 #' fit$coefficient
 #'
 #'## Compute TP and FP
@@ -53,22 +59,22 @@
 
 #' \donttest{
 #' ## alternative: robust individual selection
-#' fit=rolong(y,e,g,w,k,structure=c("individual"))
+#' fit=BayesQBVSML(y,e,C,g,w,k,structure=c("individual"))
 #' fit$coefficient
 #'
 #' ## alternative: non-robust group selection
-#' fit=rolong(y,e,g,w,k,robust=FALSE, structure=c("group"))
+#' fit=BayesQBVSML(y,e,C,g,w,k,robust=FALSE, structure=c("group"))
 #' fit$coefficient
 #'
 #' ## alternative: robust group selection under random intercept model
-#' fit=rolong(y,e,g,w,k,slope=FALSE, structure=c("group"))
+#' fit=BayesQBVSML(y,e,C,g,w,k,slope=FALSE, structure=c("group"))
 #' fit$coefficient
 #'
 #' }
 #'
 #' @export
 
-rolong <- function(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
+BayesQBVSML <- function(y,e,C,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
 {
   structure = match.arg(structure)
 
@@ -84,16 +90,16 @@ rolong <- function(y,e,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust
   if(slope){
     z = cbind(rep(1,k),c(1:k))
   if(robust){
-    out = LONRBGLSS(y,e,g,w,z,k,quant,iterations,sparse, structure)
+    out = LONRBGLSS(y,e,C,g,w,z,k,quant,iterations,sparse, structure)
   }else{
-    out = LONBGLSS(y,e,g,w,z,k,iterations,sparse, structure)
+    out = LONBGLSS(y,e,C,g,w,z,k,iterations,sparse, structure)
   }
   }else{
     z = rep(1,k)
     if(robust){
-      out = LONRBGLSS_1(y,e,g,w,z,k,quant,iterations,sparse, structure)
+      out = LONRBGLSS_1(y,e,C,g,w,z,k,quant,iterations,sparse, structure)
     }else{
-      out = LONBGLSS_1(y,e,g,w,z,k,iterations,sparse, structure)
+      out = LONBGLSS_1(y,e,C,g,w,z,k,iterations,sparse, structure)
     }
   }
 
