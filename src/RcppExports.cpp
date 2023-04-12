@@ -13,7 +13,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // BGL
 Rcpp::List BGL(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1);
-RcppExport SEXP _rolong_BGL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
+RcppExport SEXP _BayesQVGEL_BGL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -49,7 +49,7 @@ END_RCPP
 }
 // BGL_1
 Rcpp::List BGL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1);
-RcppExport SEXP _rolong_BGL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
+RcppExport SEXP _BayesQVGEL_BGL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -85,7 +85,7 @@ END_RCPP
 }
 // BGLSS
 Rcpp::List BGLSS(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, double hatPiEta, double hatPiBeta, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double nu0);
-RcppExport SEXP _rolong_BGLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
+RcppExport SEXP _BayesQVGEL_BGLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -125,7 +125,7 @@ END_RCPP
 }
 // BGLSS_1
 Rcpp::List BGLSS_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, double hatPiEta, double hatPiBeta, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double nu0);
-RcppExport SEXP _rolong_BGLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
+RcppExport SEXP _BayesQVGEL_BGLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -165,7 +165,7 @@ END_RCPP
 }
 // BL
 Rcpp::List BL(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1);
-RcppExport SEXP _rolong_BL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
+RcppExport SEXP _BayesQVGEL_BL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -201,7 +201,7 @@ END_RCPP
 }
 // BL_1
 Rcpp::List BL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1);
-RcppExport SEXP _rolong_BL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
+RcppExport SEXP _BayesQVGEL_BL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -237,7 +237,7 @@ END_RCPP
 }
 // BLSS
 Rcpp::List BLSS(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, double hatPiEta, double hatPiBeta, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double nu0);
-RcppExport SEXP _rolong_BLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
+RcppExport SEXP _BayesQVGEL_BLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -277,7 +277,7 @@ END_RCPP
 }
 // BLSS_1
 Rcpp::List BLSS_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta, arma::vec hatInvTauSq1, arma::vec hatInvTauSq2, double hatPiEta, double hatPiBeta, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double nu0);
-RcppExport SEXP _rolong_BLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
+RcppExport SEXP _BayesQVGEL_BLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP hatInvTauSq1SEXP, SEXP hatInvTauSq2SEXP, SEXP hatPiEtaSEXP, SEXP hatPiBetaSEXP, SEXP invSigAlpha0SEXP, SEXP hatLambdaSqStar1SEXP, SEXP hatLambdaSqStar2SEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP nu0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -317,7 +317,7 @@ END_RCPP
 }
 // RBGL
 Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, double hatTau, arma::mat hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat hatAta, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
-RcppExport SEXP _rolong_RBGL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBGL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -357,7 +357,7 @@ END_RCPP
 }
 // RBGL_1
 Rcpp::List RBGL_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::vec hatAta, arma::vec invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
-RcppExport SEXP _rolong_RBGL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBGL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -397,7 +397,7 @@ END_RCPP
 }
 // RBGLSS
 Rcpp::List RBGLSS(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, double hatTau, arma::mat hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat hatAta, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
-RcppExport SEXP _rolong_RBGLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBGLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -441,7 +441,7 @@ END_RCPP
 }
 // RBGLSS_1
 Rcpp::List RBGLSS_1(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::vec hatAta, arma::vec invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
-RcppExport SEXP _rolong_RBGLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBGLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -485,7 +485,7 @@ END_RCPP
 }
 // RBL
 Rcpp::List RBL(arma::mat y, arma:: mat e, arma::mat C, arma::mat g, arma:: mat w, arma:: mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, double hatTau, arma::mat hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat hatAta, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
-RcppExport SEXP _rolong_RBL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBL(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -525,7 +525,7 @@ END_RCPP
 }
 // RBL_1
 Rcpp::List RBL_1(arma::mat y, arma:: mat e, arma::mat C, arma::mat g, arma:: mat w, arma:: vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::vec hatAta, arma::vec invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
-RcppExport SEXP _rolong_RBL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBL_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -565,7 +565,7 @@ END_RCPP
 }
 // RBLSS
 Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma:: mat z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, double hatTau, arma::mat hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat hatAta, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
-RcppExport SEXP _rolong_RBLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBLSS(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -609,7 +609,7 @@ END_RCPP
 }
 // RBLSS_1
 Rcpp::List RBLSS_1(arma::mat y, arma:: mat e, arma::mat C, arma::mat g, arma:: mat w, arma:: vec z, int maxSteps, int n, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::vec hatAta, arma::vec invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
-RcppExport SEXP _rolong_RBLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+RcppExport SEXP _BayesQVGEL_RBLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP CSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP maxStepsSEXP, SEXP nSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP hatAtaSEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -653,26 +653,26 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rolong_BGL", (DL_FUNC) &_rolong_BGL, 26},
-    {"_rolong_BGL_1", (DL_FUNC) &_rolong_BGL_1, 26},
-    {"_rolong_BGLSS", (DL_FUNC) &_rolong_BGLSS, 30},
-    {"_rolong_BGLSS_1", (DL_FUNC) &_rolong_BGLSS_1, 30},
-    {"_rolong_BL", (DL_FUNC) &_rolong_BL, 26},
-    {"_rolong_BL_1", (DL_FUNC) &_rolong_BL_1, 26},
-    {"_rolong_BLSS", (DL_FUNC) &_rolong_BLSS, 30},
-    {"_rolong_BLSS_1", (DL_FUNC) &_rolong_BLSS_1, 30},
-    {"_rolong_RBGL", (DL_FUNC) &_rolong_RBGL, 30},
-    {"_rolong_RBGL_1", (DL_FUNC) &_rolong_RBGL_1, 30},
-    {"_rolong_RBGLSS", (DL_FUNC) &_rolong_RBGLSS, 34},
-    {"_rolong_RBGLSS_1", (DL_FUNC) &_rolong_RBGLSS_1, 34},
-    {"_rolong_RBL", (DL_FUNC) &_rolong_RBL, 30},
-    {"_rolong_RBL_1", (DL_FUNC) &_rolong_RBL_1, 30},
-    {"_rolong_RBLSS", (DL_FUNC) &_rolong_RBLSS, 34},
-    {"_rolong_RBLSS_1", (DL_FUNC) &_rolong_RBLSS_1, 34},
+    {"_BayesQVGEL_BGL", (DL_FUNC) &_BayesQVGEL_BGL, 26},
+    {"_BayesQVGEL_BGL_1", (DL_FUNC) &_BayesQVGEL_BGL_1, 26},
+    {"_BayesQVGEL_BGLSS", (DL_FUNC) &_BayesQVGEL_BGLSS, 30},
+    {"_BayesQVGEL_BGLSS_1", (DL_FUNC) &_BayesQVGEL_BGLSS_1, 30},
+    {"_BayesQVGEL_BL", (DL_FUNC) &_BayesQVGEL_BL, 26},
+    {"_BayesQVGEL_BL_1", (DL_FUNC) &_BayesQVGEL_BL_1, 26},
+    {"_BayesQVGEL_BLSS", (DL_FUNC) &_BayesQVGEL_BLSS, 30},
+    {"_BayesQVGEL_BLSS_1", (DL_FUNC) &_BayesQVGEL_BLSS_1, 30},
+    {"_BayesQVGEL_RBGL", (DL_FUNC) &_BayesQVGEL_RBGL, 30},
+    {"_BayesQVGEL_RBGL_1", (DL_FUNC) &_BayesQVGEL_RBGL_1, 30},
+    {"_BayesQVGEL_RBGLSS", (DL_FUNC) &_BayesQVGEL_RBGLSS, 34},
+    {"_BayesQVGEL_RBGLSS_1", (DL_FUNC) &_BayesQVGEL_RBGLSS_1, 34},
+    {"_BayesQVGEL_RBL", (DL_FUNC) &_BayesQVGEL_RBL, 30},
+    {"_BayesQVGEL_RBL_1", (DL_FUNC) &_BayesQVGEL_RBL_1, 30},
+    {"_BayesQVGEL_RBLSS", (DL_FUNC) &_BayesQVGEL_RBLSS, 34},
+    {"_BayesQVGEL_RBLSS_1", (DL_FUNC) &_BayesQVGEL_RBLSS_1, 34},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_rolong(DllInfo *dll) {
+RcppExport void R_init_BayesQVGEL(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

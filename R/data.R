@@ -1,6 +1,6 @@
-#' simulated data for demonstrating the features of BayesQBVSML
+#' simulated data for demonstrating the features of BayesQVGEL
 #'
-#' Simulated gene expression data for demonstrating the features of BayesQBVSML.
+#' Simulated gene expression data for demonstrating the features of BayesQVGEL.
 #'
 #' @docType data
 #' @keywords datasets
@@ -28,5 +28,5 @@
 #' print(C)
 #' print(coeff)
 #'
-#' @seealso \code{\link{BayesQBVSML}}
+#' @seealso \code{\link{BayesQVGEL}}
 NULL

@@ -1,8 +1,8 @@
-#' fit a Bayesian quantile variable selection with mixed effects model for gene - environment interactions in longitudinal studies
+#' fit a Bayesian quantile variable selection for gene - environment interactions in longitudinal studies
 #'
 #' @keywords models
 #' @param g the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
-#' @param y the matrix of response variable. The current version of BayesQBVSML only supports continuous response.
+#' @param y the matrix of response variable. The current version of BayesQVGEL only supports continuous response.
 #' @param e the matrix of a group of dummy environmental factors variables.
 #' @param C the matrix of time effects.
 #' @param w the matrix of interactions between genetic factors and environmental factors.
@@ -14,7 +14,7 @@
 #' @param quant specify different quantiles when applying robust methods.
 #' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly.
 #' @param structure structure for interaction effects, two choices are available. "group" for selection on group-level only. "individual" for selection on individual-level only.
-#' @return an object of class `BayesQBVSML' is returned, which is a list with component:
+#' @return an object of class `BayesQVGEL' is returned, which is a list with component:
 #' \item{posterior}{the posteriors of coefficients.}
 #' \item{coefficient}{the estimated coefficients.}
 #' \item{burn.in}{the total number of burn-ins.}
@@ -46,7 +46,7 @@
 #'
 #' ## default method
 
-#' fit=BayesQBVSML(y,e,C,g,w,k,structure=c("group"))
+#' fit=BayesQVGEL(y,e,C,g,w,k,structure=c("group"))
 #' fit$coefficient
 #'
 #'## Compute TP and FP
@@ -59,22 +59,22 @@
 
 #' \donttest{
 #' ## alternative: robust individual selection
-#' fit=BayesQBVSML(y,e,C,g,w,k,structure=c("individual"))
+#' fit=BayesQVGEL(y,e,C,g,w,k,structure=c("individual"))
 #' fit$coefficient
 #'
 #' ## alternative: non-robust group selection
-#' fit=BayesQBVSML(y,e,C,g,w,k,robust=FALSE, structure=c("group"))
+#' fit=BayesQVGEL(y,e,C,g,w,k,robust=FALSE, structure=c("group"))
 #' fit$coefficient
 #'
 #' ## alternative: robust group selection under random intercept model
-#' fit=BayesQBVSML(y,e,C,g,w,k,slope=FALSE, structure=c("group"))
+#' fit=BayesQVGEL(y,e,C,g,w,k,slope=FALSE, structure=c("group"))
 #' fit$coefficient
 #'
 #' }
 #'
 #' @export
 
-BayesQBVSML <- function(y,e,C,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
+BayesQVGEL <- function(y,e,C,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
 {
   structure = match.arg(structure)
 

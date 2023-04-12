@@ -10,12 +10,12 @@
 \alias{w}
 \alias{k}
 \alias{coeff}
-\title{simulated data for demonstrating the features of BayesQBVSML}
+\title{simulated data for demonstrating the features of BayesQVGEL}
 \format{
 The data object consists of seven components: y, e, C, g, w ,k and coeff. coeff contains the true values of parameters used for generating Y.
 }
 \description{
-Simulated gene expression data for demonstrating the features of BayesQBVSML.
+Simulated gene expression data for demonstrating the features of BayesQVGEL.
 }
 \details{
 \strong{The data and model setting}
@@ -38,6 +38,6 @@ print(coeff)
 
 }
 \seealso{
-\code{\link{BayesQBVSML}}
+\code{\link{BayesQVGEL}}
 }
 \keyword{datasets}

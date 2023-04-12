@@ -1,16 +1,16 @@
-#' @useDynLib BayesQBVSML, .registration = TRUE
+#' @useDynLib BayesQVGEL, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
 #' @docType package
 #' @keywords overview
-#' @name BayesQBVSML-package
-#' @title Bayesian Quantile Variable Selection with Mixed Effects Model for Gene - Environment Interactions in Longitudinal Studies
-#' @aliases BayesQBVSML-package
+#' @name BayesQVGEL-package
+#' @title Bayesian Quantile Variable Selection for Gene - Environment Interactions in Longitudinal Studies
+#' @aliases BayesQVGEL-package
 #' @description In this package, we provide a set of Bayesian quantile variable selection methods in the mixed effect models (random intercept and slope model, random intercept model) to dissect important gene - environment interactions for longitudinal studies. A Bayesian quantile regression has been adopted to accommodate data contamination and heavy-tailed distributions in the response/ phenotype. The default method (the proposed method) conducts variable selection by accounting the group level selection on the interaction effects under random intercept and slope model. In particular, the spike--and--slab priors are imposed on both individual and group levels to identify important main and interaction effects.
-#' In addition to the default method, users can also choose different selection structures for the interaction effects (group-level or individual-level), random intercept model, methods without spike--and--slab priors and non-robust methods. In total, \emph{BayesQBVSML} provides 16 different methods (8 robust and 8 non-robust) under both mixed effects models. Among them, robust methods with spike--and--slab priors and the robust method for both individual level selection and group level selection under both mixed effects models have been developed for the first time. Please read the Details below for how to configure the method used.
+#' In addition to the default method, users can also choose different selection structures for the interaction effects (group-level or individual-level), random intercept model, methods without spike--and--slab priors and non-robust methods. In total, \emph{BayesQVGEL} provides 16 different methods (8 robust and 8 non-robust) under both mixed effects models. Among them, robust methods with spike--and--slab priors and the robust method for both individual level selection and group level selection under both mixed effects models have been developed for the first time. Please read the Details below for how to configure the method used.
 
-#' @details The user friendly, integrated interface \strong{BayesQBVSML()} allows users to flexibly choose the fitting methods by specifying the following parameter:
+#' @details The user friendly, integrated interface \strong{BayesQVGEL()} allows users to flexibly choose the fitting methods by specifying the following parameter:
 #' \tabular{rl}{
 #' slope: \tab whether to use random intercept and slope model.\cr\cr
 #' robust: \tab whether to use robust methods for modelling.\cr\cr
@@ -19,9 +19,9 @@ NULL
 #' sparse: \tab whether to use the spike-and-slab priors to impose sparsity.
 #' }
 #'
-#' The function BayesQBVSML() returns a BayesQBVSML object that contains the posterior estimates of each coefficients.
-#' S3 generic functions selection()and print() are implemented for BayesQBVSML objects.
-#' selection() takes a BayesQBVSML object and returns the variable selection results.
+#' The function BayesQVGEL() returns a BayesQVGEL object that contains the posterior estimates of each coefficients.
+#' S3 generic functions selection()and print() are implemented for BayesQVGEL objects.
+#' selection() takes a BayesQVGEL object and returns the variable selection results.
 #'
 #' @references
 #' Fan, K., Wang, W. and Wu, C. (2022). Bayesian Quantile Variable Selection with Mixed Effects Model in the Longitudinal Study. (to be submitted)
@@ -58,5 +58,5 @@ NULL
 #' Wu, C., Zhong, P.S. and Cui, Y. (2013). High dimensional variable selection for gene-environment interactions.
 #' {\emph{Technical Report. Michigan State University.}}
 #'
-#' @seealso \code{\link{BayesQBVSML}}
+#' @seealso \code{\link{BayesQVGEL}}
 NULL

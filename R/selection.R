@@ -1,8 +1,8 @@
-#' Variable selection for a BayesQBVSML object
+#' Variable selection for a BayesQVGEL object
 #'
-#' Variable selection for a BayesQBVSML object
+#' Variable selection for a BayesQVGEL object
 #'
-#' @param obj BayesQBVSML object.
+#' @param obj BayesQVGEL object.
 #' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly..
 #'
 #' @details If sparse, the median probability model (MPM) (Barbieri and Berger, 2004) is used to identify predictors that are significantly associated
@@ -19,18 +19,18 @@
 #' @return an object of class `selection' is returned, which is a list with component:
 #' \item{inde}{a vector of indicators of selected effects.}
 #'
-#' @seealso \code{\link{BayesQBVSML}}
+#' @seealso \code{\link{BayesQVGEL}}
 #'
 #' @examples
 #' data(data)
 #' ## sparse
-#' fit=BayesQBVSML(y,e,C,g,w,k,structure=c("group"))
+#' fit=BayesQVGEL(y,e,C,g,w,k,structure=c("group"))
 #' selected=selection(fit,sparse=TRUE)
 #' selected
 #'
 #' \donttest{
 #' ## non-sparse
-#' fit=BayesQBVSML(y,e,C,g,w,k,sparse=FALSE,structure=c("group"))
+#' fit=BayesQVGEL(y,e,C,g,w,k,sparse=FALSE,structure=c("group"))
 #' selected=selection(fit,sparse=FALSE)
 #' selected
 #' }
