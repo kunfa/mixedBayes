@@ -12,8 +12,8 @@ using namespace std;
 
 Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat w, arma:: mat z,int maxSteps, int n, int k,arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, double hatTau, arma::mat hatV, arma::vec hatSg1,arma::vec hatSg2,arma::mat hatAta, arma::mat invSigAlpha0,double hatPi1,double hatPi2, double hatEtaSq1, double hatEtaSq2,double xi1, double xi2, double r1,double r2,double hatPhiSq,double a, double b, double alpha1,double gamma1, double sh1, double sh0, int progress)
 {
-  unsigned int q = e.n_cols-1,m = g.n_cols,p = w.n_cols,c = z.n_cols;
-  arma::mat gsAlpha(maxSteps, q+3),
+  unsigned int q = e.n_cols,m = g.n_cols,p = w.n_cols,c = z.n_cols,o = C.n_cols;
+  arma::mat gsAlpha(maxSteps, q+o),
   gsBeta(maxSteps,m),
   gseta(maxSteps,p),
   gsAta(maxSteps,n*c),
@@ -39,10 +39,10 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
   
   double meane;
   double varcove;
-  arma::vec muV, muS1, muS2,RZoV(c),REoV(q+3),meanAlpha,meanAta,res1;
+  arma::vec muV, muS1, muS2,RZoV(c),REoV(q+o),meanAlpha,meanAta,res1;
   double lambV, xi1Sq = std::pow(xi1, 2), xi2Sq = std::pow(xi2, 2),lj_1, lj_2,u1,u2;
- 
-  arma::mat tZZoV(c,c),tEEoV(q+3,q+3),invhatPhiSq,varAlpha,varAta;
+  
+  arma::mat tZZoV(c,c),tEEoV(q+o,q+o),invhatPhiSq,varAlpha,varAta;
   for (int t = 0; t < maxSteps; t++) {
     
     
@@ -52,13 +52,13 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
     
     
     // alpha|
-    arma::mat A0(q+3,q+3);
+    arma::mat A0(q+o,q+o);
     A0 = A0.zeros();
     arma:: vec B0;
-    B0 = zeros<vec>(q+3);
+    B0 = zeros<vec>(q+o);
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       tEEoV = (ei.each_col()/hatV.col(i)).t() * ei;
@@ -71,13 +71,13 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
     meanAlpha = varAlpha* B0 * hatTau / xi2Sq;
     hatAlpha = mvrnormCpp(meanAlpha, varAlpha);
     gsAlpha.row(t) = hatAlpha.t();
-   
+    
     
     // ata|
     arma::vec res;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       
@@ -93,13 +93,13 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
     }
     
     gsAta.row(t) = arma::vectorise(hatAta).t();
-   
- 
+    
+    
     //v|
-   arma::vec resv;
+    arma::vec resv;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       resv = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*hatEta-z*hatAta.col(i);
@@ -183,7 +183,7 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
       
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
-        ei.insert_cols(2, C);
+        ei.insert_cols(q, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
         double XgXgoV1;
@@ -224,7 +224,7 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
       
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
-        ei.insert_cols(2, C);
+        ei.insert_cols(q, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
         double XgXgoV2;
@@ -284,7 +284,7 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
     
     //tau|
     
-     double shape = a + 3*n*k/2;
+    double shape = a + 3*n*k/2;
     double rest;
     arma::vec restt;
     rest = 0;
@@ -292,7 +292,7 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
     f=0;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       restt = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*hatEta-z*hatAta.col(i)-xi1*hatV.col(i);
@@ -334,7 +334,7 @@ Rcpp::List RBLSS(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat
     Rcpp::Named("GS.tau") = gsTau,
     Rcpp::Named("GS.pi1") = gsPi1,
     Rcpp::Named("GS.pi2") = gsPi2
-    
+  
   );
   
 }

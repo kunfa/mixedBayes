@@ -2,7 +2,7 @@
 % Please edit documentation in R/BayesQVGEL.R
 \name{BayesQVGEL}
 \alias{BayesQVGEL}
-\title{fit a Bayesian quantile variable selection for gene - environment interactions in longitudinal studies}
+\title{fit a Bayesian quantile variable selection for g - e in longitudinal studies}
 \usage{
 BayesQVGEL(
   y,
@@ -25,7 +25,7 @@ BayesQVGEL(
 
 \item{e}{the matrix of a group of dummy environmental factors variables.}
 
-\item{C}{the matrix of time effects.}
+\item{C}{the matrix of the intercept and time effects(time effects are optional).}
 
 \item{g}{the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.}
 
@@ -55,7 +55,7 @@ an object of class `BayesQVGEL' is returned, which is a list with component:
 \item{iterations}{the total number of iterations.}
 }
 \description{
-fit a Bayesian quantile variable selection for gene - environment interactions in longitudinal studies
+fit a Bayesian quantile variable selection for g - e in longitudinal studies
 }
 \details{
 Consider the data model described in "\code{\link{data}}":
@@ -68,7 +68,7 @@ When {slope=TRUE} (default), random intercept and slope model will be used as th
 
 When {sparse=TRUE} (default), spike--and--slab priors are imposed on individual and/or group levels to identify important main and interaction effects. Otherwise, Laplacian shrinkage will be used.
 
-When {robust=TRUE} (default), the distribution of \eqn{\epsilon_{i}} is defined as a Laplace distribution with density.
+When {robust=TRUE} (default), the distribution of \eqn{\epsilon_{ij}} is defined as a Laplace distribution with density.
 
 \eqn{
 f(\epsilon_{ij}|\theta,\tau) = \theta(1-\theta)\exp\left\{-\tau\rho_{\theta}(\epsilon_{ij})\right\}

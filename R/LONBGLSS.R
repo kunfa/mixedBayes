@@ -2,18 +2,19 @@ LONBGLSS <- function(y,e,C,g,w,z,k,max.steps,sparse, structure){
   n = nrow(g)
   m = ncol(g)
   p = ncol(w)
-  q = ncol(e)-1
+  q = ncol(e)
   c = ncol(z)
+  o = ncol(C)
   hatAta=rep(1,n*c)
   hatBeta = rep(1,m)
   hatEta = rep(1,p)
-  hatAlpha = rep(1,q+3)
+  hatAlpha = rep(1,q+o)
   hatInvTauSq1=rep(1,m)
   hatInvTauSq21=rep(1,p)
   hatInvTauSq22=rep(1,m)
   hatPiEta=1/2
   hatPiBeta=1/2
-  invSigAlpha0 = rep(10^-3,q+3)
+  invSigAlpha0 = rep(10^-3,q+o)
   hatLambdaSqStar1=1
   hatLambdaSqStar2=1
   hatSigmaSq=1
@@ -26,8 +27,7 @@ LONBGLSS <- function(y,e,C,g,w,z,k,max.steps,sparse, structure){
   gamma1=1
   mu0=1
   nu0=1
-  #C = cbind(c(1:k),c(1:k)^2)
-
+  
   if(sparse){
     fit=switch (structure,
                 "group" = BGLSS(y,e,C,g,w,z,max.steps,n,k,hatBeta,hatEta,hatAlpha,hatAta,hatInvTauSq1,hatInvTauSq22,hatPiEta,hatPiBeta,invSigAlpha0,hatLambdaSqStar1

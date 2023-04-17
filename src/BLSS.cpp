@@ -12,8 +12,8 @@ using namespace std;
 
 Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: mat w, arma::mat z,int maxSteps, int n, int k,arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::vec hatAta,arma::vec hatInvTauSq1, arma::vec hatInvTauSq2,double hatPiEta, double hatPiBeta, arma::vec invSigAlpha0, double hatLambdaSqStar1, double hatLambdaSqStar2, double hatSigmaSq, double hatPhiSq,double aStar, double bStar, double alpha, double gamma, double alpha1,double gamma1,double mu0, double nu0)
 {
-  unsigned int q = e.n_cols-1,m = g.n_cols,p = w.n_cols,c = z.n_cols;
-  arma::mat gsAlpha(maxSteps, q+3),
+  unsigned int q = e.n_cols,m = g.n_cols,p = w.n_cols,c = z.n_cols,o=C.n_cols;
+  arma::mat gsAlpha(maxSteps, q+o),
   gsBeta(maxSteps,m),
   gseta(maxSteps,p),
   gsAta(maxSteps,n*c),
@@ -22,12 +22,12 @@ Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: ma
   
   
   arma::vec
-    gsLambdaStar1(maxSteps),
-    gsLambdaStar2(maxSteps),
-    gsSigmaSq(maxSteps),
-    gsPhiSq(maxSteps),
-    gsPiBeta(maxSteps),
-    gsPiEta(maxSteps);
+  gsLambdaStar1(maxSteps),
+  gsLambdaStar2(maxSteps),
+  gsSigmaSq(maxSteps),
+  gsPhiSq(maxSteps),
+  gsPiBeta(maxSteps),
+  gsPiEta(maxSteps);
   
   
   
@@ -51,7 +51,7 @@ Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: ma
     
     
     // alpha|
-    for(unsigned int j=0;j<q+3;j++){
+    for(unsigned int j=0;j<q+o;j++){
       arma::vec res1, res11;
       double A0;
       A0 =0;
@@ -59,7 +59,7 @@ Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: ma
       B0=0;
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
-        ei.insert_cols(ei.n_cols, C);
+        ei.insert_cols(q, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
         
@@ -88,7 +88,7 @@ Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: ma
     arma::vec res;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(ei.n_cols, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       arma::mat tzz =  z.t()*z;
@@ -119,10 +119,10 @@ Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: ma
       
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
-        ei.insert_cols(ei.n_cols, C);
+        ei.insert_cols(q, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
-       
+        
         arma::vec tggDiag = sum(square(gi),0).t();
         A1 = A1+tggDiag(j);
         res2 = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*hatEta-z*hatAta.subvec((i*c),(i*c+c-1));
@@ -162,7 +162,7 @@ Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: ma
       
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
-        ei.insert_cols(ei.n_cols, C);
+        ei.insert_cols(q, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
         
@@ -198,10 +198,10 @@ Rcpp::List BLSS (arma::mat y, arma:: mat e, arma:: mat C, arma::mat g, arma:: ma
     ress=0;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(ei.n_cols, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
-     
+      
       arma::vec res4;
       res4 = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*hatEta-z*hatAta.subvec((i*c),(i*c+c-1));
       ress = ress+arma::accu(arma::square(res4));

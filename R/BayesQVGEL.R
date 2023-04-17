@@ -1,10 +1,10 @@
-#' fit a Bayesian quantile variable selection for gene - environment interactions in longitudinal studies
+#' fit a Bayesian quantile variable selection for g - e in longitudinal studies
 #'
 #' @keywords models
 #' @param g the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
 #' @param y the matrix of response variable. The current version of BayesQVGEL only supports continuous response.
 #' @param e the matrix of a group of dummy environmental factors variables.
-#' @param C the matrix of time effects.
+#' @param C the matrix of the intercept and time effects(time effects are optional).
 #' @param w the matrix of interactions between genetic factors and environmental factors.
 #' @param k the total number of time points.
 #' @param iterations the number of MCMC iterations.
@@ -30,7 +30,7 @@
 #'
 #' When {sparse=TRUE} (default), spike--and--slab priors are imposed on individual and/or group levels to identify important main and interaction effects. Otherwise, Laplacian shrinkage will be used.
 #'
-#' When {robust=TRUE} (default), the distribution of \eqn{\epsilon_{i}} is defined as a Laplace distribution with density.
+#' When {robust=TRUE} (default), the distribution of \eqn{\epsilon_{ij}} is defined as a Laplace distribution with density.
 #'
 #' \eqn{
 #' f(\epsilon_{ij}|\theta,\tau) = \theta(1-\theta)\exp\left\{-\tau\rho_{\theta}(\epsilon_{ij})\right\}

@@ -12,8 +12,8 @@ using namespace std;
 
 Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat w, arma:: mat z,int maxSteps, int n, int k,arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, double hatTau, arma::mat hatV, arma::vec hatSg1,arma::vec hatSg2,arma::mat hatAta, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2,double xi1, double xi2, double r1,double r2,double hatPhiSq,double a, double b, double alpha1,double gamma1, int progress)
 {
-  unsigned int q = e.n_cols-1,m = g.n_cols,p = w.n_cols,c = z.n_cols;
-  arma::mat gsAlpha(maxSteps, q+3),
+  unsigned int q = e.n_cols,m = g.n_cols,p = w.n_cols,c = z.n_cols,o = C.n_cols;
+  arma::mat gsAlpha(maxSteps, q+o),
   gsBeta(maxSteps,m),
   gseta(maxSteps,p),
   gsAta(maxSteps,n*c),
@@ -35,13 +35,13 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
   double meanb;
   double varb;
   
-  arma::vec muV, muS1,RZoV(c),REoV(q+3),meanAta,meanAlpha, res1;
+  arma::vec muV, muS1,RZoV(c),REoV(q+o),meanAta,meanAlpha, res1;
   double muS2;
   double lambV, xi1Sq = std::pow(xi1, 2), xi2Sq = std::pow(xi2, 2);
   arma::mat XgXgoV2(q,q),invhatPhiSq,varAta,varAlpha;
   arma::rowvec RXgoV2(q);
   
-  arma::mat tZZoV(c,c),tEEoV(q+3,q+3);
+  arma::mat tZZoV(c,c),tEEoV(q+o,q+o);
   for (int t = 0; t < maxSteps; t++) {
     
     
@@ -51,13 +51,13 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
     
     
     // alpha|
-    arma::mat A0(q+3,q+3);
+    arma::mat A0(q+o,q+o);
     A0 = A0.zeros();
     arma:: vec B0;
-    B0 = zeros<vec>(q+3);
+    B0 = zeros<vec>(q+o);
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       tEEoV = (ei.each_col()/hatV.col(i)).t() * ei;
@@ -75,7 +75,7 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
     arma::vec res;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       
@@ -98,7 +98,7 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
     arma::vec resv;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       resv = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*arma::vectorise(hatEta)-z*hatAta.col(i);
@@ -119,10 +119,10 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
       }
       hatV.col(i) = v;
     }
- 
+    
     
     gsV.row(t) = arma::vectorise(hatV).t();
-
+    
     //s1|
     
     muS1 = std::sqrt(hatEtaSq1)/ arma::abs(hatBeta);
@@ -170,7 +170,7 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
       
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
-        ei.insert_cols(2, C);
+        ei.insert_cols(q, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
         double XgXgoV1;
@@ -214,7 +214,7 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
       
       for(int i=0;i<n;i++){
         ei = mat0.rows((i*k),(i*k+k-1));
-        ei.insert_cols(2, C);
+        ei.insert_cols(q, C);
         gi = mat1.rows((i*k),(i*k+k-1));
         wi = mat2.rows((i*k),(i*k+k-1));
         XgXgoV2 = (wi.cols((j*q),(j*q+q-1)).each_col()/hatV.col(i)).t()*wi.cols((j*q),(j*q+q-1));
@@ -275,7 +275,7 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
     f=0;
     for(int i=0;i<n;i++){
       ei = mat0.rows((i*k),(i*k+k-1));
-      ei.insert_cols(2, C);
+      ei.insert_cols(q, C);
       gi = mat1.rows((i*k),(i*k+k-1));
       wi = mat2.rows((i*k),(i*k+k-1));
       restt = y.row(i).t()-ei*hatAlpha-gi*hatBeta-wi*arma::vectorise(hatEta)-z*hatAta.col(i)-xi1*hatV.col(i);
@@ -302,7 +302,7 @@ Rcpp::List RBGL(arma::mat y, arma:: mat e, arma:: mat C,arma::mat g, arma:: mat 
     Rcpp::Named("GS.eta22.sq") = gsEtaSq2,
     Rcpp::Named("GS.phi.sq") = gsPhiSq,
     Rcpp::Named("GS.tau") = gsTau
-    
+  
   );
   
 }
