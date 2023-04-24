@@ -1,1 +1,1 @@
-# BayesQVGEL
+# mixedBayes
