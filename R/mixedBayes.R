@@ -1,10 +1,10 @@
-#' fit a Bayesian Longitudinal Regularized Quantile Mixed Model
+#' fit a Bayesian regularized quantile mixed model for G - E interactions
 #'
 #' @keywords models
 #' @param g the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
 #' @param y the matrix of response variable. The current version of mixedBayes only supports continuous response.
 #' @param e the matrix of a group of dummy environmental factors variables.
-#' @param C the matrix of the intercept and time effects (time effects are optional).
+#' @param X the matrix of the intercept and time effects (time effects are optional).
 #' @param w the matrix of interactions between genetic factors and environmental factors.
 #' @param k the total number of time points.
 #' @param iterations the number of MCMC iterations.
@@ -46,7 +46,7 @@
 #'
 #' ## default method
 
-#' fit = mixedBayes(y,e,C,g,w,k,structure=c("group"))
+#' fit = mixedBayes(y,e,X,g,w,k,structure=c("group"))
 #' fit$coefficient
 #'
 #'## Compute TP and FP
@@ -59,22 +59,22 @@
 
 #' \donttest{
 #' ## alternative: robust individual selection
-#' fit = mixedBayes(y,e,C,g,w,k,structure=c("individual"))
+#' fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
 #' fit$coefficient
 #'
 #' ## alternative: non-robust group selection
-#' fit = mixedBayes(y,e,C,g,w,k,robust=FALSE, structure=c("group"))
+#' fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("group"))
 #' fit$coefficient
 #'
 #' ## alternative: robust group selection under random intercept model
-#' fit = mixedBayes(y,e,C,g,w,k,slope=FALSE, structure=c("group"))
+#' fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
 #' fit$coefficient
 #'
 #' }
 #'
 #' @export
 
-mixedBayes <- function(y,e,C,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
+mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
 {
   structure = match.arg(structure)
 
@@ -90,16 +90,16 @@ mixedBayes <- function(y,e,C,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, 
   if(slope){
     z = cbind(rep(1,k),c(1:k))
   if(robust){
-    out = LONRBGLSS(y,e,C,g,w,z,k,quant,iterations,sparse, structure)
+    out = LONRBGLSS(y,e,X,g,w,z,k,quant,iterations,sparse, structure)
   }else{
-    out = LONBGLSS(y,e,C,g,w,z,k,iterations,sparse, structure)
+    out = LONBGLSS(y,e,X,g,w,z,k,iterations,sparse, structure)
   }
   }else{
     z = rep(1,k)
     if(robust){
-      out = LONRBGLSS_1(y,e,C,g,w,z,k,quant,iterations,sparse, structure)
+      out = LONRBGLSS_1(y,e,X,g,w,z,k,quant,iterations,sparse, structure)
     }else{
-      out = LONBGLSS_1(y,e,C,g,w,z,k,iterations,sparse, structure)
+      out = LONBGLSS_1(y,e,X,g,w,z,k,iterations,sparse, structure)
     }
   }
 

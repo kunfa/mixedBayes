@@ -2,12 +2,12 @@
 % Please edit documentation in R/mixedBayes.R
 \name{mixedBayes}
 \alias{mixedBayes}
-\title{fit a Bayesian Longitudinal Regularized Quantile Mixed Model}
+\title{fit a Bayesian regularized quantile mixed model for G - E interactions}
 \usage{
 mixedBayes(
   y,
   e,
-  C,
+  X,
   g,
   w,
   k,
@@ -25,7 +25,7 @@ mixedBayes(
 
 \item{e}{the matrix of a group of dummy environmental factors variables.}
 
-\item{C}{the matrix of the intercept and time effects (time effects are optional).}
+\item{X}{the matrix of the intercept and time effects (time effects are optional).}
 
 \item{g}{the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.}
 
@@ -55,7 +55,7 @@ an object of class `mixedBayes' is returned, which is a list with component:
 \item{iterations}{the total number of iterations.}
 }
 \description{
-fit a Bayesian Longitudinal Regularized Quantile Mixed Model
+fit a Bayesian regularized quantile mixed model for G - E interactions
 }
 \details{
 Consider the data model described in "\code{\link{data}}":
@@ -81,7 +81,7 @@ Please check the references for more details about the prior distributions.
 data(data)
 
 ## default method
-fit = mixedBayes(y,e,C,g,w,k,structure=c("group"))
+fit = mixedBayes(y,e,X,g,w,k,structure=c("group"))
 fit$coefficient
 
 ## Compute TP and FP
@@ -93,15 +93,15 @@ fp = length(pos) - tp
 list(tp=tp, fp=fp)
 \donttest{
 ## alternative: robust individual selection
-fit = mixedBayes(y,e,C,g,w,k,structure=c("individual"))
+fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
 fit$coefficient
 
 ## alternative: non-robust group selection
-fit = mixedBayes(y,e,C,g,w,k,robust=FALSE, structure=c("group"))
+fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("group"))
 fit$coefficient
 
 ## alternative: robust group selection under random intercept model
-fit = mixedBayes(y,e,C,g,w,k,slope=FALSE, structure=c("group"))
+fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
 fit$coefficient
 
 }

@@ -3,9 +3,9 @@
 \docType{package}
 \name{mixedBayes-package}
 \alias{mixedBayes-package}
-\title{Bayesian Longitudinal Regularized Quantile Mixed model}
+\title{Bayesian Regularized Quantile Mixed Model for G - E Interactions}
 \description{
-In this package, we provide a set of Bayesian regularized variable selection methods in the mixed effect models (random intercept and slope model, random intercept model) to dissect important gene - environment interactions for longitudinal studies. A Bayesian quantile regression has been adopted to accommodate data contamination and heavy-tailed distributions in the response/ phenotype. The default method (the proposed method) conducts variable selection by accounting the group level selection on the interaction effects under random intercept and slope model. In particular, the spike--and--slab priors are imposed on both individual and group levels to identify important main and interaction effects.
+In this package, we provide a set of Bayesian regularized variable selection methods under the mixed effect models (random intercept and slope model, random intercept model) to dissect important gene - environment interactions for longitudinal studies. A Bayesian quantile regression has been adopted to accommodate data contamination and heavy-tailed distributions in the response/ phenotype. The default method (the proposed method) conducts variable selection by accounting the group level selection on the interaction effects under random intercept and slope model. In particular, the spike--and--slab priors are imposed on both individual and group levels to identify important main and interaction effects.
 In addition to the default method, users can also choose different selection structures for the interaction effects (group-level or individual-level), random intercept model, methods without spike--and--slab priors and non-robust methods. In total, \emph{mixedBayes} provides 16 different methods (8 robust and 8 non-robust) under both mixed effects models. Among them, robust methods with spike--and--slab priors and the robust method for both individual level selection and group level selection under both mixed effects models have been developed for the first time. Please read the Details below for how to configure the method used.
 }
 \details{
@@ -23,7 +23,7 @@ S3 generic functions selection()and print() are implemented for mixedBayes objec
 selection() takes a mixedBayes object and returns the variable selection results.
 }
 \references{
-Fan, K., Wang, W. and Wu, C. (2022). Bayesian Quantile Variable Selection with Mixed Effects Model in the Longitudinal Study. (to be submitted)
+Fan, K., Wang, W. and Wu, C. (2022). Bayesian Regularized Quantile Mixed Model for Lipid - Environment Interactions in a Longitudinal Study. (to be submitted)
 
 Zhou, F., Ren, J.,  Li, G., Jiang, Y., Li, X., Wang, W. and Wu, C. (2019). Penalized Variable Selection for Lipid-Environment Interactions in a Longitudinal Lipidomics Study.
 {\emph{Genes}, 10(12), 1002} \doi{10.3390/genes10121002}

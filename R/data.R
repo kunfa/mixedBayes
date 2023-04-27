@@ -5,8 +5,8 @@
 #' @docType data
 #' @keywords datasets
 #' @name data
-#' @aliases data y e C g w k coeff
-#' @format The data object consists of seven components: y, e, C, g, w ,k and coeff. coeff contains the true values of parameters used for generating Y.
+#' @aliases data y e X g w k coeff
+#' @format The data object consists of seven components: y, e, X, g, w ,k and coeff. coeff contains the true values of parameters used for generating Y.
 #'
 #' @details
 #'
@@ -16,7 +16,7 @@
 #' \deqn{Y_{ij} = X_{ij}^{T}\gamma_{0}+E_{ij}^{T}\gamma_{1}+G_{ij}^{T}\gamma_{2}+(G_{ij}\bigotimes E_{ij})^{T}\gamma_{3}+Z_{ij}^{T}\alpha_{i}+\epsilon_{ij}.}
 #' where \eqn{\gamma_{1}},\eqn{\gamma_{2}},\eqn{\gamma_{3}} are \eqn{p},\eqn{m} and \eqn{mp} dimensional vectors that represent the coefficients of the environment effects, the genetics effects and interactions effects, respectively. Accommodating the Kronecker product of the \eqn{m} - dimensional vector \eqn{G_{ij}} and the \eqn{p}-dimensional vector \eqn{E_{ij}}, the interactions between genetics and environment factors can be expressed as a \eqn{mp}-dimensional vector, denoted as the following form:
 #' \deqn{G_{ij}\bigotimes E_{ij} = [E_{ij1}E_{ij1},E_{ij2}E_{ij2},...,E_{ij1}E_{ijp},E_{ij2}E_{ij1},...,E_{ijm}E_{ijp}]^{T}.}
-#' When \eqn{h=1}, the model becomes a mixed-effects model with random intercept only.
+#' For random intercept and slope model, \eqn{Z_{ij}^{T} = (1,j)} and  \eqn{\alpha_{i} = (\alpha_{i1},\alpha_{i2})^{T}}. For random intercept model, \eqn{Z_{ij}^{T} = 1} and \eqn{\alpha_{i} = \alpha_{i1}}.
 #'
 #' @examples
 #' data(data)
@@ -25,7 +25,7 @@
 #' dim(e)
 #' dim(w)
 #' print(k)
-#' print(C)
+#' print(X)
 #' print(coeff)
 #'
 #' @seealso \code{\link{mixedBayes}}
