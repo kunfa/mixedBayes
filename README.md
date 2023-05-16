@@ -6,16 +6,16 @@
 
 <!-- badges: start -->
 
-<!-- [![CRAN](https://www.r-pkg.org/badges/version/spinBayes)](https://cran.r-project.org/package=spinBayes) -->
+<!-- [![CRAN](https://www.r-pkg.org/badges/version/mixedBayes)](https://cran.r-project.org/package=mixedBayes) -->
 
-<!-- [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/spinBayes)](http://www.r-pkg.org/pkg/spinBayes) -->
+<!-- [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/mixedBayes)](http://www.r-pkg.org/pkg/mixedBayes) -->
 
 [![Travis build
-status](https://travis-ci.org/jrhub/roben.svg?branch=master)](https://travis-ci.org/jrhub/roben)
+status](https://travis-ci.org/kunfa/mixedBayes.svg?branch=master)](https://travis-ci.org/kunfa/mixedBayes)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/roben)](https://CRAN.R-project.org/package=roben)
+status](https://www.r-pkg.org/badges/version/mixedBayes)](https://CRAN.R-project.org/package=mixedBayes)
 [![Codecov test
-coverage](https://codecov.io/gh/jrhub/roben/branch/master/graph/badge.svg)](https://codecov.io/gh/jrhub/roben?branch=master)
+coverage](https://codecov.io/gh/kunfa/mixedBayes/branch/master/graph/badge.svg)](https://codecov.io/gh/kunfa/mixedBayes?branch=master)
 <!-- badges: end -->
 
 Gene-environment (G×E) interactions have important implications to
