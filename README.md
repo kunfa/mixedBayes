@@ -18,22 +18,7 @@ status](https://www.r-pkg.org/badges/version/mixedBayes)](https://CRAN.R-project
 coverage](https://codecov.io/gh/kunfa/mixedBayes/branch/master/graph/badge.svg)](https://codecov.io/gh/kunfa/mixedBayes?branch=master)
 <!-- badges: end -->
 
-Gene-environment (G×E) interactions have important implications to
-elucidate the etiology of complex diseases beyond the main genetic and
-environmental effects. Outliers and data contamination in disease
-phenotypes of G×E studies have been commonly encountered, leading to the
-development of a broad spectrum of robust penalization methods.
-Nevertheless, within the Bayesian framework, the issue has not been
-taken care of in existing studies. We develop a robust Bayesian variable
-selection method for G×E interaction studies. The proposed Bayesian
-method can effectively accommodate heavy–tailed errors and outliers in
-the response variable while conducting variable selection by accounting
-for structural sparsity. In particular, the spike–and–slab priors have
-been imposed on both individual and group levels to identify important
-main and interaction effects. An efficient Gibbs sampler has been
-developed to facilitate fast computation. The Markov chain Monte Carlo
-algorithms of the proposed and alternative methods are efficiently
-implemented in C++.
+In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the intra-cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. Here, we aim at developing novel Bayesian regularized quantile mixed effect models to tackle these challenges. We have proposed a Bayesian variable selection in the mixed effect models for longitudinal genomics studies. To dissect important gene - environment interactions, our model can simultaneously identify important main and interaction effects on the individual and group level, which have been facilitated by imposing the spike- and -slab priors through Laplacian shrinkage in the Bayesian quantile hierarchical models. The within - subject dependence among data can be accommodated by incorporating the random effects. An efficient Gibbs sampler has been developed to facilitate fast computation. The Markov chain Monte Carlo algorithms of the proposed and alternative methods are efficiently implemented in 'C++'. The development of this software package and the associated statistical methods have been partially supported by an Innovative Research Award from Johnson Cancer Research Center, Kansas State University.
 
 ## How to install
 
@@ -42,15 +27,15 @@ implemented in C++.
 <!-- end list -->
 
     install.packages("devtools")
-    devtools::install_github("jrhub/roben")
+    devtools::install_github("kunfa/mixedBayes")
 
   - Released versions of roben are available on CRAN
-    [(link)](https://cran.r-project.org/package=roben), and can be
+    [(link)](https://cran.r-project.org/package=mixedBayes), and can be
     installed within R via
 
 <!-- end list -->
 
-    install.packages("roben")
+    install.packages("mixedBayes")
 
 ## Examples
 
