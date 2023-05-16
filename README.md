@@ -29,7 +29,7 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     install.packages("devtools")
     devtools::install_github("kunfa/mixedBayes")
 
-  - Released versions of roben are available on CRAN
+  - Released versions of mixedBayes are available on CRAN
     [(link)](https://cran.r-project.org/package=mixedBayes), and can be
     installed within R via
 
@@ -39,31 +39,30 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 
 ## Examples
 
-#### Example.1 (default method: robust sparse group selection)
+#### Example.1 (default method: robust group selection under random intercept and slope model)
 
-    library(roben)
-    data(GxE_small)
+    library(mixedBayes)
+    data(data)
     
-    iter = 5000
-    fit=roben(X, Y, E, clin, iterations = iter)
+    fit = mixedBayes(y,e,C,g,w,k,structure=c("group"))
     fit$coefficient
-    
-    ## Ture values of parameters of mian G effects and interactions
-    coeff$GE
+   
     
     ## Compute TP and FP
-    sel = GxESelection(fit)
-    pos = which(sel$indicator != 0)
-    tp = length(intersect(which(coeff$GE != 0), pos))
+    b = selection(fit,sparse=TRUE)
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 
-#### Example.2 (alternative: non-robust sparse group selection)
+#### Example.2 (alternative: robust individual selection under random intercept and slope model)
 
-    fit=roben(X, Y, E, clin, iterations = iter, robust=FALSE)
-    sel = GxESelection(fit)
-    pos = which(sel$indicator != 0)
-    tp = length(intersect(which(coeff$GE != 0), pos))
+    fit = mixedBayes(y,e,C,g,w,k,structure=c("individual"))
+    b = selection(fit,sparse=TRUE)
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 
