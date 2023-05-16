@@ -66,34 +66,26 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 
-<!-- #### Example.3 (non-sparse) -->
+#### Example.3 (alternative: non-robust group selection)
 
-<!-- ``` -->
+    fit = mixedBayes(y,e,C,g,w,k,robust=FALSE, structure=c("group"))
+    b = selection(fit,sparse=TRUE)
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
+    fp = length(pos) - tp
+    list(tp=tp, fp=fp)
+#### Example.4 (alternative: robust group selection under random intercept model)
 
-<!-- data(gExp.L) -->
-
-<!-- test = sample((1:nrow(X2)), floor(nrow(X2)/5)) -->
-
-<!-- spbayes=BVCfit(X2[-test,], Y2[-test,], Z2[-test,], E2[-test,], clin2[-test,], structural=TRUE, sparse=FALSE) -->
-
-<!-- spbayes -->
-
-<!-- selected = BVSelection(spbayes) -->
-
-<!-- selected -->
-
-<!-- pred = predict(spbayes, X2[test,], Z2[test,], E2[test,], clin2[test,], Y2[test,]) -->
-
-<!-- pred$pmse -->
-
-<!-- # c(pred$y.pred) -->
-
-<!-- ``` -->
-
+    fit = mixedBayes(y,e,C,g,w,k,slope=FALSE, structure=c("group"))
+    b = selection(fit,sparse=TRUE)
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
+    fp = length(pos) - tp
+    list(tp=tp, fp=fp)
 ## Methods
 
 This package provides implementation for methods proposed in
 
-  - Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2020).
-    Robust Bayesian variable selection for gene-environment
-    interactions.
+  - Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2023+). Robust Bayesian variable selection of Gene-environment interactions in the longitudinal study.(submitted)
