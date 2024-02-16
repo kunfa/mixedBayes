@@ -1,6 +1,6 @@
 Package: mixedBayes
 Type: Package
-Title: Bayesian Regularized Quantile Mixed Model for G - E Interactions
+Title: Bayesian Longitudinal Regularized Quantile Mixed Model
 Version: 0.1.1
 Date: 2024-02-05
 Authors@R: c( person("Kun", "Fan", role = c("aut", "cre") , email = "kfan@ksu.edu"),
