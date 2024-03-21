@@ -1,4 +1,4 @@
-#' fit a Bayesian regularized quantile mixed model for G - E interactions
+#' fit a Bayesian longitudinal regularized quantile mixed model
 #'
 #' @keywords models
 #' @param g the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
