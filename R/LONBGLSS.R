@@ -2,45 +2,50 @@ LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure){
   n = nrow(g)
   m = ncol(g)
   p = ncol(w)
-  q = ncol(e)
   c = ncol(z)
+  E = cbind(e,X)
+  q = ncol(E)
   o = ncol(X)
-  hatAta=rep(1,n*c)
+  n1 = n/k
+  hatAta=matrix(c(rep(1,n1*c)),nrow=c)
   hatBeta = rep(1,m)
   hatEta = rep(1,p)
-  hatAlpha = rep(1,q+o)
+  hatAlpha = rep(1,q)
   hatInvTauSq1=rep(1,m)
   hatInvTauSq21=rep(1,p)
   hatInvTauSq22=rep(1,m)
   hatPiEta=1/2
   hatPiBeta=1/2
-  invSigAlpha0 = rep(10^-3,q+o)
+  invSigAlpha0 = rep(10^-3,q)
   hatLambdaSqStar1=1
   hatLambdaSqStar2=1
   hatSigmaSq=1
   hatPhiSq=1
-  aStar=1
-  bStar=1
+  a0=aStar=1
+  b0=bStar=1
   alpha=1
   gamma=1
   alpha1=1
   gamma1=1
-  mu0=1
-  nu0=1
+  mu0=mu1=1
+  nu0=nu1=1
+  debugging=FALSE
+
+  progress = ifelse(debugging, 10^(floor(log10(max.steps))-1), 0)
 
   if(sparse){
     fit=switch (structure,
-                "group" = BGLSS(y,e,X,g,w,z,max.steps,n,k,hatBeta,hatEta,hatAlpha,hatAta,hatInvTauSq1,hatInvTauSq22,hatPiEta,hatPiBeta,invSigAlpha0,hatLambdaSqStar1
-                                ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,aStar,bStar,alpha,gamma,alpha1,gamma1,mu0,nu0),
-                "individual" = BLSS(y,e,X,g,w,z,max.steps,n,k,hatBeta,hatEta,hatAlpha,hatAta,hatInvTauSq1,hatInvTauSq21,hatPiEta,hatPiBeta,invSigAlpha0,hatLambdaSqStar1
-                                    ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,aStar,bStar,alpha,gamma,alpha1,gamma1,mu0,nu0)
+                "group" = BGLSS(y,E,g,w,z,q,o,k,max.steps,hatAlpha,hatBeta,hatAta,hatEta,invSigAlpha0,hatInvTauSq1,hatInvTauSq22,hatPiBeta,hatPiEta,hatLambdaSqStar1
+                                ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,a0,b0,aStar,bStar,alpha,gamma,alpha1,gamma1,mu0,mu1,nu0,nu1,progress),
+                "individual" = BLSS(y,E,g,w,z,q,k,max.steps,hatAlpha,hatBeta,hatAta,hatEta,invSigAlpha0,hatInvTauSq1,hatInvTauSq22,hatPiBeta,hatPiEta,hatLambdaSqStar1
+                                    ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,a0,b0,aStar,bStar,alpha,gamma,alpha1,gamma1,mu0,mu1,nu0,nu1,progress)
     )
   }else{
     fit=switch (structure,
-                "group" = BGL(y,e,X,g,w,z,max.steps,n,k,hatBeta,hatEta,hatAlpha,hatAta,hatInvTauSq1,hatInvTauSq22,invSigAlpha0,hatLambdaSqStar1
-                              ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,aStar,bStar,alpha,gamma,alpha1,gamma1),
-                "individual" = BL(y,e,X,g,w,z,max.steps,n,k,hatBeta,hatEta,hatAlpha,hatAta,hatInvTauSq1,hatInvTauSq21,invSigAlpha0,hatLambdaSqStar1
-                                  ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,aStar,bStar,alpha,gamma,alpha1,gamma1)
+                "group" = BGL(y,E,g,w,q,o,k,max.steps,hatAlpha,hatBeta,hatEta,hatAta,z,invSigAlpha0,hatInvTauSq1,hatInvTauSq22,hatLambdaSqStar1
+                              ,hatLambdaSqStar2,hatSigmaSq,a0,b0,aStar,bStar,hatPhiSq,alpha,gamma,alpha1,gamma1,progress),
+                "individual" = BL(y,E,g,w,q,k,max.steps,hatAlpha,hatBeta,hatEta,hatAta,z,invSigAlpha0,hatInvTauSq1,hatInvTauSq22,hatLambdaSqStar1
+                                  ,hatLambdaSqStar2,hatSigmaSq,a0,b0,aStar,bStar,hatPhiSq,alpha,gamma,alpha1,gamma1,progress)
     )
   }
   out = list( GS.beta = fit$GS.beta,

@@ -2,7 +2,7 @@
 #' @importFrom Rcpp sourceCpp
 NULL
 
-#' @docType package
+"_PACKAGE"
 #' @keywords overview
 #' @name mixedBayes-package
 #' @title Bayesian Longitudinal Regularized Quantile Mixed Model
@@ -39,7 +39,7 @@ NULL
 #' {\emph{Briefings in Bioinformatics}, 16(5), 873–883} \doi{10.1093/bib/bbu046}
 #'
 #' Zhou, F., Ren, J., Lu, X., Ma, S. and Wu, C. (2021). Gene–Environment Interaction: a Variable Selection Perspective.
-#' {\emph{Epistasis. Methods in Molecular Biology.} 2212:191–223} \url{https://link.springer.com/protocol/10.1007/978-1-0716-0947-7_13}
+#' {\emph{Epistasis. Methods in Molecular Biology.} 2212:191–223} \doi{10.1007/978-1-0716-0947-7_13}
 #'
 #' Ren, J., Zhou, F., Li, X., Chen, Q., Zhang, H., Ma, S., Jiang, Y. and Wu, C. (2020) Semi-parametric Bayesian variable selection for gene-environment interactions.
 #' {\emph{Statistics in Medicine}, 39: 617– 638} \doi{10.1002/sim.8434}

@@ -2,7 +2,7 @@
 #'
 #' @keywords models
 #' @param g the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
-#' @param y the matrix of response variable. The current version of mixedBayes only supports continuous response.
+#' @param y the vector of response variable. The current version of mixedBayes only supports continuous response.
 #' @param e the matrix of a group of dummy environmental factors variables.
 #' @param X the matrix of the intercept and time effects (time effects are optional).
 #' @param w the matrix of interactions between genetic factors and environmental factors.
@@ -21,20 +21,21 @@
 #' \item{iterations}{the total number of iterations.}
 #'
 #' @details Consider the data model described in "\code{\link{data}}":
-#' \deqn{Y_{ij} = X_{ij}^{T}\gamma_{0}+E_{ij}^{T}\gamma_{1}+\sum_{l=1}^{p}G_{ijl}\gamma_{2l}+\sum_{l=1}^{p}W_{ijl}^{T}\gamma_{3l}+Z_{ij}^{T}\alpha_{i}+\epsilon_{ij}.}
+#' \deqn{Y_{ij} = X_{ij}^\top\gamma_{0}+E_{ij}^\top\gamma_{1}+\sum_{l=1}^{p}G_{ijl}\gamma_{2l}+\sum_{l=1}^{p}W_{ijl}^\top\gamma_{3l}+Z_{ij}^\top\alpha_{i}+\epsilon_{ij}.}
 #' where \eqn{\gamma_{2l}} is the main effect of the \eqn{l}th genetic variant. The interaction effects is corresponding to the coefficient vector \eqn{\gamma_{3l}=(\gamma_{3l1}, \gamma_{3l2},\ldots,\gamma_{3lm})^\top}.
 #'
-#' When {structure="group"}, group-level selection will be conducted on \eqn{||\gamma_{3l}||_{2}}. If {structure="individual"}, individual-level selection will be conducted on each \eqn{\gamma_{3lq}}, (\eqn{q=1,\ldots,m}).
+#' When `structure="group"`, group-level selection will be conducted on \eqn{||\gamma_{3l}||_{2}}. If `structure="individual"`, individual-level selection will be conducted on each \eqn{\gamma_{3lq}}, (\eqn{q=1,\ldots,m}).
 #'
-#' When {slope=TRUE} (default), random intercept and slope model will be used as the mixed effects model.
+#' When `slope=TRUE` (default), random intercept and slope model will be used as the mixed effects model.
 #'
-#' When {sparse=TRUE} (default), spike--and--slab priors are imposed on individual and/or group levels to identify important main and interaction effects. Otherwise, Laplacian shrinkage will be used.
+#' When `sparse=TRUE` (default), spike-and-slab priors are imposed on individual and/or group levels to identify important main and interaction effects. Otherwise, Laplacian shrinkage will be used.
 #'
-#' When {robust=TRUE} (default), the distribution of \eqn{\epsilon_{ij}} is defined as a Laplace distribution with density.
+#' When `robust=TRUE` (default), the distribution of \eqn{\epsilon_{ij}} is defined as a Laplace distribution with density.
 #'
 #' \eqn{
 #' f(\epsilon_{ij}|\theta,\tau) = \theta(1-\theta)\exp\left\{-\tau\rho_{\theta}(\epsilon_{ij})\right\}
-#' }, (\eqn{i=1,\dots,n,j=1,\dots,k }), which leads to a Bayesian formulation of quantile regression. If {robust=FALSE}, \eqn{\epsilon_{ij}} follows a normal distribution.
+#' }, (\eqn{i=1,\dots,n,j=1,\dots,k }), which leads to a Bayesian formulation of quantile regression. If `robust=FALSE`, \eqn{\epsilon_{ij}} follows a normal distribution.
+
 #' \cr
 #'
 #' Please check the references for more details about the prior distributions.
@@ -95,11 +96,11 @@ mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, 
     out = LONBGLSS(y,e,X,g,w,z,k,iterations,sparse, structure)
   }
   }else{
-    z = rep(1,k)
+    z = as.matrix(rep(1,k))
     if(robust){
-      out = LONRBGLSS_1(y,e,X,g,w,z,k,quant,iterations,sparse, structure)
+      out = LONRBGLSS(y,e,X,g,w,z,k,quant,iterations,sparse, structure)
     }else{
-      out = LONBGLSS_1(y,e,X,g,w,z,k,iterations,sparse, structure)
+      out = LONBGLSS(y,e,X,g,w,z,k,iterations,sparse, structure)
     }
   }
 
