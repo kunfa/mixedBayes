@@ -33,14 +33,12 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     
     fit = mixedBayes(y,e,X,g,w,k,structure=c("group"))
     fit$coefficient
-
-## Compute TP and FP
-b = selection(fit,sparse=TRUE)
-index = which(coeff!=0)
-pos = which(b != 0)
-tp = length(intersect(index, pos))
-fp = length(pos) - tp
-list(tp=tp, fp=fp)
+    b = selection(fit,sparse=TRUE)
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
+    fp = length(pos) - tp
+    list(tp=tp, fp=fp)
 #### Example.2 (alternative: robust individual selection under random intercept and slope model)
 
     fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
