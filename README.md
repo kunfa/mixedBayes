@@ -32,7 +32,7 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     data(data)
     
     fit = mixedBayes(y,e,X,g,w,k,structure=c("group"))
-fit$coefficient
+    fit$coefficient
 
 ## Compute TP and FP
 b = selection(fit,sparse=TRUE)
@@ -44,9 +44,9 @@ list(tp=tp, fp=fp)
 #### Example.2 (alternative: robust individual selection under random intercept and slope model)
 
     fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
-fit$coefficient
- b = selection(fit,sparse=TRUE)
- index = which(coeff!=0)
+    fit$coefficient
+    b = selection(fit,sparse=TRUE)
+    index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
@@ -55,7 +55,7 @@ fit$coefficient
 #### Example.3 (alternative: non-robust group selection)
 
     fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("group"))
-fit$coefficient
+    fit$coefficient
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
@@ -63,8 +63,8 @@ fit$coefficient
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 #### Example.4 (alternative: robust group selection under random intercept model)
-fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
-fit$coefficient    
+    fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
+    fit$coefficient    
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
