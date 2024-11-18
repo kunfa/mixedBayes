@@ -31,23 +31,22 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     library(mixedBayes)
     data(data)
     
-    fit = mixedBayes(y,e,C,g,w,k,structure=c("group"))
-    fit$coefficient
-   
-    
-    ## Compute TP and FP
-    b = selection(fit,sparse=TRUE)
-    index = which(coeff!=0)
-    pos = which(b != 0)
-    tp = length(intersect(index, pos))
-    fp = length(pos) - tp
-    list(tp=tp, fp=fp)
+    fit = mixedBayes(y,e,X,g,w,k,structure=c("group"))
+fit$coefficient
 
+## Compute TP and FP
+b = selection(fit,sparse=TRUE)
+index = which(coeff!=0)
+pos = which(b != 0)
+tp = length(intersect(index, pos))
+fp = length(pos) - tp
+list(tp=tp, fp=fp)
 #### Example.2 (alternative: robust individual selection under random intercept and slope model)
 
-    fit = mixedBayes(y,e,C,g,w,k,structure=c("individual"))
-    b = selection(fit,sparse=TRUE)
-    index = which(coeff!=0)
+    fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
+fit$coefficient
+ b = selection(fit,sparse=TRUE)
+ index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
@@ -55,7 +54,8 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 
 #### Example.3 (alternative: non-robust group selection)
 
-    fit = mixedBayes(y,e,C,g,w,k,robust=FALSE, structure=c("group"))
+    fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("group"))
+fit$coefficient
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
@@ -63,8 +63,8 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 #### Example.4 (alternative: robust group selection under random intercept model)
-
-    fit = mixedBayes(y,e,C,g,w,k,slope=FALSE, structure=c("group"))
+fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
+fit$coefficient    
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
@@ -75,4 +75,4 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 
 This package provides implementation for methods proposed in
 
-  - Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2023+). Robust Bayesian variable selection of Gene-environment interactions in the longitudinal study.(submitted)
+  - Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2024+). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions.(Under Review)
