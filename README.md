@@ -85,6 +85,7 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 - Updated the inputs for the main mixedBayes function.
 - Updated the documentation.
 ### mixedBayes 0.1.4 \[2025-01-07\]
+
 - Updated README and DESCRIPTION file
   
 ## Methods
