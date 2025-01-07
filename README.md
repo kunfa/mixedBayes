@@ -13,7 +13,7 @@ downloads](https://cranlogs.r-pkg.org/badges/mixedBayes)](https://www.r-pkg.org:
 [![R-CMD-check](https://github.com/kunfa/mixedBayes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kunfa/mixedBayes/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the intra-cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. In this package, we developed a Bayesian quantile mixed effects model for longitudinal genomics studies. To dissect important gene - environment interactions, our model can simultaneously identify important main and interaction effects on the individual and group level, which have been facilitated by imposing the spike- and -slab priors through Laplacian shrinkage in the Bayesian quantile hierarchical models. The within - subject dependence among data can be accommodated by incorporating the random effects. An efficient Gibbs sampler has been developed to facilitate fast computation. The Markov chain Monte Carlo algorithms of the proposed and alternative methods are efficiently implemented in 'C++'. The development of this software package and the associated statistical methods have been partially supported by an Innovative Research Award from Johnson Cancer Research Center, Kansas State University.
+In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the intra-cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. In this package, we developed a Bayesian quantile mixed effects model with spike- and -slab priors dissect important gene - environment interactions under longitudinal genomics studies. An efficient Gibbs sampler has been developed to facilitate fast computation. The Markov chain Monte Carlo algorithms of the proposed and alternative methods are efficiently implemented in 'C++'. The development of this software package and the associated statistical methods have been partially supported by an Innovative Research Award from Johnson Cancer Research Center, Kansas State University.
 
 ## How to install
 
@@ -84,8 +84,8 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 - Updated with a more efficient Gibbs sampler in the longitudinal setting.
 - Updated the inputs for the main mixedBayes function.
 - Updated the documentation.
-### mixedBayes 0.1.4 \[2025-01-03\]
-- Updated README
+### mixedBayes 0.1.4 \[2025-01-07\]
+- Updated README and DESCRIPTION file
   
 ## Methods
 
