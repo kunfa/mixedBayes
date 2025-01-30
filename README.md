@@ -2,7 +2,7 @@
 
 # mixedBayes
 
-> **Bay**esian **Lon**gitudinal Regularized Quantile Mixed Model
+> Bayesian Longitudinal Regularized Quantile Mixed Model
 <!-- badges: start -->
 
 [![CRAN](https://www.r-pkg.org/badges/version/mixedBayes)](https://cran.r-project.org/package=mixedBayes)
