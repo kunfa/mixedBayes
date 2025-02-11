@@ -79,6 +79,10 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     list(tp=tp, fp=fp)
 ## News
 
+### mixedBayes 0.1.5 \[2025-02-11\]
+
+- Updated the documentation.
+
 ### mixedBayes 0.1.4.1 \[2025-01-28\]
 
 - Fixed minor bugs.

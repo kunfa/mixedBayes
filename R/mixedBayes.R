@@ -1,11 +1,11 @@
 #' fit a Bayesian longitudinal regularized quantile mixed model
 #'
 #' @keywords models
-#' @param g the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
-#' @param y the vector of response variable. The current version of mixedBayes only supports continuous response.
-#' @param e the matrix of a group of dummy environmental factors variables.
-#' @param X the matrix of the intercept and time effects (time effects are optional).
-#' @param w the matrix of interactions between genetic factors and environmental factors.
+#' @param g the long format matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
+#' @param y the vector of repeated measured responses. The current version of mixedBayes only supports continuous response.
+#' @param e the long format matrix of a group of dummy environmental factors variables.
+#' @param X the long format matrix of the intercept and time effects (time effects are optional).
+#' @param w the long format matrix of interactions between genetic factors and environmental factors.
 #' @param k the total number of time points.
 #' @param iterations the number of MCMC iterations.
 #' @param burn.in the number of iterations for burn-in.

@@ -21,15 +21,15 @@ mixedBayes(
 )
 }
 \arguments{
-\item{y}{the vector of response variable. The current version of mixedBayes only supports continuous response.}
+\item{y}{the vector of repeated measured responses. The current version of mixedBayes only supports continuous response.}
 
-\item{e}{the matrix of a group of dummy environmental factors variables.}
+\item{e}{the long format matrix of a group of dummy environmental factors variables.}
 
-\item{X}{the matrix of the intercept and time effects (time effects are optional).}
+\item{X}{the long format matrix of the intercept and time effects (time effects are optional).}
 
-\item{g}{the matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.}
+\item{g}{the long format matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.}
 
-\item{w}{the matrix of interactions between genetic factors and environmental factors.}
+\item{w}{the long format matrix of interactions between genetic factors and environmental factors.}
 
 \item{k}{the total number of time points.}
 

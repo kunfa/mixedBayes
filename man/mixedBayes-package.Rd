@@ -22,7 +22,7 @@ S3 generic functions selection()and print() are implemented for mixedBayes objec
 selection() takes a mixedBayes object and returns the variable selection results.
 }
 \references{
-Fan, K., Wang, W. and Wu, C. (2022). Bayesian Regularized Quantile Mixed Model for Lipid - Environment Interactions in a Longitudinal Study. (to be submitted)
+Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2024+). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions.(Under Review)
 
 Zhou, F., Ren, J.,  Li, G., Jiang, Y., Li, X., Wang, W. and Wu, C. (2019). Penalized Variable Selection for Lipid-Environment Interactions in a Longitudinal Lipidomics Study.
 {\emph{Genes}, 10(12), 1002} \doi{10.3390/genes10121002}
