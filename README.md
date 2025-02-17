@@ -10,7 +10,7 @@
 coverage](https://codecov.io/gh/kunfa/mixedBayes/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kunfa/mixedBayes?branch=master)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/mixedBayes)](https://www.r-pkg.org:443/pkg/mixedBayes)
-[![R-CMD-check](https://github.com/kunfa/mixedBayes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kunfa/mixedBayes/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the intra-cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. In this package, we developed a Bayesian quantile mixed effects model with spike- and -slab priors to dissect important gene - environment interactions under longitudinal genomics studies. An efficient Gibbs sampler has been developed to facilitate fast computation. The Markov chain Monte Carlo algorithms of the proposed and alternative methods are efficiently implemented in 'C++'. The development of this software package and the associated statistical methods have been partially supported by an Innovative Research Award from Johnson Cancer Research Center, Kansas State University.
