@@ -9,7 +9,7 @@
 [![Codecov test
 coverage](https://codecov.io/gh/kunfa/mixedBayes/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kunfa/mixedBayes?branch=master)
 [![CRAN RStudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/mixedBayes)](https://www.r-pkg.org:443/pkg/mixedBayes)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/mixedBayes)](https://www.r-pkg.org:443/pkg/mixedBayes)
 [![R-CMD-check](https://github.com/kunfa/mixedBayes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kunfa/mixedBayes/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
