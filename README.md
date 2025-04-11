@@ -8,6 +8,8 @@
 [![CRAN](https://www.r-pkg.org/badges/version/mixedBayes)](https://cran.r-project.org/package=mixedBayes)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/mixedBayes)](https://www.r-pkg.org:443/pkg/mixedBayes)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/last-month/mixedBayes)](https://www.r-pkg.org:443/pkg/mixedBayes)
 
 <!-- badges: end -->
 
@@ -75,25 +77,6 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
-## News
-
-### mixedBayes 0.1.5 \[2025-02-11\]
-
-- Updated the documentation.
-
-### mixedBayes 0.1.4.1 \[2025-01-28\]
-
-- Fixed minor bugs.
-
-### mixedBayes 0.1.4 \[2025-01-07\]
-
-- Updated README and DESCRIPTION file.
-
-### mixedBayes 0.1.3 \[2024-09-25\]
-
-- Updated with a more efficient Gibbs sampler in the longitudinal setting.
-- Updated the inputs for the main mixedBayes function.
-- Updated the documentation.
 
   
 ## Methods
