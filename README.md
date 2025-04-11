@@ -100,4 +100,4 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 
 This package provides implementation for methods proposed in
 
-  - Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2024+). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions.(Under Review)
+  - Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2025). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions. [Journal of the Royal Statistical Society Series C: Applied Statistics, qlaf027](https://doi.org/10.1093/jrsssc/qlaf027)
