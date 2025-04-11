@@ -4,6 +4,7 @@
 ### mixedBayes 0.1.6 \[2025-04-11\]
 
 - Updated the README and DESCRIPTION file.
+- Updated the documentation.
 
 ### mixedBayes 0.1.5 \[2025-02-11\]
 

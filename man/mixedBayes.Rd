@@ -23,7 +23,7 @@ mixedBayes(
 \arguments{
 \item{y}{the vector of repeated measured responses. The current version of mixedBayes only supports continuous response.}
 
-\item{e}{the long format matrix of a group of dummy environmental factors variables.}
+\item{e}{the long format matrix of dummy environmental factors.}
 
 \item{X}{the long format matrix of the intercept and time effects (time effects are optional).}
 
