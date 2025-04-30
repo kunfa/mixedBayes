@@ -13,7 +13,7 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/mixedBayes)](https://www
 
 <!-- badges: end -->
 
-In longitudinal studies, the same subjects are measured repeatedly over time, leading to correlations among the repeated measurements. Properly accounting for the intra-cluster correlations in the presence of data heterogeneity and long tailed distributions of the disease phenotype is challenging, especially in the context of high dimensional regressions. In this package, we developed a Bayesian quantile mixed effects model with spike- and -slab priors to dissect important gene - environment interactions under longitudinal genomics studies. An efficient Gibbs sampler has been developed to facilitate fast computation. The Markov chain Monte Carlo algorithms of the proposed and alternative methods are efficiently implemented in 'C++'. The development of this software package and the associated statistical methods have been partially supported by an Innovative Research Award from Johnson Cancer Research Center, Kansas State University.
+With high-dimensional omics features, repeated measure ANOVA leads to longitudinal gene-environment interaction studies that have intra-cluster correlations, outlying observations and structured sparsity arising from the ANOVA design. In this package, we have developed robust sparse Bayesian mixed effect models tailored for the above studies ([Fan et al. (2025)] (https://doi.org/10.1093/jrsssc/qlaf027)). An efficient Gibbs sampler has been developed to facilitate fast computation. The Markov chain Monte Carlo algorithms of the proposed and alternative methods are efficiently implemented in 'C++'. The development of this software package and the associated statistical methods have been partially supported by an Innovative Research Award from Johnson Cancer Research Center, Kansas State University.
 
 ## How to install
 
@@ -34,12 +34,12 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
 
 ## Examples
 
-#### Example.1 (default method: robust group selection under random intercept and slope model)
+#### Example.1 (default method: robust sparse bi-level selection under random intercept -and- slope model)
 
     library(mixedBayes)
     data(data)
     
-    fit = mixedBayes(y,e,X,g,w,k,structure=c("group"))
+    fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
     fit$coefficient
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
@@ -47,7 +47,7 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
-#### Example.2 (alternative: robust individual selection under random intercept and slope model)
+#### Example.2 (alternative: robust sparse individual level selections under random intercept -and- slope model)
 
     fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
     fit$coefficient
@@ -58,9 +58,9 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 
-#### Example.3 (alternative: non-robust group selection)
+#### Example.3 (alternative: non-robust sparse bi-level selection)
 
-    fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("group"))
+    fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("bi-level"))
     fit$coefficient
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
@@ -68,7 +68,7 @@ In longitudinal studies, the same subjects are measured repeatedly over time, le
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
-#### Example.4 (alternative: robust group selection under random intercept model)
+#### Example.4 (alternative: robust sparse bi-level selection under random intercept model)
     fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
     fit$coefficient    
     b = selection(fit,sparse=TRUE)

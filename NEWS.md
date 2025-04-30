@@ -1,6 +1,12 @@
 
 ## News
 
+### mixedBayes 0.1.7 \[2025-04-30\]
+
+- Updated the README and DESCRIPTION file.
+- Updated the documentation.
+- Fixed minor bugs.
+
 ### mixedBayes 0.1.6 \[2025-04-11\]
 
 - Updated the README and DESCRIPTION file.

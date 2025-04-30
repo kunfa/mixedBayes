@@ -3,17 +3,17 @@
 #' @keywords models
 #' @param g the long format matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.
 #' @param y the vector of repeated measured responses. The current version of mixedBayes only supports continuous response.
-#' @param e the long format matrix of dummy environmental factors.
+#' @param e the long format matrix of environment (treatment) factors (a group of dummy variables).
 #' @param X the long format matrix of the intercept and time effects (time effects are optional).
-#' @param w the long format matrix of interactions between genetic factors and environmental factors.
-#' @param k the total number of time points.
+#' @param w the long format matrix of interactions between genetic factors and environment (treatment) factors.
+#' @param k the number of repeated measurements.
 #' @param iterations the number of MCMC iterations.
 #' @param burn.in the number of iterations for burn-in.
-#' @param slope logical flag. If TRUE, random intercept and slope model will be used.
+#' @param slope logical flag. If TRUE, random intercept-and-slope model will be used.
 #' @param robust logical flag. If TRUE, robust methods will be used.
 #' @param quant specify different quantiles when applying robust methods.
 #' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly.
-#' @param structure structure for interaction effects, two choices are available. "group" for selection on group-level only. "individual" for selection on individual-level only.
+#' @param structure two choices are available. "bi-level" for selection on both the main and interaction effects corresponding to individual and group levels. "individual" for selections on individual-level only.
 #' @return an object of class `mixedBayes' is returned, which is a list with component:
 #' \item{posterior}{the posteriors of coefficients.}
 #' \item{coefficient}{the estimated coefficients.}
@@ -22,15 +22,15 @@
 #'
 #' @details Consider the data model described in "\code{\link{data}}":
 #' \deqn{Y_{ij} = X_{ij}^\top\gamma_{0}+E_{ij}^\top\gamma_{1}+\sum_{l=1}^{p}G_{ijl}\gamma_{2l}+\sum_{l=1}^{p}W_{ijl}^\top\gamma_{3l}+Z_{ij}^\top\alpha_{i}+\epsilon_{ij}.}
-#' where \eqn{\gamma_{2l}} is the main effect of the \eqn{l}th genetic variant. The interaction effects is corresponding to the coefficient vector \eqn{\gamma_{3l}=(\gamma_{3l1}, \gamma_{3l2},\ldots,\gamma_{3lm})^\top}.
+#' where \eqn{\gamma_{2l}} is the main effect of the \eqn{l}th genetic variant. The interaction effects is corresponding to the coefficient vector \eqn{\gamma_{3l}=(\gamma_{3l1}, \gamma_{3l2},\ldots,\gamma_{3lm})^\top}, with \eqn{W_{ij} = G_{ij}\bigotimes E_{ij}}.
 #'
-#' When `structure="group"`, group-level selection will be conducted on \eqn{||\gamma_{3l}||_{2}}. If `structure="individual"`, individual-level selection will be conducted on each \eqn{\gamma_{3lq}}, (\eqn{q=1,\ldots,m}).
+#' When `structure="bi-level"`, bi-level selection will be conducted. If `structure="individual"`, individual-level selection will be conducted.
 #'
-#' When `slope=TRUE` (default), random intercept and slope model will be used as the mixed effects model.
+#' When `slope=TRUE` (default), random intercept-and-slope model will be used as the mixed effects model.
 #'
-#' When `sparse=TRUE` (default), spike-and-slab priors are imposed on individual and/or group levels to identify important main and interaction effects. Otherwise, Laplacian shrinkage will be used.
+#' When `sparse=TRUE` (default), spike-and-slab priors are imposed to identify important main and interaction effects. Otherwise, Laplacian shrinkage will be used.
 #'
-#' When `robust=TRUE` (default), the distribution of \eqn{\epsilon_{ij}} is defined as a Laplace distribution with density.
+#' When `robust=TRUE` (default), the distribution of \eqn{\epsilon_{ij}} is defined as an asymmetric Laplace distribution with density.
 #'
 #' \eqn{
 #' f(\epsilon_{ij}|\theta,\tau) = \theta(1-\theta)\exp\left\{-\tau\rho_{\theta}(\epsilon_{ij})\right\}
@@ -45,9 +45,9 @@
 #' @examples
 #' data(data)
 #'
-#' ## default method
+#' ## default method (robust sparse bi-level selection under random intercept-and-slope model)
 
-#' fit = mixedBayes(y,e,X,g,w,k,structure=c("group"))
+#' fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
 #' fit$coefficient
 #'
 #'## Compute TP and FP
@@ -59,23 +59,23 @@
 #'list(tp=tp, fp=fp)
 
 #' \donttest{
-#' ## alternative: robust individual selection
+#' ## alternative: robust sparse individual level selections under random intercept-and-slope model
 #' fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
 #' fit$coefficient
 #'
-#' ## alternative: non-robust group selection
-#' fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("group"))
+#' ## alternative: non-robust sparse bi-level selection under random intercept-and-slope model
+#' fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("bi-level"))
 #' fit$coefficient
 #'
-#' ## alternative: robust group selection under random intercept model
-#' fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
+#' ## alternative: robust sparse bi-level selection under random intercept model
+#' fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("bi-level"))
 #' fit$coefficient
 #'
 #' }
 #'
 #' @export
 
-mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("group","individual"))
+mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("bi-level","individual"))
 {
   structure = match.arg(structure)
 
