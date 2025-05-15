@@ -69,7 +69,7 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 #### Example.4 (alternative: robust sparse bi-level selection under random intercept model)
-    fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("group"))
+    fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("bi-level"))
     fit$coefficient    
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
