@@ -199,6 +199,7 @@ Rcpp::List BLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat 
   return Rcpp::List::create(Rcpp::Named("GS.alpha") = gsAlpha,
 
                             Rcpp::Named("GS.beta") = gsBeta,
+                            Rcpp::Named("GS.ata") = gsAta,
 
                             Rcpp::Named("GS.eta") = gsEta,
 

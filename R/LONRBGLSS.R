@@ -54,8 +54,8 @@ LONRBGLSS <- function(y,e,X,g,w,z,k,quant,max.steps,sparse, structure){
     )
   }
 
-  out = list( GS.beta = fit$GS.beta,
-              GS.eta = fit$GS.eta)
+  out = list( GS.alpha = fit$GS.alpha, GS.beta = fit$GS.beta,
+              GS.eta = fit$GS.eta, GS.ata = fit$GS.ata)
   out
 
 }

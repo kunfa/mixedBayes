@@ -48,7 +48,7 @@ LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure){
                                   ,hatLambdaSqStar2,hatSigmaSq,a0,b0,aStar,bStar,hatPhiSq,alpha,gamma,alpha1,gamma1,progress)
     )
   }
-  out = list( GS.beta = fit$GS.beta,
-              GS.eta = fit$GS.eta)
+  out = list( GS.alpha = fit$GS.alpha,GS.beta = fit$GS.beta,
+              GS.eta = fit$GS.eta,GS.ata = fit$GS.ata)
   out
 }

@@ -163,6 +163,7 @@ Rcpp::List BGL (arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned in
                             Rcpp::Named("GS.beta") = gsR0,
 
                             Rcpp::Named("GS.eta") = gsRStar,
+                            Rcpp::Named("GS.ata") = gsAta,
                             Rcpp::Named("GS.invTAUsq.0") = gsInvTauSq0,
 
                             Rcpp::Named("GS.invTAUsq.star") = gsInvTauSqStar,

@@ -204,6 +204,7 @@ Rcpp::List RBGL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps
   return Rcpp::List::create(
     Rcpp::Named("GS.alpha") = gsAlpha,
     Rcpp::Named("GS.beta") = gsBeta,
+    Rcpp::Named("GS.ata") = gsAta,
     Rcpp::Named("GS.eta") = gseta,
     Rcpp::Named("GS.v") = gsV,
     Rcpp::Named("GS.s1") = gsSg1,

@@ -1,5 +1,12 @@
 
 ## News
+### mixedBayes 0.1.8 \[2025-05-15\]
+
+- Added posteriors for the environment (treatment) and random effects.
+- Updated the documentation.
+- Updated the example data.
+- Fixed minor bugs.
+
 
 ### mixedBayes 0.1.7 \[2025-04-30\]
 

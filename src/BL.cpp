@@ -152,6 +152,7 @@ Rcpp::List BL (arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int
   return Rcpp::List::create(Rcpp::Named("GS.alpha") = gsAlpha,
 
                             Rcpp::Named("GS.beta") = gsBeta,
+                            Rcpp::Named("GS.ata") = gsAta,
 
                             Rcpp::Named("GS.eta") = gsEta,
                             Rcpp::Named("GS.invTAUsq.0") = gsInvTauSq0,

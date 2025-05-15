@@ -23,7 +23,7 @@ NULL
 #'
 #' @references
 #' Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2025). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions.
-#' \href{https://academic.oup.com/jrsssc/advance-article/doi/10.1093/jrsssc/qlaf027/8108436}{\emph{Journal of the Royal Statistical Society Series C: Applied Statistics}, qlaf027} \doi{10.1093/jrsssc/qlaf027}
+#' {\emph{Journal of the Royal Statistical Society Series C: Applied Statistics}, qlaf027} \doi{10.1093/jrsssc/qlaf027}
 #'
 #' Zhou, F., Ren, J.,  Li, G., Jiang, Y., Li, X., Wang, W. and Wu, C. (2019). Penalized Variable Selection for Lipid-Environment Interactions in a Longitudinal Lipidomics Study.
 #' {\emph{Genes}, 10(12), 1002} \doi{10.3390/genes10121002}
@@ -32,7 +32,7 @@ NULL
 #' {\emph{Genes}, 13(3), 544} \doi{10.3390/genes13030544}
 #'
 #' Zhou, F., Lu, X., Ren, J., Fan, K., Ma, S., and Wu, C. (2022). Sparse group variable selection for gene–environment interactions in the longitudinal study.
-#' \href{https://onlinelibrary.wiley.com/doi/full/10.1002/gepi.22461}{\emph{Genetic epidemiology}, 46(5-6), 317-340} \doi{10.1002/gepi.22461}
+#' {\emph{Genetic epidemiology}, 46(5-6), 317-340} \doi{10.1002/gepi.22461}
 #'
 #' Ren, J., Zhou, F., Li, X., Ma, S., Jiang, Y. and Wu, C. (2023). Robust Bayesian variable selection for gene-environment interactions.
 #' {\emph{Biometrics},79(2),684-694 } \doi{10.1111/biom.13670}

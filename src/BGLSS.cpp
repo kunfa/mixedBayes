@@ -206,6 +206,7 @@ arma::mat invSigM0 = arma::diagmat(hatInvSigM0);
   return Rcpp::List::create(Rcpp::Named("GS.alpha") = gsM,
 
                             Rcpp::Named("GS.beta") = gsR0,
+                            Rcpp::Named("GS.ata") = gsAta,
 
                             Rcpp::Named("GS.eta") = gsRStar,
                             Rcpp::Named("GS.tRsRs") = gsRstRs,
