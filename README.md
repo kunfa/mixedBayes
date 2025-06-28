@@ -47,7 +47,7 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
-#### Example.2 (alternative: robust sparse individual level selections under random intercept -and- slope model)
+#### Example.2 (alternative: robust sparse individual level selection under random intercept -and- slope model)
 
     fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
     fit$coefficient
@@ -58,7 +58,7 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
 
-#### Example.3 (alternative: non-robust sparse bi-level selection)
+#### Example.3 (alternative: non-robust sparse bi-level selection under random intercept -and- slope model)
 
     fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("bi-level"))
     fit$coefficient
