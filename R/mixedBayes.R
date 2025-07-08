@@ -107,14 +107,15 @@ mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, 
     }
   }
 
-  coeff.treatment = apply(out$GS.alpha[-(1:BI),,drop=FALSE], 2, stats::median);
-  coeff.main = apply(out$GS.beta[-(1:BI),,drop=FALSE], 2, stats::median);
-  coeff.interaction = apply(out$GS.eta[-(1:BI),,drop=FALSE], 2, stats::median);
-  coeff.random = apply(out$GS.ata[-(1:BI),,drop=FALSE], 2, stats::median);
+  coeff.treatment = apply(out$GS.gamma1[-(1:BI),,drop=FALSE], 2, stats::median);
+  coeff.X = apply(out$GS.gamma0[-(1:BI),,drop=FALSE], 2, stats::median);
+  coeff.main = apply(out$GS.gamma2[-(1:BI),,drop=FALSE], 2, stats::median);
+  coeff.interaction = apply(out$GS.gamma3[-(1:BI),,drop=FALSE], 2, stats::median);
+  coeff.random = apply(out$GS.alpha[-(1:BI),,drop=FALSE], 2, stats::median);
   coeff.random = matrix(coeff.random,ncol = length(y)/k)
 
 
-  coefficient = list(treatment = coeff.treatment, main=coeff.main, interaction=coeff.interaction, random=coeff.random)
+  coefficient = list(treatment = coeff.treatment, X = coeff.X, main=coeff.main, interaction=coeff.interaction, random=coeff.random)
 
   fit = list(posterior = out, coefficient=coefficient, burn.in = BI, iterations=iterations)
 
