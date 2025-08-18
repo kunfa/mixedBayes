@@ -80,6 +80,7 @@
 
 mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("bi-level","individual"))
 {
+  X = as.matrix(X)
   structure = match.arg(structure)
 
   if(iterations<1) stop("iterations must be a positive integer.")
@@ -108,7 +109,7 @@ mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, 
   }
 
   coeff.treatment = apply(out$GS.gamma1[-(1:BI),,drop=FALSE], 2, stats::median);
-  coeff.X = apply(out$GS.gamma0[-(1:BI),,drop=FALSE], 2, stats::median);
+  coeff.X = apply(as.matrix(out$GS.gamma0)[-(1:BI),,drop=FALSE], 2, stats::median);
   coeff.main = apply(out$GS.gamma2[-(1:BI),,drop=FALSE], 2, stats::median);
   coeff.interaction = apply(out$GS.gamma3[-(1:BI),,drop=FALSE], 2, stats::median);
   coeff.random = apply(out$GS.alpha[-(1:BI),,drop=FALSE], 2, stats::median);
