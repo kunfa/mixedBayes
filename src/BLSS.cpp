@@ -11,7 +11,7 @@ using namespace arma;
 
 
 // [[Rcpp::export()]]
-Rcpp::List BLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q, unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::mat hatAta, arma::vec hatEta, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar,double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double hatPhiSq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1,double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress)
+Rcpp::List BLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q,unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::mat hatAta, arma::vec hatEta, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar,double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double hatPhiSq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1,double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress)
 {
   unsigned int n = g.n_rows, m = g.n_cols, c = z.n_cols,p = w.n_cols, n1 = n/k;
   arma::mat gsAlpha(maxSteps, q),
@@ -78,7 +78,7 @@ Rcpp::List BLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat 
       B0jtRes = arma::as_scalar(g.col(j).t() * res);
       meanR0 = temp0 * B0jtRes;
       l0 = hatPi0/(hatPi0 + (1-hatPi0)*sqrt(hatInvTauSq0(j)*temp0)*exp(0.5/hatSigmaSq*temp0*pow(B0jtRes,2)));
-      gsL0(k,j) = l0;
+      gsL0(t,j) = l0;
       u = R::runif(0, 1);
       if(u<l0){
         hatBeta(j) = 0;
@@ -97,7 +97,7 @@ Rcpp::List BLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat 
       BrjtRes = arma::as_scalar(w.col(j).t() * res);
       meanRs = tempS * BrjtRes;
       lS = hatPiStar/(hatPiStar + (1-hatPiStar)*sqrt(hatInvTauSqStar(j)*tempS)*exp(0.5/hatSigmaSq*tempS*pow(BrjtRes,2)));
-      gsLS(k,j) = lS;
+      gsLS(t,j) = lS;
       u1 = R::runif(0, 1);
       if(u1<lS){
         hatEta(j) = 0;

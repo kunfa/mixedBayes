@@ -1,7 +1,7 @@
 selection_sparse = function(obj,burn.in=obj$burn.in){
-  sg1 = obj$posterior$GS.beta
+  sg1 = obj$posterior$GS.gamma2
   sg1[which(sg1!=0)]=1
-  sg2 = obj$posterior$GS.eta
+  sg2 = obj$posterior$GS.gamma3
   sg2[which(sg2!=0)]=1
   main=c()
   for(j in 1:ncol(sg1)){
@@ -17,6 +17,6 @@ selection_sparse = function(obj,burn.in=obj$burn.in){
     q_t2 = mpm(t2)
     inter = c(inter,q_t2)
   }
-  inde = c(main,inter)
-  inde
+  index = c(main,inter)
+  index
 }

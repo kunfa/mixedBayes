@@ -13,7 +13,7 @@ selection(obj, sparse)
 }
 \value{
 an object of class `selection' is returned, which is a list with component:
-\item{inde}{a vector of indicators of selected effects.}
+\item{index}{a vector of indicators of selected effects.}
 }
 \description{
 Variable selection for a mixedBayes object

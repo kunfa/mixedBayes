@@ -1,5 +1,13 @@
 
 ## News
+### mixedBayes 0.1.11 \[2025-08-17\]
+
+- Fixed minor bugs.
+
+### mixedBayes 0.1.10 \[2025-07-08\]
+
+- Fixed minor bugs.
+
 ### mixedBayes 0.1.9 \[2025-06-27\]
 
 - Fixed minor bugs.

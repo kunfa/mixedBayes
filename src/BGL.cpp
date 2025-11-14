@@ -95,7 +95,7 @@ Rcpp::List BGL (arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned in
 
 
     // sigma.sq|
-    double shapeSig = alpha + (n+2*s+s*L)/2;
+    double shapeSig = alpha + (n+s+s*L)/2;
     repInvTau = arma::vectorise(arma::repelem(hatInvTauSqStar.t(), L, 1), 0);
     double rateSig = gamma + 0.5*(arma::accu(arma::square(res)) +
                                   arma::accu(square(hatR0) % hatInvTauSq0) +
