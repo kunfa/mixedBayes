@@ -12,8 +12,48 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // BGL
-Rcpp::List BGL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int q, unsigned int o, unsigned int k, int maxSteps, arma::vec hatM, arma::vec hatR0, arma::vec hatRStar, arma::mat hatAta, arma::mat z, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double a0, double b0, double aStar, double bStar, double hatPhiSq, double alpha, double gamma, double alpha1, double gamma1, int progress);
-RcppExport SEXP _mixedBayes_BGL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatMSEXP, SEXP hatR0SEXP, SEXP hatRStarSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP hatPhiSqSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+Rcpp::List BGL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int q, unsigned int o, unsigned int k, int maxSteps, arma::vec hatM, arma::vec hatR0, arma::vec hatRStar, arma::mat hatAta, arma::mat z, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double a0, double b0, double aStar, double bStar, double Phi1Sq, double Phi2Sq, double alpha, double gamma, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_BGL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatMSEXP, SEXP hatR0SEXP, SEXP hatRStarSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type o(oSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatM(hatMSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatR0(hatR0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatRStar(hatRStarSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvSigM0(hatInvSigM0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSq0(hatInvTauSq0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSqStar(hatInvTauSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSq0(hatLambdaSq0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSqStar(hatLambdaSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatSigmaSq(hatSigmaSqSEXP);
+    Rcpp::traits::input_parameter< double >::type a0(a0SEXP);
+    Rcpp::traits::input_parameter< double >::type b0(b0SEXP);
+    Rcpp::traits::input_parameter< double >::type aStar(aStarSEXP);
+    Rcpp::traits::input_parameter< double >::type bStar(bStarSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(BGL(y, e, g, w, q, o, k, maxSteps, hatM, hatR0, hatRStar, hatAta, z, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, a0, b0, aStar, bStar, Phi1Sq, Phi2Sq, alpha, gamma, alpha1, gamma1, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BGL_1
+Rcpp::List BGL_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int q, unsigned int o, unsigned int k, int maxSteps, arma::vec hatM, arma::vec hatR0, arma::vec hatRStar, arma::mat hatAta, arma::mat z, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double a0, double b0, double aStar, double bStar, double hatPhiSq, double alpha, double gamma, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_BGL_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatMSEXP, SEXP hatR0SEXP, SEXP hatRStarSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP hatPhiSqSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -46,13 +86,59 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
     Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(BGL(y, e, g, w, q, o, k, maxSteps, hatM, hatR0, hatRStar, hatAta, z, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, a0, b0, aStar, bStar, hatPhiSq, alpha, gamma, alpha1, gamma1, progress));
+    rcpp_result_gen = Rcpp::wrap(BGL_1(y, e, g, w, q, o, k, maxSteps, hatM, hatR0, hatRStar, hatAta, z, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, a0, b0, aStar, bStar, hatPhiSq, alpha, gamma, alpha1, gamma1, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 // BGLSS
-Rcpp::List BGLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q, unsigned int o, unsigned int k, int maxSteps, arma::vec hatM, arma::vec hatR0, arma::mat hatAta, arma::vec hatRStar, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double hatPhiSq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress);
-RcppExport SEXP _mixedBayes_BGLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatMSEXP, SEXP hatR0SEXP, SEXP hatAtaSEXP, SEXP hatRStarSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatPi0SEXP, SEXP hatPiStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP muStarSEXP, SEXP nu0SEXP, SEXP nuStarSEXP, SEXP progressSEXP) {
+Rcpp::List BGLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q, unsigned int o, unsigned int k, int maxSteps, arma::vec hatM, arma::vec hatR0, arma::mat hatAta, arma::vec hatRStar, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double Phi1Sq, double Phi2Sq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress);
+RcppExport SEXP _mixedBayes_BGLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatMSEXP, SEXP hatR0SEXP, SEXP hatAtaSEXP, SEXP hatRStarSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatPi0SEXP, SEXP hatPiStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP muStarSEXP, SEXP nu0SEXP, SEXP nuStarSEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type o(oSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatM(hatMSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatR0(hatR0SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatRStar(hatRStarSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvSigM0(hatInvSigM0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSq0(hatInvTauSq0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSqStar(hatInvTauSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatPi0(hatPi0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatPiStar(hatPiStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSq0(hatLambdaSq0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSqStar(hatLambdaSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatSigmaSq(hatSigmaSqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
+    Rcpp::traits::input_parameter< double >::type a0(a0SEXP);
+    Rcpp::traits::input_parameter< double >::type b0(b0SEXP);
+    Rcpp::traits::input_parameter< double >::type aStar(aStarSEXP);
+    Rcpp::traits::input_parameter< double >::type bStar(bStarSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< double >::type mu0(mu0SEXP);
+    Rcpp::traits::input_parameter< double >::type muStar(muStarSEXP);
+    Rcpp::traits::input_parameter< double >::type nu0(nu0SEXP);
+    Rcpp::traits::input_parameter< double >::type nuStar(nuStarSEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(BGLSS(y, e, g, w, z, q, o, k, maxSteps, hatM, hatR0, hatAta, hatRStar, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatPi0, hatPiStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, Phi1Sq, Phi2Sq, a0, b0, aStar, bStar, alpha, gamma, alpha1, gamma1, mu0, muStar, nu0, nuStar, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BGLSS_1
+Rcpp::List BGLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q, unsigned int o, unsigned int k, int maxSteps, arma::vec hatM, arma::vec hatR0, arma::mat hatAta, arma::vec hatRStar, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double hatPhiSq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress);
+RcppExport SEXP _mixedBayes_BGLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatMSEXP, SEXP hatR0SEXP, SEXP hatAtaSEXP, SEXP hatRStarSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatPi0SEXP, SEXP hatPiStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP muStarSEXP, SEXP nu0SEXP, SEXP nuStarSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -91,13 +177,52 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type nu0(nu0SEXP);
     Rcpp::traits::input_parameter< double >::type nuStar(nuStarSEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(BGLSS(y, e, g, w, z, q, o, k, maxSteps, hatM, hatR0, hatAta, hatRStar, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatPi0, hatPiStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, hatPhiSq, a0, b0, aStar, bStar, alpha, gamma, alpha1, gamma1, mu0, muStar, nu0, nuStar, progress));
+    rcpp_result_gen = Rcpp::wrap(BGLSS_1(y, e, g, w, z, q, o, k, maxSteps, hatM, hatR0, hatAta, hatRStar, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatPi0, hatPiStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, hatPhiSq, a0, b0, aStar, bStar, alpha, gamma, alpha1, gamma1, mu0, muStar, nu0, nuStar, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 // BL
-Rcpp::List BL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int q, unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::vec hatEta, arma::mat hatAta, arma::mat z, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double a0, double b0, double aStar, double bStar, double hatPhiSq, double alpha, double gamma, double alpha1, double gamma1, int progress);
-RcppExport SEXP _mixedBayes_BL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP qSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatAlphaSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP hatPhiSqSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+Rcpp::List BL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int q, unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::vec hatEta, arma::mat hatAta, arma::mat z, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double a0, double b0, double aStar, double bStar, double Phi1Sq, double Phi2Sq, double alpha, double gamma, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_BL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP qSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatAlphaSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatAlpha(hatAlphaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatBeta(hatBetaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatEta(hatEtaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvSigM0(hatInvSigM0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSq0(hatInvTauSq0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSqStar(hatInvTauSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSq0(hatLambdaSq0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSqStar(hatLambdaSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatSigmaSq(hatSigmaSqSEXP);
+    Rcpp::traits::input_parameter< double >::type a0(a0SEXP);
+    Rcpp::traits::input_parameter< double >::type b0(b0SEXP);
+    Rcpp::traits::input_parameter< double >::type aStar(aStarSEXP);
+    Rcpp::traits::input_parameter< double >::type bStar(bStarSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(BL(y, e, g, w, q, k, maxSteps, hatAlpha, hatBeta, hatEta, hatAta, z, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, a0, b0, aStar, bStar, Phi1Sq, Phi2Sq, alpha, gamma, alpha1, gamma1, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BL_1
+Rcpp::List BL_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int q, unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::vec hatEta, arma::mat hatAta, arma::mat z, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double a0, double b0, double aStar, double bStar, double hatPhiSq, double alpha, double gamma, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_BL_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP qSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatAlphaSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP hatPhiSqSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -129,13 +254,58 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
     Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(BL(y, e, g, w, q, k, maxSteps, hatAlpha, hatBeta, hatEta, hatAta, z, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, a0, b0, aStar, bStar, hatPhiSq, alpha, gamma, alpha1, gamma1, progress));
+    rcpp_result_gen = Rcpp::wrap(BL_1(y, e, g, w, q, k, maxSteps, hatAlpha, hatBeta, hatEta, hatAta, z, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, a0, b0, aStar, bStar, hatPhiSq, alpha, gamma, alpha1, gamma1, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 // BLSS
-Rcpp::List BLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q, unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::mat hatAta, arma::vec hatEta, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double hatPhiSq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress);
-RcppExport SEXP _mixedBayes_BLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP qSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatAlphaSEXP, SEXP hatBetaSEXP, SEXP hatAtaSEXP, SEXP hatEtaSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatPi0SEXP, SEXP hatPiStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP muStarSEXP, SEXP nu0SEXP, SEXP nuStarSEXP, SEXP progressSEXP) {
+Rcpp::List BLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q, unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::mat hatAta, arma::vec hatEta, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double Phi1Sq, double Phi2Sq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress);
+RcppExport SEXP _mixedBayes_BLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP qSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatAlphaSEXP, SEXP hatBetaSEXP, SEXP hatAtaSEXP, SEXP hatEtaSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatPi0SEXP, SEXP hatPiStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP muStarSEXP, SEXP nu0SEXP, SEXP nuStarSEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatAlpha(hatAlphaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatBeta(hatBetaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatEta(hatEtaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvSigM0(hatInvSigM0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSq0(hatInvTauSq0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatInvTauSqStar(hatInvTauSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatPi0(hatPi0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatPiStar(hatPiStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSq0(hatLambdaSq0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatLambdaSqStar(hatLambdaSqStarSEXP);
+    Rcpp::traits::input_parameter< double >::type hatSigmaSq(hatSigmaSqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
+    Rcpp::traits::input_parameter< double >::type a0(a0SEXP);
+    Rcpp::traits::input_parameter< double >::type b0(b0SEXP);
+    Rcpp::traits::input_parameter< double >::type aStar(aStarSEXP);
+    Rcpp::traits::input_parameter< double >::type bStar(bStarSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< double >::type mu0(mu0SEXP);
+    Rcpp::traits::input_parameter< double >::type muStar(muStarSEXP);
+    Rcpp::traits::input_parameter< double >::type nu0(nu0SEXP);
+    Rcpp::traits::input_parameter< double >::type nuStar(nuStarSEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(BLSS(y, e, g, w, z, q, k, maxSteps, hatAlpha, hatBeta, hatAta, hatEta, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatPi0, hatPiStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, Phi1Sq, Phi2Sq, a0, b0, aStar, bStar, alpha, gamma, alpha1, gamma1, mu0, muStar, nu0, nuStar, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BLSS_1
+Rcpp::List BLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, arma:: mat z, unsigned int q, unsigned int k, int maxSteps, arma::vec hatAlpha, arma::vec hatBeta, arma::mat hatAta, arma::vec hatEta, arma::vec hatInvSigM0, arma::vec hatInvTauSq0, arma::vec hatInvTauSqStar, double hatPi0, double hatPiStar, double hatLambdaSq0, double hatLambdaSqStar, double hatSigmaSq, double hatPhiSq, double a0, double b0, double aStar, double bStar, double alpha, double gamma, double alpha1, double gamma1, double mu0, double muStar, double nu0, double nuStar, int progress);
+RcppExport SEXP _mixedBayes_BLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP zSEXP, SEXP qSEXP, SEXP kSEXP, SEXP maxStepsSEXP, SEXP hatAlphaSEXP, SEXP hatBetaSEXP, SEXP hatAtaSEXP, SEXP hatEtaSEXP, SEXP hatInvSigM0SEXP, SEXP hatInvTauSq0SEXP, SEXP hatInvTauSqStarSEXP, SEXP hatPi0SEXP, SEXP hatPiStarSEXP, SEXP hatLambdaSq0SEXP, SEXP hatLambdaSqStarSEXP, SEXP hatSigmaSqSEXP, SEXP hatPhiSqSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP aStarSEXP, SEXP bStarSEXP, SEXP alphaSEXP, SEXP gammaSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP mu0SEXP, SEXP muStarSEXP, SEXP nu0SEXP, SEXP nuStarSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -173,13 +343,54 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type nu0(nu0SEXP);
     Rcpp::traits::input_parameter< double >::type nuStar(nuStarSEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(BLSS(y, e, g, w, z, q, k, maxSteps, hatAlpha, hatBeta, hatAta, hatEta, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatPi0, hatPiStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, hatPhiSq, a0, b0, aStar, bStar, alpha, gamma, alpha1, gamma1, mu0, muStar, nu0, nuStar, progress));
+    rcpp_result_gen = Rcpp::wrap(BLSS_1(y, e, g, w, z, q, k, maxSteps, hatAlpha, hatBeta, hatAta, hatEta, hatInvSigM0, hatInvTauSq0, hatInvTauSqStar, hatPi0, hatPiStar, hatLambdaSq0, hatLambdaSqStar, hatSigmaSq, hatPhiSq, a0, b0, aStar, bStar, alpha, gamma, alpha1, gamma1, mu0, muStar, nu0, nuStar, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 // RBGL
-Rcpp::List RBGL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, int q, int o, int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
-RcppExport SEXP _mixedBayes_RBGL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+Rcpp::List RBGL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, int q, int o, int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double Phi1Sq, double Phi2Sq, double a, double b, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_RBGL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< int >::type o(oSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatBeta(hatBetaSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type hatEta(hatEtaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatAlpha(hatAlphaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< double >::type hatTau(hatTauSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatV(hatVSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg1(hatSg1SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg2(hatSg2SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type invSigAlpha0(invSigAlpha0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq1(hatEtaSq1SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq2(hatEtaSq2SEXP);
+    Rcpp::traits::input_parameter< double >::type xi1(xi1SEXP);
+    Rcpp::traits::input_parameter< double >::type xi2(xi2SEXP);
+    Rcpp::traits::input_parameter< double >::type r1(r1SEXP);
+    Rcpp::traits::input_parameter< double >::type r2(r2SEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(RBGL(y, e, g, w, maxSteps, q, o, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, Phi1Sq, Phi2Sq, a, b, alpha1, gamma1, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RBGL_1
+Rcpp::List RBGL_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, int q, int o, int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_RBGL_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -213,13 +424,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
     Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(RBGL(y, e, g, w, maxSteps, q, o, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, hatPhiSq, a, b, alpha1, gamma1, progress));
+    rcpp_result_gen = Rcpp::wrap(RBGL_1(y, e, g, w, maxSteps, q, o, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, hatPhiSq, a, b, alpha1, gamma1, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 // RBGLSS
-Rcpp::List RBGLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, unsigned int q, unsigned int o, unsigned int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma:: mat hatAta, arma:: mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
-RcppExport SEXP _mixedBayes_RBGLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+Rcpp::List RBGLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, unsigned int q, unsigned int o, unsigned int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma:: mat hatAta, arma:: mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double Phi1Sq, double Phi2Sq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
+RcppExport SEXP _mixedBayes_RBGLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -249,7 +460,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type xi2(xi2SEXP);
     Rcpp::traits::input_parameter< double >::type r1(r1SEXP);
     Rcpp::traits::input_parameter< double >::type r2(r2SEXP);
-    Rcpp::traits::input_parameter< double >::type hatPhiSq(hatPhiSqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     Rcpp::traits::input_parameter< double >::type b(bSEXP);
     Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
@@ -257,13 +469,97 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type sh1(sh1SEXP);
     Rcpp::traits::input_parameter< double >::type sh0(sh0SEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(RBGLSS(y, e, g, w, maxSteps, q, o, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatPi1, hatPi2, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, hatPhiSq, a, b, alpha1, gamma1, sh1, sh0, progress));
+    rcpp_result_gen = Rcpp::wrap(RBGLSS(y, e, g, w, maxSteps, q, o, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatPi1, hatPi2, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, Phi1Sq, Phi2Sq, a, b, alpha1, gamma1, sh1, sh0, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RBGLSS_1
+Rcpp::List RBGLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, unsigned int q, unsigned int o, unsigned int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma:: mat hatAta, arma:: mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double Phi1Sq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
+RcppExport SEXP _mixedBayes_RBGLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP oSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP Phi1SqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type o(oSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatBeta(hatBetaSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type hatEta(hatEtaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatAlpha(hatAlphaSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< double >::type hatTau(hatTauSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatV(hatVSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg1(hatSg1SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg2(hatSg2SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type invSigAlpha0(invSigAlpha0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatPi1(hatPi1SEXP);
+    Rcpp::traits::input_parameter< double >::type hatPi2(hatPi2SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq1(hatEtaSq1SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq2(hatEtaSq2SEXP);
+    Rcpp::traits::input_parameter< double >::type xi1(xi1SEXP);
+    Rcpp::traits::input_parameter< double >::type xi2(xi2SEXP);
+    Rcpp::traits::input_parameter< double >::type r1(r1SEXP);
+    Rcpp::traits::input_parameter< double >::type r2(r2SEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< double >::type sh1(sh1SEXP);
+    Rcpp::traits::input_parameter< double >::type sh0(sh0SEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(RBGLSS_1(y, e, g, w, maxSteps, q, o, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatPi1, hatPi2, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, Phi1Sq, a, b, alpha1, gamma1, sh1, sh0, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 // RBL
-Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, int q, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
-RcppExport SEXP _mixedBayes_RBL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, int q, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double Phi1Sq, double Phi2Sq, double a, double b, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_RBL(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatBeta(hatBetaSEXP);
+    Rcpp::traits::input_parameter< arma:: vec >::type hatEta(hatEtaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatAlpha(hatAlphaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< double >::type hatTau(hatTauSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatV(hatVSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg1(hatSg1SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg2(hatSg2SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type invSigAlpha0(invSigAlpha0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq1(hatEtaSq1SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq2(hatEtaSq2SEXP);
+    Rcpp::traits::input_parameter< double >::type xi1(xi1SEXP);
+    Rcpp::traits::input_parameter< double >::type xi2(xi2SEXP);
+    Rcpp::traits::input_parameter< double >::type r1(r1SEXP);
+    Rcpp::traits::input_parameter< double >::type r2(r2SEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(RBL(y, e, g, w, maxSteps, q, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, Phi1Sq, Phi2Sq, a, b, alpha1, gamma1, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RBL_1
+Rcpp::List RBL_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, int q, int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, int progress);
+RcppExport SEXP _mixedBayes_RBL_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -296,13 +592,57 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
     Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(RBL(y, e, g, w, maxSteps, q, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, hatPhiSq, a, b, alpha1, gamma1, progress));
+    rcpp_result_gen = Rcpp::wrap(RBL_1(y, e, g, w, maxSteps, q, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, hatPhiSq, a, b, alpha1, gamma1, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 // RBLSS
-Rcpp::List RBLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, unsigned int q, unsigned int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma:: mat hatAta, arma:: mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
-RcppExport SEXP _mixedBayes_RBLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+Rcpp::List RBLSS(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, unsigned int q, unsigned int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma:: mat hatAta, arma:: mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double Phi1Sq, double Phi2Sq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
+RcppExport SEXP _mixedBayes_RBLSS(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP Phi1SqSEXP, SEXP Phi2SqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type g(gSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type w(wSEXP);
+    Rcpp::traits::input_parameter< int >::type maxSteps(maxStepsSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type q(qSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatBeta(hatBetaSEXP);
+    Rcpp::traits::input_parameter< arma:: vec >::type hatEta(hatEtaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatAlpha(hatAlphaSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type hatAta(hatAtaSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type z(zSEXP);
+    Rcpp::traits::input_parameter< double >::type hatTau(hatTauSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatV(hatVSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg1(hatSg1SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type hatSg2(hatSg2SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type invSigAlpha0(invSigAlpha0SEXP);
+    Rcpp::traits::input_parameter< double >::type hatPi1(hatPi1SEXP);
+    Rcpp::traits::input_parameter< double >::type hatPi2(hatPi2SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq1(hatEtaSq1SEXP);
+    Rcpp::traits::input_parameter< double >::type hatEtaSq2(hatEtaSq2SEXP);
+    Rcpp::traits::input_parameter< double >::type xi1(xi1SEXP);
+    Rcpp::traits::input_parameter< double >::type xi2(xi2SEXP);
+    Rcpp::traits::input_parameter< double >::type r1(r1SEXP);
+    Rcpp::traits::input_parameter< double >::type r2(r2SEXP);
+    Rcpp::traits::input_parameter< double >::type Phi1Sq(Phi1SqSEXP);
+    Rcpp::traits::input_parameter< double >::type Phi2Sq(Phi2SqSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha1(alpha1SEXP);
+    Rcpp::traits::input_parameter< double >::type gamma1(gamma1SEXP);
+    Rcpp::traits::input_parameter< double >::type sh1(sh1SEXP);
+    Rcpp::traits::input_parameter< double >::type sh0(sh0SEXP);
+    Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(RBLSS(y, e, g, w, maxSteps, q, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatPi1, hatPi2, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, Phi1Sq, Phi2Sq, a, b, alpha1, gamma1, sh1, sh0, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RBLSS_1
+Rcpp::List RBLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, unsigned int q, unsigned int k, arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma:: mat hatAta, arma:: mat z, double hatTau, arma::vec hatV, arma::vec hatSg1, arma::vec hatSg2, arma::mat invSigAlpha0, double hatPi1, double hatPi2, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1, double r2, double hatPhiSq, double a, double b, double alpha1, double gamma1, double sh1, double sh0, int progress);
+RcppExport SEXP _mixedBayes_RBLSS_1(SEXP ySEXP, SEXP eSEXP, SEXP gSEXP, SEXP wSEXP, SEXP maxStepsSEXP, SEXP qSEXP, SEXP kSEXP, SEXP hatBetaSEXP, SEXP hatEtaSEXP, SEXP hatAlphaSEXP, SEXP hatAtaSEXP, SEXP zSEXP, SEXP hatTauSEXP, SEXP hatVSEXP, SEXP hatSg1SEXP, SEXP hatSg2SEXP, SEXP invSigAlpha0SEXP, SEXP hatPi1SEXP, SEXP hatPi2SEXP, SEXP hatEtaSq1SEXP, SEXP hatEtaSq2SEXP, SEXP xi1SEXP, SEXP xi2SEXP, SEXP r1SEXP, SEXP r2SEXP, SEXP hatPhiSqSEXP, SEXP aSEXP, SEXP bSEXP, SEXP alpha1SEXP, SEXP gamma1SEXP, SEXP sh1SEXP, SEXP sh0SEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -339,20 +679,28 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type sh1(sh1SEXP);
     Rcpp::traits::input_parameter< double >::type sh0(sh0SEXP);
     Rcpp::traits::input_parameter< int >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(RBLSS(y, e, g, w, maxSteps, q, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatPi1, hatPi2, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, hatPhiSq, a, b, alpha1, gamma1, sh1, sh0, progress));
+    rcpp_result_gen = Rcpp::wrap(RBLSS_1(y, e, g, w, maxSteps, q, k, hatBeta, hatEta, hatAlpha, hatAta, z, hatTau, hatV, hatSg1, hatSg2, invSigAlpha0, hatPi1, hatPi2, hatEtaSq1, hatEtaSq2, xi1, xi2, r1, r2, hatPhiSq, a, b, alpha1, gamma1, sh1, sh0, progress));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mixedBayes_BGL", (DL_FUNC) &_mixedBayes_BGL, 29},
-    {"_mixedBayes_BGLSS", (DL_FUNC) &_mixedBayes_BGLSS, 35},
-    {"_mixedBayes_BL", (DL_FUNC) &_mixedBayes_BL, 28},
-    {"_mixedBayes_BLSS", (DL_FUNC) &_mixedBayes_BLSS, 34},
-    {"_mixedBayes_RBGL", (DL_FUNC) &_mixedBayes_RBGL, 30},
-    {"_mixedBayes_RBGLSS", (DL_FUNC) &_mixedBayes_RBGLSS, 34},
-    {"_mixedBayes_RBL", (DL_FUNC) &_mixedBayes_RBL, 29},
-    {"_mixedBayes_RBLSS", (DL_FUNC) &_mixedBayes_RBLSS, 33},
+    {"_mixedBayes_BGL", (DL_FUNC) &_mixedBayes_BGL, 30},
+    {"_mixedBayes_BGL_1", (DL_FUNC) &_mixedBayes_BGL_1, 29},
+    {"_mixedBayes_BGLSS", (DL_FUNC) &_mixedBayes_BGLSS, 36},
+    {"_mixedBayes_BGLSS_1", (DL_FUNC) &_mixedBayes_BGLSS_1, 35},
+    {"_mixedBayes_BL", (DL_FUNC) &_mixedBayes_BL, 29},
+    {"_mixedBayes_BL_1", (DL_FUNC) &_mixedBayes_BL_1, 28},
+    {"_mixedBayes_BLSS", (DL_FUNC) &_mixedBayes_BLSS, 35},
+    {"_mixedBayes_BLSS_1", (DL_FUNC) &_mixedBayes_BLSS_1, 34},
+    {"_mixedBayes_RBGL", (DL_FUNC) &_mixedBayes_RBGL, 31},
+    {"_mixedBayes_RBGL_1", (DL_FUNC) &_mixedBayes_RBGL_1, 30},
+    {"_mixedBayes_RBGLSS", (DL_FUNC) &_mixedBayes_RBGLSS, 35},
+    {"_mixedBayes_RBGLSS_1", (DL_FUNC) &_mixedBayes_RBGLSS_1, 34},
+    {"_mixedBayes_RBL", (DL_FUNC) &_mixedBayes_RBL, 30},
+    {"_mixedBayes_RBL_1", (DL_FUNC) &_mixedBayes_RBL_1, 29},
+    {"_mixedBayes_RBLSS", (DL_FUNC) &_mixedBayes_RBLSS, 34},
+    {"_mixedBayes_RBLSS_1", (DL_FUNC) &_mixedBayes_RBLSS_1, 33},
     {NULL, NULL, 0}
 };
 

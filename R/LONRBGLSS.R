@@ -27,9 +27,9 @@ LONRBGLSS <- function(y,e,X,g,w,z,k,quant,max.steps,sparse, structure){
   hatEta2 = matrix(c(rep(1,p)),nrow=q-o)
   hatAlpha = rep(1,q)
   invSigAlpha0 = diag(rep(10^-3,q))
-  alpha1=1
-  gamma1=1
-  hatPhiSq=1
+  alpha1=0
+  gamma1=0
+  hatPhi1Sq=hatPhi2Sq=1
   progress=0
   hatPi1=1/2
   hatPi2=1/2
@@ -41,16 +41,16 @@ LONRBGLSS <- function(y,e,X,g,w,z,k,quant,max.steps,sparse, structure){
   if(sparse){
     fit=switch (structure,
                 "bi-level" = RBGLSS(y,E,g,w,max.steps,q,o,k,hatBeta,hatEta2,hatAlpha,hatAta,z,hatTau,hatV,hatSg1,hatSg22,invSigAlpha0,
-                                 hatPi1,hatPi2,hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,sh1,sh0,progress),
+                                 hatPi1,hatPi2,hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhi1Sq,hatPhi2Sq,a,b,alpha1,gamma1,sh1,sh0,progress),
                 "individual" = RBLSS(y,E,g,w,max.steps,q,k,hatBeta,hatEta1,hatAlpha,hatAta,z,hatTau,hatV,hatSg1,hatSg21,invSigAlpha0,
-                                     hatPi1,hatPi2,hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,sh1,sh0,progress)
+                                     hatPi1,hatPi2,hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhi1Sq,hatPhi2Sq,a,b,alpha1,gamma1,sh1,sh0,progress)
     )
   }else{
     fit=switch (structure,
                 "bi-level" =  RBGL(y,E,g,w,max.steps,q,o,k,hatBeta,hatEta2,hatAlpha,hatAta,z,hatTau,hatV,hatSg1,hatSg22,invSigAlpha0,
-                                hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,progress),
+                                hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhi1Sq,hatPhi2Sq,a,b,alpha1,gamma1,progress),
                 "individual" = RBL(y,E,g,w,max.steps,q,k,hatBeta,hatEta1,hatAlpha,hatAta,z,hatTau,hatV,hatSg1,hatSg21,invSigAlpha0,
-                                   hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhiSq,a,b,alpha1,gamma1,progress)
+                                   hatEtaSq1,hatEtaSq2,xi1,xi2,r1,r2,hatPhi1Sq,hatPhi2Sq,a,b,alpha1,gamma1,progress)
     )
   }
 

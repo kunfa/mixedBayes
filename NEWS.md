@@ -1,5 +1,9 @@
 
 ## News
+### mixedBayes 0.1.12 \[2025-12-20\]
+
+- Minor bug fixes and improvements.
+
 ### mixedBayes 0.1.11 \[2025-08-17\]
 
 - Fixed minor bugs.

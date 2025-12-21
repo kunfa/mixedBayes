@@ -93,7 +93,9 @@ mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, 
   }
   if(iterations<=BI) stop("iterations must be larger than burn.in.")
   if(slope){
-    z = cbind(rep(1,k),c(1:k))
+    k_1 = c(1:k)
+    k_1 = k_1 - mean(k_1)
+    z = cbind(rep(1,k),k_1)
   if(robust){
     out = LONRBGLSS(y,e,X,g,w,z,k,quant,iterations,sparse, structure)
   }else{
@@ -102,9 +104,9 @@ mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, 
   }else{
     z = as.matrix(rep(1,k))
     if(robust){
-      out = LONRBGLSS(y,e,X,g,w,z,k,quant,iterations,sparse, structure)
+      out = LONRBGLSS_1(y,e,X,g,w,z,k,quant,iterations,sparse, structure)
     }else{
-      out = LONBGLSS(y,e,X,g,w,z,k,iterations,sparse, structure)
+      out = LONBGLSS_1(y,e,X,g,w,z,k,iterations,sparse, structure)
     }
   }
 

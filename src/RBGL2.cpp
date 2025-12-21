@@ -10,43 +10,44 @@ using namespace std;
 
 // [[Rcpp::export()]]
 
-Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps, int q, int k,arma::vec hatBeta, arma:: vec hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z,double hatTau, arma::vec hatV, arma::vec hatSg1,arma::vec hatSg2,arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1,double r2,double Phi1Sq,double Phi2Sq,double a, double b,double alpha1, double gamma1,int progress)
+Rcpp::List RBGL_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps, int q, int o,int k,arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma::mat hatAta, arma::mat z,double hatTau, arma::vec hatV, arma::vec hatSg1,arma::vec hatSg2,arma::mat invSigAlpha0, double hatEtaSq1, double hatEtaSq2, double xi1, double xi2, double r1,double r2,double hatPhiSq,double a, double b,double alpha1, double gamma1,int progress)
 {
-  unsigned int n = g.n_rows, m = g.n_cols,p = w.n_cols,c = z.n_cols, n1 = n/k;
+  unsigned int n = g.n_rows,L = q-o, m = g.n_cols,p = w.n_cols,c = z.n_cols, n1 = n/k;
   arma::mat gsAlpha(maxSteps, q),
   gsBeta(maxSteps,m),
   gsAta(maxSteps,n1*c),
-  gsEta(maxSteps,p),
+  gseta(maxSteps,p),
   gsV(maxSteps, n),
   gsSg1(maxSteps, m),
-  gsSg2(maxSteps, p)
+  gsSg2(maxSteps, m)
     ;
 
   arma::vec gsEtaSq1(maxSteps),
   gsEtaSq2(maxSteps),
-  gsPhi1Sq(maxSteps),
-  gsPhi2Sq(maxSteps),
+  gsPhiSq(maxSteps),
   gsTau(maxSteps)
     ;
   arma::mat temp1;
 
-  double meanb,meane;
-  double varb,vare;
-  double XgXgoV1,RXgoV1,XgXgoV2,RXgoV2;
-
-  arma::vec muV, muS1,  muS2, REoV(q), meanAlpha, res;
+  double meanb;
+  double varb;
+  double XgXgoV1,RXgoV1;
+  arma::vec meane;
+  arma::mat varcove;
+  arma::vec muV, muS1, REoV(q), meanAlpha, res,meanAta,RZoV(c);
+  double muS2;
   double lambV, xi1Sq = std::pow(xi1, 2), xi2Sq = std::pow(xi2, 2);
-  arma::mat varAlpha, tEEoV(q,q);
+  arma::mat XgXgoV2(L,L), varAlpha, tEEoV(q,q),varAta, tZZoV(c,c);
+  arma::rowvec RXgoV2(L);
 
   for (int t = 0; t < maxSteps; t++) {
 
 
     // alpha|
-    arma::mat Zblock(n, c*n1, arma::fill::zeros);
+    res = y - g*hatBeta-w*arma::vectorise(hatEta)-xi1*hatV;
     for(unsigned int i=0;i<n1;i++){
-      Zblock.submat(i*k,c*i,i*k + k - 1, c*i + 1) = z;
+      res.subvec((i*k), (i*k+k-1)) -= z*hatAta.col(i);
     }
-    res = y - g*hatBeta-w*arma::vectorise(hatEta)-xi1*hatV - Zblock*arma::vectorise(hatAta);
     tEEoV = (e.each_col()/hatV).t() * e;
     REoV = arma::sum(e.each_col()% (res/hatV), 0).t();
     varAlpha = arma::inv_sympd(tEEoV*hatTau/xi2Sq+invSigAlpha0);
@@ -56,41 +57,22 @@ Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps,
     gsAlpha.row(t) = hatAlpha.t();
 
     // ata|
-    res+= Zblock*arma::vectorise(hatAta);
 
-    for (unsigned int i = 0; i < n1; i++) {
+    for(unsigned int i=0;i<n1;i++){
+      res.subvec((i*k), (i*k+k-1)) += z * hatAta.col(i);
+      tZZoV = (z.each_col()/hatV.subvec((i*k), (i*k+k-1))).t() * z;
+      RZoV = arma::sum(z.each_col()% (res.subvec((i*k), (i*k+k-1))/hatV.subvec((i*k), (i*k+k-1))), 0).t();
 
-
-      arma::vec rblock = res.subvec(i*k, i*k+k-1);
-      arma::vec vblock = hatV.subvec(i*k, i*k+k-1);
-
-      // ===== ata0 =====
-      double tZZ0 = arma::as_scalar(
-        (z.col(0) / vblock).t() * z.col(0)
-      );
-      double RZ0 = arma::sum(z.col(0) % (rblock / vblock));
-
-      double var0  = 1.0 / (tZZ0 * hatTau / xi2Sq + 1.0 / Phi1Sq);
-      double mean0 = var0 * (RZ0 * hatTau / xi2Sq);
-
-      hatAta(0, i) = R::rnorm(mean0, std::sqrt(var0));
-
-      // ===== ata1 =====
-      double tZZ1 = arma::as_scalar(
-        (z.col(1) / vblock).t() * z.col(1)
-      );
-      double RZ1 = arma::sum(z.col(1) % (rblock / vblock));
-
-      double var1  = 1.0 / (tZZ1 * hatTau / xi2Sq + 1.0 / Phi2Sq);
-      double mean1 = var1 * (RZ1 * hatTau / xi2Sq);
-
-      hatAta(1, i) = R::rnorm(mean1, std::sqrt(var1));
-
+      temp1 = tZZoV*hatTau/xi2Sq;
+      temp1.diag()+=1/hatPhiSq;
+      varAta = arma::inv(temp1);
+      meanAta = varAta* RZoV * hatTau / xi2Sq;
+      hatAta.col(i) = mvrnormCpp(meanAta, varAta);
+      res.subvec((i*k), (i*k+k-1)) -= z * hatAta.col(i);
     }
-    res-= Zblock*arma::vectorise(hatAta);
-
 
     gsAta.row(t) = arma::vectorise(hatAta).t();
+
     //v|
     res += xi1*hatV;
     lambV = hatTau*xi1Sq/xi2Sq + 2*hatTau;
@@ -130,14 +112,16 @@ Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps,
 
 
     //s2|
-    muS2 = std::sqrt(hatEtaSq2)/ arma::abs(hatEta);
-    for(unsigned int j = 0; j<p; j++){
+    for(unsigned int j = 0; j<m; j++){
+      muS2 = std::sqrt(hatEtaSq2)/ (arma::norm(hatEta.col(j)));
       bool flag = true;
       while(flag){
-        hatSg2(j) = 1/rinvGauss(muS2(j), hatEtaSq2);
+        hatSg2(j) = 1/rinvGauss(muS2, hatEtaSq2);
         if(hatSg2(j)<=0 || std::isinf(hatSg2(j)) || std::isnan(hatSg2(j))){
-          if(progress != 0) Rcpp::Rcout << "hatSg2(j): " << hatSg2(j) << std::endl;
-          Rcpp::checkUserInterrupt();
+          if(progress != 0){
+            Rcpp::Rcout << "hatSg2(j) = " << hatSg2(j) << " mu: " << muS2 << " lamb: " << hatEtaSq2 << std::endl;
+            Rcpp::checkUserInterrupt();
+          }
         }else{
           flag = false;
         }
@@ -164,18 +148,18 @@ Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps,
 
     // eta|
 
-    for(unsigned int j=0; j<p; j++){
-      res += w.col(j) * hatEta(j);
-      XgXgoV2 = arma::as_scalar((w.col(j)/hatV).t() * w.col(j));
-      vare = 1/(XgXgoV2*hatTau/xi2Sq + 1/hatSg2(j));
-
-      RXgoV2 = arma::sum(w.col(j) % (res/hatV));
-      meane = vare * RXgoV2 * hatTau / xi2Sq;
-      hatEta(j) = R::rnorm(meane, sqrt(vare));
-      res -= w.col(j) * hatEta(j);
+    for(unsigned int j=0; j<m; j++){
+      res += w.cols((j*L), (j*L+L-1))* hatEta.col(j);
+      XgXgoV2 = (w.cols((j*L), (j*L+L-1)).each_col()/hatV).t() * w.cols((j*L), (j*L+L-1));
+      temp1 = XgXgoV2*hatTau/xi2Sq;
+      temp1.diag() += 1/hatSg2(j);
+      varcove = arma::inv(temp1);
+      RXgoV2 = arma::sum(w.cols((j*L), (j*L+L-1)).each_col()% (res/hatV), 0);
+      meane = varcove * RXgoV2.t() * hatTau / xi2Sq;
+      hatEta.col(j) = mvrnormCpp(meane, varcove);
+      res -= w.cols((j*L), (j*L+L-1)) * hatEta.col(j);
     }
-
-    gsEta.row(t) = hatEta.t();
+    gseta.row(t) = arma::vectorise(hatEta).t();
 
     //etasq1;
 
@@ -186,28 +170,24 @@ Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps,
 
     //etasq2;
 
-    double shape21 = p+1;
+    double shape21 = (m+m*L)/2+1;
     double rate21 = arma::accu(hatSg2)/2 + r2;
     hatEtaSq2 = R::rgamma(shape21, 1/rate21);
     gsEtaSq2(t) = hatEtaSq2;
 
 
-    //phi1sq, phi2sq;
-    double diff1 = 0.5 * arma::accu( arma::square(hatAta.row(0)) );
-    double diff2 = 0.5 * arma::accu( arma::square(hatAta.row(1)) );
+    //phi;
+    double shapePhi, ratePhi;
+    shapePhi = alpha1 + n1*c/2;
+    double diff;
+    diff=0;
+    for(unsigned int i=0;i<n1;i++){
+      diff= diff+0.5*(arma::accu(square(hatAta.col(i))));
+    }
 
-    double shape1 = alpha1 + n1 / 2.0;
-    double rate1  = gamma1 + diff1;
-    Phi1Sq = 1.0 / R::rgamma(shape1, 1.0 / rate1);
-
-    double shape11 = alpha1 + n1 / 2.0;
-    double rate11  = gamma1 + diff2;
-    Phi2Sq = 1.0 / R::rgamma(shape11, 1.0 / rate11);
-
-    gsPhi1Sq(t) = Phi1Sq;
-    gsPhi2Sq(t) = Phi2Sq;
-
-
+    ratePhi = gamma1 + diff;
+    hatPhiSq = 1/R::rgamma(shapePhi, 1/ratePhi);
+    gsPhiSq(t) = hatPhiSq;
 
     //tau|
 
@@ -224,8 +204,14 @@ Rcpp::List RBL(arma::vec y, arma::mat e, arma::mat g, arma:: mat w,int maxSteps,
   return Rcpp::List::create(
     Rcpp::Named("GS.alpha") = gsAlpha,
     Rcpp::Named("GS.beta") = gsBeta,
-    Rcpp::Named("GS.eta") = gsEta,
-    Rcpp::Named("GS.ata") = gsAta
+    Rcpp::Named("GS.ata") = gsAta,
+    Rcpp::Named("GS.eta") = gseta,
+    Rcpp::Named("GS.v") = gsV,
+    Rcpp::Named("GS.s1") = gsSg1,
+    Rcpp::Named("GS.s2") = gsSg2,
+    Rcpp::Named("GS.eta21.sq") = gsEtaSq1,
+    Rcpp::Named("GS.eta22.sq") = gsEtaSq2,
+    Rcpp::Named("GS.tau") = gsTau
 
   );
 
