@@ -4,15 +4,13 @@
 #' @param y a numeric vector of repeated-measure responses in long format. The observations
 #'   should be stacked in the same order as the rows of X, e, g, and w.
 #'   The current version only supports continuous response.
-#' @param e the long-format design matrix for environment/treatment effects. In many applications,
+#' @param e the long-format design matrix for environment/treatment effects. In applications,
 #'   this is a set of dummy variables encoding treatment levels.
-#' @param X the long-format design matrix for fixed effects, including an intercept and optionally
+#' @param X the long-format design matrix, including an intercept and optionally
 #'   time-related covariates.
-#' @param g the long-format matrix of genetic predictors (main effects) without an intercept.
+#' @param g the long-format matrix of genetic predictors.
 #' @param w the long-format matrix of gene-environment interaction terms. Typically, each row
-#'   of w is constructed from the corresponding rows of g and e (e.g., via a Kronecker product),
-#'   so that interaction terms represent products of genetic predictors with environment/treatment
-#'   covariates.
+#'   of w is constructed from the corresponding rows of g and e via a Kronecker product.
 #' @param k integer. Number of repeated measurements per subject.
 #' @param slope logical flag. If TRUE, random intercept-and-slope model will be used.
 #' @param loss character string specifying the prediction loss function.
