@@ -15,7 +15,7 @@
 The data object consists of seven components: y, e, X, g, w ,k and coeff. coeff contains the true values of parameters (main and interaction effects) used for generating Y.
 }
 \description{
-Simulated gene expression data for demonstrating the features of mixedBayes.
+simulated data for demonstrating the features of mixedBayes
 }
 \details{
 \strong{The data and model setting}
