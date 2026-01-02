@@ -8,11 +8,9 @@
 #'   this is a set of dummy variables encoding treatment levels.
 #' @param X the long-format design matrix, including an intercept and optionally
 #'   time-related covariates.
-#' @param g the long-format matrix of genetic predictors (main effects).
+#' @param g the long-format matrix of genetic predictors.
 #' @param w the long-format matrix of gene-environment interaction terms. Typically, each row
-#'   of w is constructed from the corresponding rows of g and e (e.g., via a Kronecker product),
-#'   so that interaction terms represent products of genetic predictors with environment/treatment
-#'   covariates.
+#'   of w is constructed from the corresponding rows of g and e via a Kronecker product.
 #' @param k integer. Number of repeated measurements per subject.
 #' @param iterations the number of MCMC iterations. The default value is 10,000.
 #' @param burn.in the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained.
