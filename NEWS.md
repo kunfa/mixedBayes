@@ -1,5 +1,12 @@
 
 ## News
+
+### mixedBayes 0.2.0 \[2026-01-01\]
+
+- Added function `predict_mixedBayes` for making predictions based on fitted mixedBayes models.
+- Fixed minor bugs.
+- Updated the documentation.
+
 ### mixedBayes 0.1.12 \[2025-12-20\]
 
 - Minor bug fixes and improvements.

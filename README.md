@@ -31,52 +31,94 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
 <!-- end list -->
 
     install.packages("mixedBayes")
+    
+## Load the package
+
+    library(mixedBayes)
+    
+## Data
+
+    The example data set `data` simulated under random intercept-and-slope model included in the package can be loaded by
+
+    data(data)
 
 ## Examples
 
 #### Example.1 (default method: robust sparse bi-level selection under random intercept -and- slope model)
-
-    library(mixedBayes)
-    data(data)
     
     fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
+    
+    # Estimated coefficients(posterior median)
     fit$coefficient
+    
+    # Identification
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=TRUE,loss = "L1")
+    prediction
+    
 #### Example.2 (alternative: robust sparse individual level selection under random intercept -and- slope model)
 
     fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
+    
+    # Estimated coefficients(posterior median)
     fit$coefficient
+    
+    # Identification
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=TRUE,loss = "L1")
+    prediction
 
 #### Example.3 (alternative: non-robust sparse bi-level selection under random intercept -and- slope model)
 
     fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("bi-level"))
+    
+    # Estimated coefficients(posterior median)
     fit$coefficient
+    
+    # Identification
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=TRUE,loss = "L2")
+    prediction
+    
 #### Example.4 (alternative: robust sparse bi-level selection under random intercept model)
+
     fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("bi-level"))
-    fit$coefficient    
+    
+    # Estimated coefficients(posterior median)
+    fit$coefficient
+    
+    # Identification
     b = selection(fit,sparse=TRUE)
     index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
     list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=FALSE,loss = "L1")
+    prediction
 
   
 ## Methods

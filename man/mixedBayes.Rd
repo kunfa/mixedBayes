@@ -21,21 +21,28 @@ mixedBayes(
 )
 }
 \arguments{
-\item{y}{the vector of repeated measured responses. The current version of mixedBayes only supports continuous response.}
+\item{y}{a numeric vector of repeated-measure responses in long format. The observations
+should be stacked in the same order as the rows of X, e, g, and w.
+The current version only supports continuous response.}
 
-\item{e}{the long format matrix of environment (treatment) factors (a group of dummy variables).}
+\item{e}{the long-format design matrix for environment/treatment effects. In many applications,
+this is a set of dummy variables encoding treatment levels.}
 
-\item{X}{the long format matrix of the intercept and time effects (time effects are optional).}
+\item{X}{the long-format design matrix for fixed effects, including an intercept and optionally
+time-related covariates.}
 
-\item{g}{the long format matrix of predictors (genetic factors) without intercept. Each row should be an observation vector.}
+\item{g}{the long-format matrix of genetic predictors (main effects) without an intercept.}
 
-\item{w}{the long format matrix of interactions between genetic factors and environment (treatment) factors.}
+\item{w}{the long-format matrix of gene-environment interaction terms. Typically, each row
+of w is constructed from the corresponding rows of g and e (e.g., via a Kronecker product),
+so that interaction terms represent products of genetic predictors with environment/treatment
+covariates.}
 
-\item{k}{the number of repeated measurements.}
+\item{k}{integer. Number of repeated measurements per subject.}
 
 \item{iterations}{the number of MCMC iterations. The default value is 10,000.}
 
-\item{burn.in}{the number of iterations for burn-in. If NULL, the first half of MCMC iterations will be used as burn-ins.}
+\item{burn.in}{the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained.}
 
 \item{slope}{logical flag. If TRUE, random intercept-and-slope model will be used. Otherwise, random intercept model will be used. The default value is TRUE.}
 
@@ -49,21 +56,28 @@ mixedBayes(
 }
 \value{
 an object of class `mixedBayes' is returned, which is a list with component:
-\item{posterior}{the posteriors of coefficients.}
-\item{coefficient}{the estimated coefficients.}
-\item{burn.in}{the total number of burn-ins.}
-\item{iterations}{the total number of iterations.}
+\item{posterior}{posterior samples for fixed effects and random effects.}
+\item{coefficient}{posterior median estimates of coefficients for fixed effects and random effects.}
 }
 \description{
 fit a Bayesian longitudinal regularized quantile mixed model
 }
 \details{
+\strong{Data layout}
+
+Consider a longitudinal study with repeated measurements per subject. The response vector y
+and the design matrices X, e, g, and w must all be provided in long format and share the same
+row ordering. In practice, each row corresponds to one observation from a particular subject at a
+particular time point.
+
+\strong{Model}
+
 Consider the data model described in "\code{\link{data}}":
 \deqn{Y_{ij} = X_{ij}^\top\gamma_{0}+E_{ij}^\top\gamma_{1}+\sum_{l=1}^{p}G_{ijl}\gamma_{2l}+\sum_{l=1}^{p}W_{ijl}^\top\gamma_{3l}+Z_{ij}^\top\alpha_{i}+\epsilon_{ij}.}, with \eqn{W_{ij} = G_{ij}\bigotimes E_{ij}}.
 
 where \eqn{\gamma_{0}} is the coefficient vector for \eqn{X_{ij}}, \eqn{\gamma_{1}} is the coefficient vector for \eqn{E_{ij}}, \eqn{\gamma_{2l}} is the coefficient for the main effect of the \eqn{l}th genetic variant, and \eqn{\gamma_{3l}} is the coefficient vector for the interaction effect of the \eqn{l}th genetic variant with environment factors.
 
-For random intercept-and-slope model, \eqn{Z_{ij}^\top = (1,j)} and  \eqn{\alpha_{i} = (\alpha_{i1},\alpha_{i2})^\top}. For random intercept model, \eqn{Z_{ij}^\top = 1} and \eqn{\alpha_{i} = \alpha_{i1}}.
+The subject-specific random effects \eqn{\alpha_i} capture within-subject correlation. For random intercept-and-slope model, \eqn{Z_{ij}^\top = (1,j)} and  \eqn{\alpha_{i} = (\alpha_{i1},\alpha_{i2})^\top}. For random intercept model, \eqn{Z_{ij}^\top = 1} and \eqn{\alpha_{i} = \alpha_{i1}}.
 
 When `structure="bi-level"`, bi-level selection will be conducted. If `structure="individual"`, individual-level selection will be conducted.
 
