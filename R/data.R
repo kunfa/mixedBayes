@@ -1,7 +1,5 @@
 #' simulated data for demonstrating the features of mixedBayes
 #'
-#' Simulated gene expression data for demonstrating the features of mixedBayes.
-#'
 #' @docType data
 #' @keywords datasets
 #' @name data

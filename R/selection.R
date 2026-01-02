@@ -1,7 +1,5 @@
 #' Variable selection for a mixedBayes object
 #'
-#' Variable selection for a mixedBayes object
-#'
 #' @param obj mixedBayes object.
 #' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly..
 #'
