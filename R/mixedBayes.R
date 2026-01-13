@@ -1,16 +1,14 @@
 #' fit a Bayesian longitudinal regularized quantile mixed model
 #'
 #' @keywords models
-#' @param y a numeric vector of repeated-measure responses in long format. The observations
-#'   should be stacked in the same order as the rows of X, e, g, and w.
+#' @param y a numeric vector of repeated-measure responses in long format.
 #'   The current version only supports continuous response.
 #' @param e the long-format design matrix for environment/treatment effects. In applications,
 #'   this is a set of dummy variables encoding treatment levels.
 #' @param X the long-format design matrix, including an intercept and optionally
 #'   time-related covariates.
 #' @param g the long-format matrix of genetic predictors.
-#' @param w the long-format matrix of gene-environment interaction terms. Typically, each row
-#'   of w is constructed from the corresponding rows of g and e via a Kronecker product.
+#' @param w the long-format matrix of gene-environment interaction terms.
 #' @param k integer. Number of repeated measurements per subject.
 #' @param iterations the number of MCMC iterations. The default value is 10,000.
 #' @param burn.in the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained.

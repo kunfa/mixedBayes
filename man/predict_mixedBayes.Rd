@@ -9,8 +9,7 @@ predict_mixedBayes(object, y, X, e, g, w, k, slope, loss)
 \arguments{
 \item{object}{a mixedBayes object.}
 
-\item{y}{a numeric vector of repeated-measure responses in long format. The observations
-should be stacked in the same order as the rows of X, e, g, and w.
+\item{y}{a numeric vector of repeated-measure responses in long format.
 The current version only supports continuous response.}
 
 \item{X}{the long-format design matrix, including an intercept and optionally
@@ -21,8 +20,7 @@ this is a set of dummy variables encoding treatment levels.}
 
 \item{g}{the long-format matrix of genetic predictors.}
 
-\item{w}{the long-format matrix of gene-environment interaction terms. Typically, each row
-of w is constructed from the corresponding rows of g and e via a Kronecker product.}
+\item{w}{the long-format matrix of gene-environment interaction terms.}
 
 \item{k}{integer. Number of repeated measurements per subject.}
 
