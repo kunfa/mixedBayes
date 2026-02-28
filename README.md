@@ -125,4 +125,4 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
 
 This package provides implementation for methods proposed in
 
-  - Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2025). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions. [Journal of the Royal Statistical Society Series C: Applied Statistics, qlaf027](https://doi.org/10.1093/jrsssc/qlaf027)
+  - Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2025). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions. [Journal of the Royal Statistical Society Series C: Applied Statistics, 74(5), 1372–1394.](https://doi.org/10.1093/jrsssc/qlaf027)

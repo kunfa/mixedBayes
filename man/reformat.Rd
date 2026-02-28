@@ -4,17 +4,17 @@
 \alias{reformat}
 \title{This function changes the format of the longitudinal data from wide format to long format}
 \usage{
-reformat(k,y,x)
+reformat(k,data,type=c("r","d"))
 }
 \arguments{
 \item{k}{the number of repeated measurement.}
 
-\item{y}{the matrix of longitudinal response.}
+\item{data}{either the response matrix or the predictor matrix.}
 
-\item{x}{the matrix of predictors.}
+\item{type}{"r" for response, "d" for design.}
 }
 \value{
-a list containing the reformatted response vector and predictor matrix.
+the reformatted response vector or predictor matrix.
 }
 \description{
 This function changes the format of the longitudinal data from wide format to long format

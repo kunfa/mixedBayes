@@ -1,24 +1,26 @@
 #' This function changes the format of the longitudinal data from wide format to long format
 #'
 #' @param k the number of repeated measurement.
-#' @param y the matrix of longitudinal response.
-#' @param x the matrix of predictors.
-#' @return a list containing the reformatted response vector and predictor matrix.
-#' @usage reformat(k,y,x)
+#' @param data either the response matrix or the predictor matrix.
+#' @param type "r" for response, "d" for design.
+#' @return the reformatted response vector or predictor matrix.
+#' @usage reformat(k,data,type=c("r","d"))
 #' @export
-reformat <- function(k,y,x){
-  n=nrow(y)
-  response=y
-  y=rep(0,n*k)
-  for (i in 1:n) {
-    for (j in 1:k) {
-      y[(i-1)*k+j]=response[i,j]
-    }
+reformat <- function(k,data,type=c("r","d")){
+  type <- match.arg(type)
+  if (!is.matrix(data)) data <- as.matrix(data)
+  n <- nrow(data)
+  if (type == "r") {
+
+    if (ncol(data) != k)
+      stop("For response type, ncol(data) must equal k.")
+
+    return(as.vector(t(data)))
+  }
+  if (type == "d") {
+
+    x <- data[rep(1:n, times = rep(k,n)), ]
+    return(x)
   }
 
-  data=cbind(y,x[rep(1:nrow(x), times = rep(k,n)), ])
-
-  y=data[,1]
-  x=data[,-1]
-  return(list(y=y,x=x))
 }

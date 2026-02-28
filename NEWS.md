@@ -1,6 +1,10 @@
 
 ## News
 
+### mixedBayes 0.2.1 \[2026-02-28\]
+
+- Optimized `reformat` for better performance.
+
 ### mixedBayes 0.2.0 \[2026-01-12\]
 
 - Added function `predict_mixedBayes` for making predictions based on fitted mixedBayes models.
