@@ -93,7 +93,9 @@ mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, 
 {
   X = as.matrix(X)
   structure = match.arg(structure)
-
+  if (k != as.integer(k)) {
+    stop("k must be an integer.")
+  }
   if(slope){
     k_1 = c(1:k)
     k_1 = k_1 - mean(k_1)

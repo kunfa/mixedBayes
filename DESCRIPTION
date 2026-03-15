@@ -2,7 +2,7 @@ Package: mixedBayes
 Type: Package
 Title: Bayesian Longitudinal Regularized Quantile Mixed Model
 Version: 0.2.2
-Date: 2026-03-14
+Date: 2026-03-15
 Authors@R: c( person("Kun", "Fan", role = c("aut", "cre") , email = "kfan@ksu.edu"),
               person("Shejuty", "Devnath", role = "aut"),
               person("Cen", "Wu", role = "aut"))

@@ -45,20 +45,78 @@ LONBGLSS_1 <- function(y,e,X,g,w,z,k,max.steps,sparse, structure,iterations, bur
     stop("iterations must be larger than burn.in.")
   }
 
-  if(sparse){
-    fit=switch (structure,
-                "bi-level" = BGLSS_1(y,E,g,w,z,q,o,k,max.steps,hatAlpha,hatBeta,hatAta,hatEta,invSigAlpha0,hatInvTauSq1,hatInvTauSq22,hatPiBeta,hatPiEta,hatLambdaSqStar1
-                                   ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,a0,b0,aStar,bStar,alpha,gamma,alpha1,gamma1,mu0,mu1,nu0,nu1,progress),
-                "individual" = BLSS_1(y,E,g,w,z,q,k,max.steps,hatAlpha,hatBeta,hatAta,hatEta,invSigAlpha0,hatInvTauSq1,hatInvTauSq21,hatPiBeta,hatPiEta,hatLambdaSqStar1
-                                    ,hatLambdaSqStar2,hatSigmaSq,hatPhiSq,a0,b0,aStar,bStar,alpha,gamma,alpha1,gamma1,mu0,mu1,nu0,nu1,progress)
-    )
-  }else{
-    fit=switch (structure,
-                "bi-level" = BGL_1(y,E,g,w,q,o,k,max.steps,hatAlpha,hatBeta,hatEta,hatAta,z,invSigAlpha0,hatInvTauSq1,hatInvTauSq22,hatLambdaSqStar1
-                                 ,hatLambdaSqStar2,hatSigmaSq,a0,b0,aStar,bStar,hatPhiSq,alpha,gamma,alpha1,gamma1,progress),
-                "individual" = BL_1(y,E,g,w,q,k,max.steps,hatAlpha,hatBeta,hatEta,hatAta,z,invSigAlpha0,hatInvTauSq1,hatInvTauSq21,hatLambdaSqStar1
-                                  ,hatLambdaSqStar2,hatSigmaSq,a0,b0,aStar,bStar,hatPhiSq,alpha,gamma,alpha1,gamma1,progress)
-    )
+  if (sparse) {
+
+    if (structure == "bi-level") {
+
+      fit <- BGLSS_1(
+        y, E, g, w, z, q, o, k, max.steps,
+        hatAlpha, hatBeta, hatAta, hatEta, invSigAlpha0,
+        hatInvTauSq1, hatInvTauSq22,
+        hatPiBeta, hatPiEta,
+        hatLambdaSqStar1, hatLambdaSqStar2,
+        hatSigmaSq, hatPhiSq,
+        a0, b0, aStar, bStar,
+        alpha, gamma, alpha1, gamma1,
+        mu0, mu1, nu0, nu1,
+        progress
+      )
+
+    } else if (structure == "individual") {
+
+      fit <- BLSS_1(
+        y, E, g, w, z, q, k, max.steps,
+        hatAlpha, hatBeta, hatAta, hatEta, invSigAlpha0,
+        hatInvTauSq1, hatInvTauSq21,
+        hatPiBeta, hatPiEta,
+        hatLambdaSqStar1, hatLambdaSqStar2,
+        hatSigmaSq, hatPhiSq,
+        a0, b0, aStar, bStar,
+        alpha, gamma, alpha1, gamma1,
+        mu0, mu1, nu0, nu1,
+        progress
+      )
+
+    } else {
+      stop("structure must be either 'bi-level' or 'individual'.")
+    }
+
+  } else {
+
+    if (structure == "bi-level") {
+
+      fit <- BGL_1(
+        y, E, g, w, q, o, k, max.steps,
+        hatAlpha, hatBeta, hatEta, hatAta, z,
+        invSigAlpha0,
+        hatInvTauSq1, hatInvTauSq22,
+        hatLambdaSqStar1, hatLambdaSqStar2,
+        hatSigmaSq,
+        a0, b0, aStar, bStar,
+        hatPhiSq,
+        alpha, gamma, alpha1, gamma1,
+        progress
+      )
+
+    } else if (structure == "individual") {
+
+      fit <- BL_1(
+        y, E, g, w, q, k, max.steps,
+        hatAlpha, hatBeta, hatEta, hatAta, z,
+        invSigAlpha0,
+        hatInvTauSq1, hatInvTauSq21,
+        hatLambdaSqStar1, hatLambdaSqStar2,
+        hatSigmaSq,
+        a0, b0, aStar, bStar,
+        hatPhiSq,
+        alpha, gamma, alpha1, gamma1,
+        progress
+      )
+
+    } else {
+      stop("structure must be either 'bi-level' or 'individual'.")
+    }
+
   }
   if (is.null(burn.in) || BI == 0) {
     out <- list(

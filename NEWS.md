@@ -1,7 +1,7 @@
 
 ## News
 
-### mixedBayes 0.2.2 \[2026-03-14\]
+### mixedBayes 0.2.2 \[2026-03-15\]
 
 - Fixed minor bugs.
 
