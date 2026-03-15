@@ -11,12 +11,12 @@
 #' @param w the long-format matrix of gene-environment interaction terms.
 #' @param k integer. Number of repeated measurements per subject.
 #' @param iterations the number of MCMC iterations. The default value is 10,000.
-#' @param burn.in the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained.
+#' @param burn.in the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained. The default value is 5,000.
 #' @param slope logical flag. If TRUE, random intercept-and-slope model will be used. Otherwise, random intercept model will be used. The default value is TRUE.
 #' @param robust logical flag. If TRUE, robust methods will be used. Otherwise, non-robust methods will be used. The default value is TRUE.
-#' @param quant the quantile level specified by users. The default value is 0.5.
+#' @param quant the quantile level specified by users. Required when robust = TRUE. Ignored (set to NULL) when robust = FALSE. The default value is 0.5.
 #' @param sparse logical flag. If TRUE, spike-and-slab priors will be adopted to impose exact sparsity on regression coefficients. Otherwise, Laplacian shrinkage will be adopted. The default value is TRUE.
-#' @param structure two choices are available. "bi-level" for selection on both the main and interaction effects corresponding to individual and group levels. "individual" for selections on individual-level only.
+#' @param structure two choices are available. "bi-level" performs selection on both main effects and interaction effects corresponding to individual and group levels, whereas "individual" performs selections only on individual levels by ignoring the group structure.
 #' @return an object of class `mixedBayes' is returned, which is a list with component:
 #' \item{posterior}{posterior samples for fixed effects and random effects.}
 #' \item{coefficient}{posterior median estimates of coefficients for fixed effects and random effects.}
@@ -61,7 +61,7 @@
 #'
 #' ## default method (robust sparse bi-level selection under random intercept-and-slope model)
 
-#' fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
+#' fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
 #' fit$coefficient
 #'
 #'## Compute TP and FP
@@ -74,52 +74,123 @@
 
 #' \donttest{
 #' ## alternative: robust sparse individual level selections under random intercept-and-slope model
-#' fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
+#' fit = mixedBayes(y,e,X,g,w,k,structure="individual")
 #' fit$coefficient
 #'
 #' ## alternative: non-robust sparse bi-level selection under random intercept-and-slope model
-#' fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("bi-level"))
+#' fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, quant = NULL, structure="bi-level")
 #' fit$coefficient
 #'
 #' ## alternative: robust sparse bi-level selection under random intercept model
-#' fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("bi-level"))
+#' fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure="bi-level")
 #' fit$coefficient
 #'
 #' }
 #'
 #' @export
 
-mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=NULL, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure=c("bi-level","individual"))
+mixedBayes <- function(y,e,X,g,w,k, iterations=10000, burn.in=5000, slope=TRUE, robust=TRUE, quant=0.5, sparse=TRUE, structure="bi-level")
 {
   X = as.matrix(X)
-  structure = match.arg(structure)
-  if (k != as.integer(k)) {
-    stop("k must be an integer.")
+  n = length(y)
+  E = cbind(e,X)
+  o = ncol(X)
+  q = ncol(E)
+  if (nrow(X) != n || nrow(e) != n || nrow(g) != n || nrow(w) != n) {
+    stop("X, e, g, and w must all have the same number of rows as length(y).")
   }
+  if (length(k) != 1 || !is.numeric(k) || is.na(k) || k <= 0 || k %% 1 != 0) {
+    stop("k must be a positive integer.")
+  }
+  if (n %% k != 0) {
+    stop("length(y) must be divisible by k.")
+  }
+  if (!is.logical(slope) || length(slope) != 1 || is.na(slope)) {
+    stop("slope must be TRUE or FALSE.")
+  }
+  if (!is.logical(robust) || length(robust) != 1 || is.na(robust)) {
+    stop("robust must be TRUE or FALSE.")
+  }
+  if (!is.logical(sparse) || length(sparse) != 1 || is.na(sparse)) {
+    stop("sparse must be TRUE or FALSE.")
+  }
+  if (length(structure) != 1 || !is.character(structure) || is.na(structure) ||
+      !(structure %in% c("bi-level", "individual"))) {
+    stop("structure must be either 'bi-level' or 'individual'.")
+  }
+  if (length(iterations) != 1 || !is.numeric(iterations) || is.na(iterations) ||
+      iterations <= 0 || iterations %% 1 != 0) {
+    stop("iterations must be a positive integer.")
+  }
+
+  if (is.null(burn.in)) {
+    BI <- 0
+  } else if (length(burn.in) == 1 && is.numeric(burn.in) && !is.na(burn.in) &&
+             burn.in > 0 && burn.in %% 1 == 0) {
+    BI <- as.integer(burn.in)
+  } else {
+    stop("burn.in must be NULL or a positive integer.")
+  }
+
+  if (iterations <= BI) {
+    stop("iterations must be larger than burn.in.")
+  }
+
   if(slope){
     k_1 = c(1:k)
     k_1 = k_1 - mean(k_1)
     z = cbind(rep(1,k),k_1)
   if(robust){
-    out = LONRBGLSS(y,e,X,g,w,z,k,quant,iterations,sparse, structure, iterations,burn.in)
+    if (is.null(quant) || length(quant) != 1 || !is.numeric(quant) || is.na(quant) ||
+        quant <= 0 || quant >= 1) {
+      stop("quant must be a single number between 0 and 1 when robust = TRUE.")
+    }
+    fit = LONRBGLSS(y,e,X,g,w,z,k,quant,iterations,sparse, structure, iterations,burn.in)
   }else{
-    out = LONBGLSS(y,e,X,g,w,z,k,iterations,sparse, structure, iterations,burn.in)
+    if (!is.null(quant)) {
+      stop("quant must be NULL when robust = FALSE.")
+    }
+    fit = LONBGLSS(y,e,X,g,w,z,k,iterations,sparse, structure, iterations,burn.in)
   }
   }else{
     z = as.matrix(rep(1,k))
     if(robust){
-      out = LONRBGLSS_1(y,e,X,g,w,z,k,quant,iterations,sparse, structure, iterations,burn.in)
+      if (is.null(quant) || length(quant) != 1 || !is.numeric(quant) || is.na(quant) ||
+          quant <= 0 || quant >= 1) {
+        stop("quant must be a single number between 0 and 1 when robust = TRUE.")
+      }
+      fit = LONRBGLSS_1(y,e,X,g,w,z,k,quant,iterations,sparse, structure, iterations,burn.in)
     }else{
-      out = LONBGLSS_1(y,e,X,g,w,z,k,iterations,sparse, structure, iterations,burn.in)
+      if (!is.null(quant)) {
+        stop("quant must be NULL when robust = FALSE.")
+      }
+      fit = LONBGLSS_1(y,e,X,g,w,z,k,iterations,sparse, structure, iterations,burn.in)
     }
   }
-
+  if (is.null(burn.in) || BI == 0) {
+    out <- list(
+      GS.gamma1 = fit$GS.alpha[, 1:(q-o)],
+      GS.gamma0 = fit$GS.alpha[, -(1:(q-o))],
+      GS.gamma2 = fit$GS.beta,
+      GS.gamma3 = fit$GS.eta,
+      GS.alpha  = fit$GS.ata
+    )
+  } else {
+    burn_rows <- seq_len(BI)
+    out <- list(
+      GS.gamma1 = fit$GS.alpha[-burn_rows, 1:(q-o)],
+      GS.gamma0 = fit$GS.alpha[-burn_rows, -(1:(q-o))],
+      GS.gamma2 = fit$GS.beta[-burn_rows,],
+      GS.gamma3 = fit$GS.eta[-burn_rows,],
+      GS.alpha  = fit$GS.ata[-burn_rows,]
+    )
+  }
   coeff.treatment = apply(out$GS.gamma1, 2, stats::median);
   coeff.X = apply(as.matrix(out$GS.gamma0), 2, stats::median);
   coeff.main = apply(out$GS.gamma2, 2, stats::median);
   coeff.interaction = apply(out$GS.gamma3, 2, stats::median);
   coeff.random = apply(out$GS.alpha, 2, stats::median);
-  coeff.random = matrix(coeff.random,ncol = length(y)/k)
+  coeff.random = matrix(coeff.random,ncol = n/k)
 
 
   coefficient = list(treatment = coeff.treatment, X = coeff.X, main=coeff.main, interaction=coeff.interaction, random=coeff.random)

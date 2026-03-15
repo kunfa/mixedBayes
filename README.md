@@ -46,7 +46,7 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
 
 #### Example.1 (default method: robust sparse bi-level selection under random intercept -and- slope model)
     
-    fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
+    fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
     
     # Estimated coefficients(posterior median)
     fit$coefficient
@@ -65,7 +65,7 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     
 #### Example.2 (alternative: robust sparse individual level selection under random intercept -and- slope model)
 
-    fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
+    fit = mixedBayes(y,e,X,g,w,k,structure="individual")
     
     # Estimated coefficients(posterior median)
     fit$coefficient
@@ -84,7 +84,7 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
 
 #### Example.3 (alternative: non-robust sparse bi-level selection under random intercept -and- slope model)
 
-    fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("bi-level"))
+    fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, quant = NULL,structure = "bi-level")
     
     # Estimated coefficients(posterior median)
     fit$coefficient
@@ -103,7 +103,7 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     
 #### Example.4 (alternative: robust sparse bi-level selection under random intercept model)
 
-    fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("bi-level"))
+    fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure="bi-level")
     
     # Estimated coefficients(posterior median)
     fit$coefficient

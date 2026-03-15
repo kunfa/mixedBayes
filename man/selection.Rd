@@ -26,13 +26,13 @@ Please check the references for more details about the variable selection.
 \examples{
 data(data)
 ## sparse
-fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
+fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
 selected=selection(fit,sparse=TRUE)
 selected
 
 \donttest{
 ## non-sparse
-fit = mixedBayes(y,e,X,g,w,k,sparse=FALSE,structure=c("bi-level"))
+fit = mixedBayes(y,e,X,g,w,k,sparse=FALSE,structure="bi-level")
 selected=selection(fit,sparse=FALSE)
 selected
 }

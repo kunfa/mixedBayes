@@ -2,25 +2,42 @@
 #'
 #' @param k the number of repeated measurement.
 #' @param data either the response matrix or the predictor matrix.
-#' @param type "r" for response, "d" for design.
+#' @param type "r" for response matrix, "d" for design matrix.
 #' @return the reformatted response vector or predictor matrix.
-#' @usage reformat(k,data,type=c("r","d"))
+#' @usage reformat(k,data,type="r")
 #' @export
-reformat <- function(k,data,type=c("r","d")){
-  type <- match.arg(type)
-  if (!is.matrix(data)) data <- as.matrix(data)
+reformat <- function(k, data, type = "r") {
+
+  if (length(k) != 1 || !is.numeric(k) || is.na(k) || k <= 0 || k %% 1 != 0) {
+    stop("k must be a positive integer.")
+  }
+
+  if (length(type) != 1 || !is.character(type) || is.na(type) ||
+      !(type %in% c("r", "d"))) {
+    stop("type must be exactly 'r' or 'd'.")
+  }
+
+  if (!is.matrix(data)) {
+    data <- as.matrix(data)
+  }
+
   n <- nrow(data)
+
   if (type == "r") {
 
-    if (ncol(data) != k)
-      stop("For response type, ncol(data) must equal k.")
+    if (ncol(data) != k) {
+      stop("For type = 'r', ncol(data) must equal k.")
+    }
 
-    return(as.vector(t(data)))
+    out <- as.vector(t(data))
+
+  } else if (type == "d") {
+
+    out <- data[rep(seq_len(n), each = k), , drop = FALSE]
+
+  } else {
+    stop("type must be either 'r' or 'd'.")
   }
-  if (type == "d") {
 
-    x <- data[rep(1:n, times = rep(k,n)), ]
-    return(x)
-  }
-
+  return(out)
 }

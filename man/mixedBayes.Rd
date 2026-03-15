@@ -12,12 +12,12 @@ mixedBayes(
   w,
   k,
   iterations = 10000,
-  burn.in = NULL,
+  burn.in = 5000,
   slope = TRUE,
   robust = TRUE,
   quant = 0.5,
   sparse = TRUE,
-  structure = c("bi-level", "individual")
+  structure = "bi-level"
 )
 }
 \arguments{
@@ -38,17 +38,17 @@ time-related covariates.}
 
 \item{iterations}{the number of MCMC iterations. The default value is 10,000.}
 
-\item{burn.in}{the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained.}
+\item{burn.in}{the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained. The default value is 5,000.}
 
 \item{slope}{logical flag. If TRUE, random intercept-and-slope model will be used. Otherwise, random intercept model will be used. The default value is TRUE.}
 
 \item{robust}{logical flag. If TRUE, robust methods will be used. Otherwise, non-robust methods will be used. The default value is TRUE.}
 
-\item{quant}{the quantile level specified by users. The default value is 0.5.}
+\item{quant}{the quantile level specified by users. Required when robust = TRUE. Ignored (set to NULL) when robust = FALSE. The default value is 0.5.}
 
 \item{sparse}{logical flag. If TRUE, spike-and-slab priors will be adopted to impose exact sparsity on regression coefficients. Otherwise, Laplacian shrinkage will be adopted. The default value is TRUE.}
 
-\item{structure}{two choices are available. "bi-level" for selection on both the main and interaction effects corresponding to individual and group levels. "individual" for selections on individual-level only.}
+\item{structure}{two choices are available. "bi-level" performs selection on both main effects and interaction effects corresponding to individual and group levels, whereas "individual" performs selections only on individual levels by ignoring the group structure.}
 }
 \value{
 an object of class `mixedBayes' is returned, which is a list with component:
@@ -94,7 +94,7 @@ Please check the references for more details about the prior distributions.
 data(data)
 
 ## default method (robust sparse bi-level selection under random intercept-and-slope model)
-fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
+fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
 fit$coefficient
 
 ## Compute TP and FP
@@ -106,15 +106,15 @@ fp = length(pos) - tp
 list(tp=tp, fp=fp)
 \donttest{
 ## alternative: robust sparse individual level selections under random intercept-and-slope model
-fit = mixedBayes(y,e,X,g,w,k,structure=c("individual"))
+fit = mixedBayes(y,e,X,g,w,k,structure="individual")
 fit$coefficient
 
 ## alternative: non-robust sparse bi-level selection under random intercept-and-slope model
-fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, structure=c("bi-level"))
+fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, quant = NULL, structure="bi-level")
 fit$coefficient
 
 ## alternative: robust sparse bi-level selection under random intercept model
-fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure=c("bi-level"))
+fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure="bi-level")
 fit$coefficient
 
 }

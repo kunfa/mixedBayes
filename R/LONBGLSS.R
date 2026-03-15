@@ -1,4 +1,5 @@
 LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure, iterations,burn.in=NULL){
+
   n = nrow(g)
   m = ncol(g)
   p = ncol(w)
@@ -33,18 +34,6 @@ LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure, iterations,burn.
 
   progress = ifelse(debugging, 10^(floor(log10(max.steps))-1), 0)
 
-  if (is.null(burn.in)) {
-    BI <- 0
-  } else if (burn.in >= 1) {
-    BI <- as.integer(burn.in)
-  } else {
-    stop("burn.in must be NULL or a positive integer.")
-  }
-
-  if (iterations <= BI) {
-    stop("iterations must be larger than burn.in.")
-  }
-
   if (sparse) {
 
     if (structure == "bi-level") {
@@ -73,8 +62,6 @@ LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure, iterations,burn.
         mu0, mu1, nu0, nu1, progress
       )
 
-    } else {
-      stop("structure must be either 'bi-level' or 'individual'.")
     }
 
   } else {
@@ -103,28 +90,8 @@ LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure, iterations,burn.
         alpha, gamma, alpha1, gamma1, progress
       )
 
-    } else {
-      stop("structure must be either 'bi-level' or 'individual'.")
     }
+  }
 
-  }
-  if (is.null(burn.in) || BI == 0) {
-    out <- list(
-      GS.gamma1 = fit$GS.alpha[, 1:(q-o)],
-      GS.gamma0 = fit$GS.alpha[, -(1:(q-o))],
-      GS.gamma2 = fit$GS.beta,
-      GS.gamma3 = fit$GS.eta,
-      GS.alpha  = fit$GS.ata
-    )
-  } else {
-    burn_rows <- seq_len(BI)
-    out <- list(
-      GS.gamma1 = fit$GS.alpha[-burn_rows,1:(q-o)],
-      GS.gamma0 = fit$GS.alpha[-burn_rows,-(1:(q-o))],
-      GS.gamma2 = fit$GS.beta[-burn_rows,],
-      GS.gamma3 = fit$GS.eta[-burn_rows,],
-      GS.alpha  = fit$GS.ata[-burn_rows,]
-    )
-  }
-  out
+  fit
 }

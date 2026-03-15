@@ -22,19 +22,22 @@
 #' @examples
 #' data(data)
 #' ## sparse
-#' fit = mixedBayes(y,e,X,g,w,k,structure=c("bi-level"))
+#' fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
 #' selected=selection(fit,sparse=TRUE)
 #' selected
 #'
 #' \donttest{
 #' ## non-sparse
-#' fit = mixedBayes(y,e,X,g,w,k,sparse=FALSE,structure=c("bi-level"))
+#' fit = mixedBayes(y,e,X,g,w,k,sparse=FALSE,structure="bi-level")
 #' selected=selection(fit,sparse=FALSE)
 #' selected
 #' }
 #'
 #' @export
 selection = function(obj,sparse){
+  if (!is.logical(sparse) || length(sparse) != 1 || is.na(sparse)) {
+    stop("sparse must be TRUE or FALSE.")
+  }
   if(sparse){
     index = selection_sparse(obj)
   }

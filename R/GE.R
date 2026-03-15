@@ -6,6 +6,12 @@
 #' @export
 #'
 GE = function(g,e){
+  g <- as.matrix(g)
+  e <- as.matrix(e)
+
+  if (nrow(g) != nrow(e)) {
+    stop("g and e must have the same number of rows.")
+  }
   m = ncol(g)
   w = c()
 
