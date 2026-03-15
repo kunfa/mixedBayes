@@ -44,6 +44,7 @@ data(data)
 fit <- mixedBayes(y, e, X, g, w, k, structure = c("bi-level"))
 pred1 <- predict_mixedBayes(fit, y, X, e, g, w, k, slope = TRUE, loss = "L1")
 print(pred1$pred_error)
+fit <- mixedBayes(y, e, X, g, w, k, robust =F, structure = c("bi-level"))
 pred2 <- predict_mixedBayes(fit, y, X, e, g, w, k, slope = TRUE, loss = "L2")
 print(pred2$pred_error)
 

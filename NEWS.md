@@ -1,6 +1,10 @@
 
 ## News
 
+### mixedBayes 0.2.2 \[2026-03-14\]
+
+- Fixed minor bugs.
+
 ### mixedBayes 0.2.1 \[2026-02-28\]
 
 - Optimized `reformat` for better performance.
