@@ -38,11 +38,11 @@ Rcpp::List BL (arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int
 
   for (int t = 0; t < maxSteps; t++) {
     // m|y, r0, r.star
-    arma::mat Zblock(n, c*n1, arma::fill::zeros);
-    for(unsigned int i=0;i<n1;i++){
-      Zblock.submat(i*k,c*i,i*k + k - 1, c*i + 1) = z;
+    arma::mat Zblock(n, c * n1, arma::fill::zeros);
+    for (unsigned int i = 0; i < n1; i++) {
+      Zblock.submat(i * k, c * i, i * k + k - 1, c * i + c - 1) = z;
     }
-    varM = arma::inv(tBmBm/hatSigmaSq + invSigM0);
+    varM = arma::inv_sympd(tBmBm/hatSigmaSq + invSigM0);
     res = y - (g * hatBeta + w * hatEta+ Zblock * arma::vectorise(hatAta));
     meanM = varM * (e.t() * res/hatSigmaSq);
     hatAlpha = mvrnormCpp(meanM, varM);
@@ -50,37 +50,44 @@ Rcpp::List BL (arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int
     gsAlpha.row(t) = hatAlpha.t();
 
     // ata|
-    res+= Zblock*arma::vectorise(hatAta);
-
     arma::vec z0 = z.col(0);  // k x 1
     arma::vec z1 = z.col(1);  // k x 1
 
     for (unsigned int i = 0; i < n1; i++) {
 
-      const unsigned int s = i * k;
-      const unsigned int e = s + k - 1;
 
-      arma::vec r = res.subvec(s, e);
+      arma::vec rblock = res.subvec(i*k, i*k + k - 1);
 
-      // ata0
+      // ----- ata0 -----
+      double old_ata0 = hatAta(0, i);
+      rblock += z0 * old_ata0;
+
       double t00 = arma::dot(z0, z0) / hatSigmaSq;
-      double b0  = arma::dot(z0, r)  / hatSigmaSq;
-      double var0  = 1.0 / (t00 + 1.0 / Phi1Sq);
+      double b0  = arma::dot(z0, rblock) / hatSigmaSq;
+      double var0  = 1 / (t00 + 1 / Phi1Sq);
       double mean0 = var0 * b0;
+
       hatAta(0, i) = R::rnorm(mean0, std::sqrt(var0));
+      rblock -= z0 * hatAta(0, i);
 
-      // ata1
+      // ----- ata1 -----
+      double old_ata1 = hatAta(1, i);
+      rblock += z1 * old_ata1;
+
       double t11 = arma::dot(z1, z1) / hatSigmaSq;
-      double b1  = arma::dot(z1, r)  / hatSigmaSq;
-      double var1  = 1.0 / (t11 + 1.0 / Phi2Sq);
+      double b1  = arma::dot(z1, rblock) / hatSigmaSq;
+      double var1  = 1 / (t11 + 1 / Phi2Sq);
       double mean1 = var1 * b1;
-      hatAta(1, i) = R::rnorm(mean1, std::sqrt(var1));
 
+      hatAta(1, i) = R::rnorm(mean1, std::sqrt(var1));
+      rblock -= z1 * hatAta(1, i);
+
+      // write updated block back
+      res.subvec(i*k, i*k + k - 1) = rblock;
     }
 
     gsAta.row(t) = arma::vectorise(hatAta).t();
 
-    res-= Zblock*arma::vectorise(hatAta);
     for(unsigned int j=0; j<m; j++){
       temp0 = 1/(tB0B0Diag(j) + hatInvTauSq0(j));
       varR0 = hatSigmaSq * temp0;
@@ -147,13 +154,13 @@ Rcpp::List BL (arma::vec y, arma::mat e, arma::mat g, arma:: mat w, unsigned int
     double diff1 = 0.5 * arma::accu( arma::square(hatAta.row(0)) );
     double diff2 = 0.5 * arma::accu( arma::square(hatAta.row(1)) );
 
-    double shape1 = alpha1 + n1 / 2.0;
+    double shape1 = alpha1 + n1 / 2;
     double rate1  = gamma1 + diff1;
-    Phi1Sq = 1.0 / R::rgamma(shape1, 1.0 / rate1);
+    Phi1Sq = 1 / R::rgamma(shape1, 1 / rate1);
 
-    double shape11 = alpha1 + n1 / 2.0;
+    double shape11 = alpha1 + n1 / 2;
     double rate11  = gamma1 + diff2;
-    Phi2Sq = 1.0 / R::rgamma(shape11, 1.0 / rate11);
+    Phi2Sq = 1 / R::rgamma(shape11, 1 / rate11);
 
     gsPhi1Sq(t) = Phi1Sq;
     gsPhi2Sq(t) = Phi2Sq;

@@ -7,9 +7,9 @@
 GE(g,e)
 }
 \arguments{
-\item{g}{the long-format matrix of genetic predictors.}
+\item{g}{the (long-format) matrix of genetic predictors.}
 
-\item{e}{the long-format design matrix for environment/treatment effects.}
+\item{e}{the (long-format) design matrix for environment/treatment effects.}
 }
 \value{
 the G×E interaction terms.

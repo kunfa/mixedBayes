@@ -12,7 +12,7 @@ using namespace std;
 
 Rcpp::List RBGLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int maxSteps, unsigned int q, unsigned int o,unsigned int k, arma::vec hatBeta, arma:: mat hatEta, arma::vec hatAlpha, arma:: mat hatAta, arma:: mat z, double hatTau, arma::vec hatV, arma::vec hatSg1,arma::vec hatSg2,arma::mat invSigAlpha0,double hatPi1,double hatPi2, double hatEtaSq1, double hatEtaSq2,double xi1, double xi2, double r1,double r2,double Phi1Sq, double a, double b, double alpha1, double gamma1,double sh1, double sh0, int progress)
 {
-  unsigned int n = g.n_rows, L = q-o, m = g.n_cols, p = w.n_cols, n1 = n/k;
+  unsigned int n = g.n_rows, L = q-o, m = g.n_cols, p = w.n_cols, c = z.n_cols, n1 = n/k;
   arma::mat gsAlpha(maxSteps, q),
   gsBeta(maxSteps,m),
   gseta(maxSteps,p),
@@ -45,9 +45,9 @@ Rcpp::List RBGLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int max
   for (int t = 0; t < maxSteps; t++) {
 
     // alpha|
-    arma::mat Zblock(n, n1, arma::fill::zeros);
-    for (unsigned int i = 0; i < n1; ++i) {
-      Zblock.submat(i*k, i, i*k + k - 1, i).fill(1.0);
+    arma::mat Zblock(n, c * n1, arma::fill::zeros);
+    for (unsigned int i = 0; i < n1; i++) {
+      Zblock.submat(i * k, c * i, i * k + k - 1, c * i + c - 1) = z;
     }
     res = y - g*hatBeta-w*arma::vectorise(hatEta)-xi1*hatV - Zblock*arma::vectorise(hatAta);
     tEEoV = (e.each_col()/hatV).t() * e;
@@ -59,28 +59,24 @@ Rcpp::List RBGLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int max
     gsAlpha.row(t) = hatAlpha.t();
 
     // ata|
-    res+= Zblock*arma::vectorise(hatAta);
-
     for (unsigned int i = 0; i < n1; i++) {
+      arma::vec rblock = res.subvec(i*k, i*k + k - 1);
+      arma::vec vblock = hatV.subvec(i*k, i*k + k - 1);
 
+      double old_ata0 = hatAta(0, i);
+      rblock += z.col(0) * old_ata0;
 
-      arma::vec rblock = res.subvec(i*k, i*k+k-1);
-      arma::vec vblock = hatV.subvec(i*k, i*k+k-1);
+      double tZZ0 = arma::as_scalar((z.col(0) / vblock).t() * z.col(0));
+      double RZ0  = arma::sum(z.col(0) % (rblock / vblock));
 
-      // ===== ata0 =====
-      double tZZ0 = arma::as_scalar(
-        (z.col(0) / vblock).t() * z.col(0)
-      );
-      double RZ0 = arma::sum(z.col(0) % (rblock / vblock));
-
-      double var0  = 1.0 / (tZZ0 * hatTau / xi2Sq + 1.0 / Phi1Sq);
+      double var0  = 1 / (tZZ0 * hatTau / xi2Sq + 1/ Phi1Sq);
       double mean0 = var0 * (RZ0 * hatTau / xi2Sq);
 
       hatAta(0, i) = R::rnorm(mean0, std::sqrt(var0));
 
+      rblock -= z.col(0) * hatAta(0, i);
+      res.subvec(i*k, i*k + k - 1) = rblock;
     }
-    res-= Zblock*arma::vectorise(hatAta);
-
     gsAta.row(t) = arma::vectorise(hatAta).t();
 
     //v|
@@ -182,7 +178,7 @@ Rcpp::List RBGLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int max
       XgXgoV2 = (w.cols((j*L),(j*L+L-1)).each_col()/hatV).t()*w.cols((j*L),(j*L+L-1));
       temp = XgXgoV2*hatTau/xi2Sq;
       temp.diag() += 1/hatSg2(j);
-      varcove = arma::inv(temp);
+      varcove = arma::inv_sympd(temp);
       RXgoV2 = arma::sum(w.cols((j*L),(j*L+L-1)).each_col()%(res/hatV),0).t();
       RXgoV2 *= hatTau/xi2Sq;
       meane = varcove*RXgoV2;
@@ -217,9 +213,9 @@ Rcpp::List RBGLSS_1(arma::vec y, arma::mat e, arma::mat g, arma:: mat w, int max
     //phi1sq;
     double diff1 = 0.5 * arma::accu( arma::square(hatAta.row(0)) );
 
-    double shape1 = alpha1 + n1 / 2.0;
+    double shape1 = alpha1 + n1 / 2;
     double rate1  = gamma1 + diff1;
-    Phi1Sq = 1.0 / R::rgamma(shape1, 1.0 / rate1);
+    Phi1Sq = 1 / R::rgamma(shape1, 1 / rate1);
 
     gsPhi1Sq(t) = Phi1Sq;
 

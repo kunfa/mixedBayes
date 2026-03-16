@@ -1,6 +1,6 @@
 #' Construct Gene-Environment (G×E) Interaction Matrix
-#' @param g the long-format matrix of genetic predictors.
-#' @param e the long-format design matrix for environment/treatment effects.
+#' @param g the (long-format) matrix of genetic predictors.
+#' @param e the (long-format) design matrix for environment/treatment effects.
 #' @return the G×E interaction terms.
 #' @usage GE(g,e)
 #' @export
