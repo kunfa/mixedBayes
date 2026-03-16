@@ -16,7 +16,7 @@ The current version only supports continuous response.}
 time-related covariates.}
 
 \item{e}{the long-format design matrix for environment/treatment effects. In applications,
-this is a set of dummy variables encoding treatment levels.}
+this is a group of dummy variables encoding treatment levels.}
 
 \item{g}{the long-format matrix of genetic predictors.}
 

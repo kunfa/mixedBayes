@@ -4,7 +4,7 @@
 #' @param y a numeric vector of repeated-measure responses in long format.
 #'   The current version only supports continuous response.
 #' @param e the long-format design matrix for environment/treatment effects. In applications,
-#'   this is a set of dummy variables encoding treatment levels.
+#'   this is a group of dummy variables encoding treatment levels.
 #' @param X the long-format design matrix, including an intercept and optionally
 #'   time-related covariates.
 #' @param g the long-format matrix of genetic predictors.

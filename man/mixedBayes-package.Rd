@@ -11,7 +11,7 @@ The user friendly, integrated interface \strong{mixedBayes()} allows users to fl
 \tabular{rl}{
 slope: \tab whether to use random intercept-and-slope model or random intercept model.\cr\cr
 robust: \tab whether to use robust or non-robust methods.\cr\cr
-quant: \tab to specify different quantiles when using robust methods.\cr\cr
+quant: \tab to specify different quantile levels when using robust methods.\cr\cr
 structure: \tab whether to specify bi-level or individual level.\cr\cr
 sparse: \tab whether to use the spike-and-slab priors to impose sparsity.
 }

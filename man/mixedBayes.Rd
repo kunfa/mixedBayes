@@ -25,7 +25,7 @@ mixedBayes(
 The current version only supports continuous response.}
 
 \item{e}{the long-format design matrix for environment/treatment effects. In applications,
-this is a set of dummy variables encoding treatment levels.}
+this is a group of dummy variables encoding treatment levels.}
 
 \item{X}{the long-format design matrix, including an intercept and optionally
 time-related covariates.}
@@ -69,15 +69,17 @@ particular time point.
 \strong{Model}
 
 Consider the data model described in "\code{\link{data}}":
-\deqn{Y_{ij} = X_{ij}^\top\gamma_{0}+E_{ij}^\top\gamma_{1}+\sum_{l=1}^{p}G_{ijl}\gamma_{2l}+\sum_{l=1}^{p}W_{ijl}^\top\gamma_{3l}+Z_{ij}^\top\alpha_{i}+\epsilon_{ij}.}, with \eqn{W_{ij} = G_{ij}\bigotimes E_{ij}}.
+\deqn{\boldsymbol{Y_{ij}} = \boldsymbol{X^\top_{ij}}\boldsymbol{\gamma_{0}}+\boldsymbol{E^\top_{ij}}\boldsymbol{\gamma_{1}}+\boldsymbol{G^\top_{ij}}\boldsymbol{\gamma_{2}}+(\boldsymbol{G_{ij}}\bigotimes \boldsymbol{E_{ij}})^\top\boldsymbol{\gamma_{3}}+\boldsymbol{Z^\top_{ij}}\boldsymbol{\alpha_{i}}+\epsilon_{ij}.}
 
-where \eqn{\gamma_{0}} is the coefficient vector for \eqn{X_{ij}}, \eqn{\gamma_{1}} is the coefficient vector for \eqn{E_{ij}}, \eqn{\gamma_{2l}} is the coefficient for the main effect of the \eqn{l}th genetic variant, and \eqn{\gamma_{3l}} is the coefficient vector for the interaction effect of the \eqn{l}th genetic variant with environment factors.
+Here \eqn{\boldsymbol{\gamma_{0}}} is the coefficient vector for \eqn{\boldsymbol{X_{ij}}}, \eqn{\boldsymbol{\gamma_{1}}} is the coefficient vector for \eqn{\boldsymbol{E_{ij}}}, \eqn{\boldsymbol{\gamma_{2}}} is the coefficient vector for the genetic variants, and \eqn{\boldsymbol{\gamma_{3}}} is the coefficient vector for the interactions of the genetic variants with environment factors.
 
-The subject-specific random effects \eqn{\alpha_i} capture within-subject correlation. For random intercept-and-slope model, \eqn{Z_{ij}^\top = (1,j)} and  \eqn{\alpha_{i} = (\alpha_{i1},\alpha_{i2})^\top}. For random intercept model, \eqn{Z_{ij}^\top = 1} and \eqn{\alpha_{i} = \alpha_{i1}}.
+where \eqn{\boldsymbol{\gamma_{1}}=(\gamma_{11},\dots,\gamma_{1p})^\top}, \eqn{\boldsymbol{\gamma_{2}}=(\gamma_{21},\dots,\gamma_{2m})^\top}, \eqn{\boldsymbol{\gamma_{3}}=(\boldsymbol{\gamma_{31}},\dots,\boldsymbol{\gamma_{3m}})^\top} where \eqn{\boldsymbol{\gamma_{3l}}=(\gamma_{3l1},\dots,\gamma_{3lp})^\top} for \eqn{l=1,\dots,m}.
 
-When `structure="bi-level"`, bi-level selection will be conducted. If `structure="individual"`, individual-level selection will be conducted.
+The subject-specific random effects \eqn{\boldsymbol{\alpha_i}} capture within-subject correlation. For random intercept-and-slope model, \eqn{\boldsymbol{Z^\top_{ij}} = (1,j)} and  \eqn{\boldsymbol{\alpha_{i}} = (\alpha_{i1},\alpha_{i2})^\top}. For random intercept model, \eqn{Z_{ij} = 1} and \eqn{\alpha_{i} = \alpha_{i1}}.
 
-When `slope=TRUE` (default), random intercept-and-slope model will be used as the mixed effects model.
+When `structure="bi-level"`(default), bi-level selection on main and interaction effects will be conducted corresponding to individual and group levels, respectively. When `structure="individual"`, selections only on individual levels by ignoring the group structure will be performed.
+
+When `slope=TRUE` (default), random intercept-and-slope model will be used as the mixed effects model. Otherwise, random intercept model will be used.
 
 When `sparse=TRUE` (default), spike-and-slab priors are imposed to identify important main and interaction effects. Otherwise, Laplacian shrinkage will be used.
 
@@ -85,7 +87,7 @@ When `robust=TRUE` (default), the distribution of \eqn{\epsilon_{ij}} is defined
 
 \eqn{
 f(\epsilon_{ij}|\theta,\tau) = \theta(1-\theta)\exp\left\{-\tau\rho_{\theta}(\epsilon_{ij})\right\}
-}, (\eqn{i=1,\dots,n,j=1,\dots,k }), which leads to a Bayesian formulation of quantile regression. If `robust=FALSE`, \eqn{\epsilon_{ij}} follows a normal distribution.
+}, (\eqn{i=1,\dots,n,j=1,\dots,k }), which leads to a Bayesian formulation of quantile regression. Otherwise, \eqn{\epsilon_{ij}} follows a normal distribution.
 \cr
 
 Please check the references for more details about the prior distributions.
