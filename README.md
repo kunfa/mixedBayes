@@ -38,8 +38,6 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     
 ## Data generation under random intercept-and-slope model with t(2) error
 
-    library(MASS)
-    library(mixedBayes)
     Data <- function (n,p,k,q,quant){
     sigma2=1
     # Generate genetic factors
@@ -122,7 +120,16 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     dat <- list(y = y, g = g, e  = e, w  = w ,X  = X, coef = betas_true)
     return (dat)
     }
-
+    
+    library(MASS)
+    library(mixedBayes)
+    n=200;p=100;q=3;k=5;quant=0.5
+    data = Data(n,p,k,q,quant)
+    y = data$y
+    e = data$e
+    g = data$g
+    X = data$X
+    
 #### Example.1 (proposed method: robust sparse bi-level selection under random intercept -and- slope model)
     
     fit = mixedBayes(y,e,X,g,k,structure="bilevel")
@@ -204,8 +211,6 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     
 ## Data generation under random intercept model with t(2) error
 
-    library(MASS)
-    library(mixedBayes)
     Data <- function (n,p,k,q,quant){
     sigma2=1
     # Generate genetic factors
@@ -288,6 +293,14 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     return (dat)
     }
 
+    library(MASS)
+    library(mixedBayes)
+    n=200;p=100;q=3;k=5;quant=0.5
+    data = Data(n,p,k,q,quant)
+    y = data$y
+    e = data$e
+    g = data$g
+    X = data$X
     
 #### Example.1 (proposed method: robust sparse bi-level selection under random intercept model)
 
