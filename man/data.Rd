@@ -7,12 +7,11 @@
 \alias{e}
 \alias{X}
 \alias{g}
-\alias{w}
 \alias{k}
 \alias{coeff}
 \title{simulated data for demonstrating the features of mixedBayes}
 \format{
-The data object consists of seven components: y, e, X, g, w ,k and coeff. coeff contains the true values of parameters (main and interaction effects) used for generating Y.
+The data object consists of seven components: y, e, X, g, k and coeff. coeff contains the true values of parameters (main and interaction effects) used for generating y.
 }
 \description{
 simulated data for demonstrating the features of mixedBayes
@@ -20,8 +19,8 @@ simulated data for demonstrating the features of mixedBayes
 \details{
 \strong{The data and model setting}
 
-Consider a longitudinal study on \eqn{n} subjects with \eqn{k} repeated measurement for each subject. Let \eqn{\boldsymbol{Y_{ij}}} be the measurement for the \eqn{i}th subject at each time point \eqn{j}(\eqn{1\leq i \leq n, 1\leq j \leq k}) .We use the \eqn{m}-dimensional vector \eqn{\boldsymbol{G_{ij}}} to denote measurements of genetic factors for the \eqn{i}th subject at time point \eqn{j}, where \eqn{\boldsymbol{G_{ij}} = (G_{ij1},...,G_{ijm})^\top}. Also, we use \eqn{p}-dimensional vector \eqn{\boldsymbol{E_{ij}}} to denote the environment/treatment factors, where \eqn{\boldsymbol{E_{ij}} = (E_{ij1},...,E_{ijp})^\top}. \eqn{\boldsymbol{X_{ij}} = (1, \boldsymbol{T^\top_{ij}})^\top}, where \eqn{\boldsymbol{T_{ij}}} is a vector of time effects . \eqn{\boldsymbol{Z_{ij}}} is a \eqn{h \times 1} covariate associated with random effects and \eqn{\boldsymbol{\alpha_{i,\theta}}} is a \eqn{h\times 1} vector of random effects. In a typical one-way repeated measure ANOVA with a fixed number (say four) of factor levels, the environment (or treatment) factor is modeled as a group of three dummy variables. Therefore, gene-environment (or treatment) interaction leads to variable selections on individual levels (main effects) and group levels (interaction effects) simultaneously. Considering the genetics factors, environment (or treatment) factors and their interactions that are jointly associated with the longitudinal phenotype, we have the following mixed-effects model at a given quantile level \eqn{\theta}, (\eqn{0 < \theta < 1}):
-\deqn{\boldsymbol{Y_{ij}} = \boldsymbol{X^\top_{ij}}\boldsymbol{\gamma_{0,\theta}}+\boldsymbol{E^\top_{ij}}\boldsymbol{\gamma_{1,\theta}}+\boldsymbol{G^\top_{ij}}\boldsymbol{\gamma_{2,\theta}}+(\boldsymbol{G_{ij}}\bigotimes \boldsymbol{E_{ij}})^\top\boldsymbol{\gamma_{3,\theta}}+\boldsymbol{Z^\top_{ij}}\boldsymbol{\alpha_{i,\theta}}+\epsilon_{ij,\theta}.}
+Consider a longitudinal study on \eqn{n} subjects with \eqn{k} repeated measurement for each subject. Let \eqn{Y_{ij}} be the measurement for the \eqn{i}th subject at each time point \eqn{j}(\eqn{1\leq i \leq n, 1\leq j \leq k}) .We use the \eqn{m}-dimensional vector \eqn{\boldsymbol{G_{ij}}} to denote measurements of genetic factors for the \eqn{i}th subject at time point \eqn{j}, where \eqn{\boldsymbol{G_{ij}} = (G_{ij1},...,G_{ijm})^\top}. Also, we use \eqn{p}-dimensional vector \eqn{\boldsymbol{E_{ij}}} to denote the environment/treatment factors, where \eqn{\boldsymbol{E_{ij}} = (E_{ij1},...,E_{ijp})^\top}. \eqn{\boldsymbol{X_{ij}} = (1, \boldsymbol{T^\top_{ij}})^\top}, where \eqn{\boldsymbol{T_{ij}}} is a vector of time effects . \eqn{\boldsymbol{Z_{ij}}} is a \eqn{h \times 1} covariate associated with random effects and \eqn{\boldsymbol{\alpha_{i,\theta}}} is a \eqn{h\times 1} vector of random effects. In a typical one-way repeated measure ANOVA with a fixed number (say four) of factor levels, the environment (or treatment) factor is modeled as a group of three dummy variables. Therefore, gene-environment (or treatment) interaction leads to variable selections on individual levels (main effects) and group levels (interaction effects) simultaneously. Considering the genetics factors, environment (or treatment) factors and their interactions that are jointly associated with the longitudinal phenotype, we have the following mixed-effects model at a given quantile level \eqn{\theta}, (\eqn{0 < \theta < 1}):
+\deqn{Y_{ij} = \boldsymbol{X^\top_{ij}}\boldsymbol{\gamma_{0,\theta}}+\boldsymbol{E^\top_{ij}}\boldsymbol{\gamma_{1,\theta}}+\boldsymbol{G^\top_{ij}}\boldsymbol{\gamma_{2,\theta}}+(\boldsymbol{G_{ij}}\bigotimes \boldsymbol{E_{ij}})^\top\boldsymbol{\gamma_{3,\theta}}+\boldsymbol{Z^\top_{ij}}\boldsymbol{\alpha_{i,\theta}}+\epsilon_{ij,\theta}.}
 where \eqn{\boldsymbol{\gamma_{1,\theta}}},\eqn{\boldsymbol{\gamma_{2,\theta}}},\eqn{\boldsymbol{\gamma_{3,\theta}}} are \eqn{p},\eqn{m} and \eqn{mp} dimensional vectors that represent the coefficients of the environment effects, the genetic effects and interaction effects, respectively. In addition, \eqn{\boldsymbol{\gamma_{0,\theta}}} is the coefficient vector for \eqn{\boldsymbol{X_{ij}}}.
 The gene–environment interactions that can be expressed as a Kronecker product between the two types of main effects as a \eqn{mp}-dimensional vector:
 \deqn{\boldsymbol{G_{ij}}\bigotimes \boldsymbol{E_{ij}} = [G_{ij1}E_{ij1},G_{ij1}E_{ij2},...,G_{ij1}E_{ijp},G_{ij2}E_{ij1},...,G_{ijm}E_{ijp}]^\top.}
@@ -38,7 +37,6 @@ data(data)
 length(y)
 dim(g)
 dim(e)
-dim(w)
 print(k)
 print(X)
 print(coeff)

@@ -26,17 +26,18 @@ reformat <- function(k, data, type = "r") {
   if (type == "r") {
 
     if (ncol(data) != k) {
-      stop("For type = 'r', ncol(data) must equal k.")
+      stop("For type = 'r', data must be an n x k response matrix.")
     }
 
     out <- as.vector(t(data))
 
   } else if (type == "d") {
 
-    out <- data[rep(seq_len(n), each = k), , drop = FALSE]
+    if (ncol(data) == k) {
+      stop("For type = 'd', data should not have ncol = k. Did you pass a response matrix?")
+    }
 
-  } else {
-    stop("type must be either 'r' or 'd'.")
+    out <- data[rep(seq_len(n), each = k), , drop = FALSE]
   }
 
   return(out)

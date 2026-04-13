@@ -1,7 +1,7 @@
 #' Variable selection for a mixedBayes object
 #'
 #' @param obj mixedBayes object.
-#' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly..
+#' @param sparse logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly.
 #'
 #' @details If sparse, the median probability model (MPM) (Barbieri and Berger, 2004) is used to identify predictors that are significantly associated
 #' with the response variable. Otherwise, variable selection is based on 95\% credible interval.
@@ -22,28 +22,44 @@
 #' @examples
 #' data(data)
 #' ## sparse
-#' fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
+#' fit = mixedBayes(y,e,X,g,k,structure="bilevel")
 #' selected=selection(fit,sparse=TRUE)
 #' selected
 #'
 #' \donttest{
 #' ## non-sparse
-#' fit = mixedBayes(y,e,X,g,w,k,sparse=FALSE,structure="bi-level")
+#' fit = mixedBayes(y,e,X,g,k,sparse=FALSE,structure="bilevel")
 #' selected=selection(fit,sparse=FALSE)
 #' selected
 #' }
 #'
 #' @export
-selection = function(obj,sparse){
+selection <- function(obj, sparse) {
+  if (!inherits(obj, "mixedBayes")) {
+    stop("obj must be a 'mixedBayes' object.")
+  }
+
   if (!is.logical(sparse) || length(sparse) != 1 || is.na(sparse)) {
     stop("sparse must be TRUE or FALSE.")
   }
-  if(sparse){
-    index = selection_sparse(obj)
+
+  if (is.null(obj$sparse) || !is.logical(obj$sparse) || length(obj$sparse) != 1 || is.na(obj$sparse)) {
+    stop("The mixedBayes object must contain a valid logical component 'sparse'.")
   }
-  else{
-    index = selection_nonsparse(obj)
+
+  if (!identical(sparse, obj$sparse)) {
+    stop(sprintf(
+      "Mismatch detected: selection() was called with sparse = %s, but the model was fitted with sparse = %s.",
+      sparse, obj$sparse
+    ))
   }
-  out = index
-  out
+
+  if (sparse) {
+    index <- selection_sparse(obj)
+  } else {
+    index <- selection_nonsparse(obj)
+  }
+
+  out <- index
+  return(out)
 }

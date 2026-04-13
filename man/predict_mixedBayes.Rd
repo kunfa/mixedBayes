@@ -4,7 +4,7 @@
 \alias{predict_mixedBayes}
 \title{Make predictions from a mixedBayes object}
 \usage{
-predict_mixedBayes(object, y, X, e, g, w, k, slope, loss)
+predict_mixedBayes(object, y, X, e, g, k, slope, loss)
 }
 \arguments{
 \item{object}{a mixedBayes object.}
@@ -19,8 +19,6 @@ time-related covariates.}
 this is a group of dummy variables encoding treatment levels.}
 
 \item{g}{the long-format matrix of genetic predictors.}
-
-\item{w}{the long-format matrix of gene-environment interaction terms.}
 
 \item{k}{integer. Number of repeated measurements per subject.}
 
@@ -41,11 +39,11 @@ Make predictions from a mixedBayes object
 \examples{
 data(data)
 
-fit <- mixedBayes(y, e, X, g, w, k, structure = "bi-level")
-pred1 <- predict_mixedBayes(fit, y, X, e, g, w, k, slope = TRUE, loss = "L1")
+fit <- mixedBayes(y, e, X, g, k, structure = "bilevel")
+pred1 <- predict_mixedBayes(fit, y, X, e, g, k, slope = TRUE, loss = "L1")
 print(pred1$pred_error)
-fit <- mixedBayes(y, e, X, g, w, k, robust =FALSE, quant =NULL,structure = "bi-level")
-pred2 <- predict_mixedBayes(fit, y, X, e, g, w, k, slope = TRUE, loss = "L2")
+fit <- mixedBayes(y, e, X, g, k, robust =FALSE, quant =NULL,structure = "bilevel")
+pred2 <- predict_mixedBayes(fit, y, X, e, g, k, slope = TRUE, loss = "L2")
 print(pred2$pred_error)
 
 }

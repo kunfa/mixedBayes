@@ -1,7 +1,15 @@
-LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure, iterations,burn.in=NULL){
+LONBGLSS <- function(y,e,X,g,z,k,max.steps,sparse, structure, iterations,burn.in=NULL){
 
   n = nrow(g)
   m = ncol(g)
+  w = c()
+
+  for (i in 1:m)
+  {
+
+    w = cbind(w,g[,i]*e)
+
+  }
   p = ncol(w)
   c = ncol(z)
   E = cbind(e,X)
@@ -36,7 +44,7 @@ LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure, iterations,burn.
 
   if (sparse) {
 
-    if (structure == "bi-level") {
+    if (structure == "bilevel") {
 
       fit <- BGLSS(
         y, E, g, w, z, q, o, k, max.steps,
@@ -66,7 +74,7 @@ LONBGLSS <- function(y,e,X,g,w,z,k,max.steps,sparse, structure, iterations,burn.
 
   } else {
 
-    if (structure == "bi-level") {
+    if (structure == "bilevel") {
 
       fit <- BGL(
         y, E, g, w, q, o, k, max.steps,

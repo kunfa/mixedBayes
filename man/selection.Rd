@@ -9,7 +9,7 @@ selection(obj, sparse)
 \arguments{
 \item{obj}{mixedBayes object.}
 
-\item{sparse}{logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly..}
+\item{sparse}{logical flag. If TRUE, spike-and-slab priors will be used to shrink coefficients of irrelevant covariates to zero exactly.}
 }
 \value{
 an object of class `selection' is returned, which is a list with component:
@@ -26,13 +26,13 @@ Please check the references for more details about the variable selection.
 \examples{
 data(data)
 ## sparse
-fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
+fit = mixedBayes(y,e,X,g,k,structure="bilevel")
 selected=selection(fit,sparse=TRUE)
 selected
 
 \donttest{
 ## non-sparse
-fit = mixedBayes(y,e,X,g,w,k,sparse=FALSE,structure="bi-level")
+fit = mixedBayes(y,e,X,g,k,sparse=FALSE,structure="bilevel")
 selected=selection(fit,sparse=FALSE)
 selected
 }

@@ -36,42 +36,122 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
 
     library(mixedBayes)
     
-## Data
+## Data generation under random intercept-and-slope model with t(2) error
 
-    The example data set `data` simulated under random intercept-and-slope model included in the package can be loaded by
-
-    data(data)
-
-## Examples
-
-#### Example.1 (default method: robust sparse bi-level selection under random intercept -and- slope model)
+    library(MASS)
+    library(mixedBayes)
+    Data <- function (n,p,k,q,quant){
+    sigma2=1
+    # Generate genetic factors
+    sig = matrix(0,p,p)
+    for (i in 1:p)
+    {
+    for(j in 1:p)
+    {
+      sig[i,j] = 0.5^abs(i-j)
+    }
+    }
+  
+    g = mvrnorm(n,rep(0,p),sig)
+    g = as.matrix(g)
+    g = scale(g)
+  
+    # True main effects for genetic variables 
+    beta_true = rep(0,p)
+    beta_true[c(2,4,7,12)] = runif(4,0.4,0.8)
+  
+    # Generate environmental factors (a group of 3 dummy variables)
+    group <- sample(0:3, size = n, replace = TRUE)
+  
+    e1 <- as.numeric(group == 1)
+    e2 <- as.numeric(group == 2)
+    e3 <- as.numeric(group == 3)
+  
+    e <- cbind(e1, e2, e3)
+    e <- scale(e)
+  
+    # Fixed effects for environmental main effects
+    alpha1= runif(q,0.4,0.8)
+  
+    # Fixed effects for time (polynomial terms)
+    alpha2= runif(3,0.4,0.8)
+  
+    # Interaction terms
+    w = c()
+  
+    for (i in 1:ncol(g))
+    {
     
-    fit = mixedBayes(y,e,X,g,w,k,structure="bi-level")
+    w = cbind(w,g[,i]*e)
+    
+    }
+  
+    # True interaction effects
+    eta_true <- rep(0, p * q)
+    nz_block <- list(4:6, 10:12, 16:18, 19:21, 34:36, 43:45)
+    for (idx in nz_block) {
+     eta_true[idx] <- runif(q, 0.4, 0.8)
+    }
+  
+    # Combine all coefficients
+    betas_true <- c(beta_true, eta_true)
+  
+    #  Random effects design 
+    k_1 <- 1:k
+    k_1 <- k_1 - mean(k_1)
+    z <- cbind(1, k_1)
+  
+    # fixed-effect design for time
+    xi <- cbind(1, 1:k, (1:k)^2)
+    X <- do.call(rbind, replicate(n, xi, simplify = FALSE))
+  
+    # Generate response 
+    y <- matrix(0, n, k)
+    for (i in 1:n) {
+    ata <- runif(2,0,1)
+    ei <- matrix(rep(e[i, ], each = k), nrow = k)
+    gi <- matrix(rep(g[i, ], each = k), nrow = k)
+    wi <- matrix(rep(w[i, ], each = k), nrow = k)
+    error <- rt(k, 2)
+    error <- error -quantile(error, probs = quant)
+    y[i, ] <- ei %*% alpha1 +xi %*% alpha2 +gi %*% beta_true +wi %*% eta_true +z %*% ata + error
+    }
+  
+    # Convert to long format
+    y = reformat(k,y,type="r");g = reformat(k,g,type="d");e = reformat(k,e,type="d");w = reformat(k,w,type="d")
+    dat <- list(y = y, g = g, e  = e, w  = w ,X  = X, coef = betas_true)
+    return (dat)
+    }
+
+#### Example.1 (proposed method: robust sparse bi-level selection under random intercept -and- slope model)
+    
+    fit = mixedBayes(y,e,X,g,k,structure="bilevel")
     
     # Estimated coefficients(posterior median)
     fit$coefficient
     
     # Identification
-    b = selection(fit,sparse=TRUE)
-    index = which(coeff!=0)
-    pos = which(b != 0)
+    beta_est = selection(fit,sparse=TRUE)
+    coeff = data$coef
+    index = which(coeff!=0) # true active predictors
+    pos = which(beta_est != 0) # selected active predictors
     tp = length(intersect(index, pos))
     fp = length(pos) - tp
-    list(tp=tp, fp=fp)
     
     # Prediction
-    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=TRUE,loss = "L1")
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=TRUE,loss = "L1")
     prediction
     
 #### Example.2 (alternative: robust sparse individual level selection under random intercept -and- slope model)
 
-    fit = mixedBayes(y,e,X,g,w,k,structure="individual")
+    fit = mixedBayes(y,e,X,g,k,structure="individual")
     
     # Estimated coefficients(posterior median)
     fit$coefficient
     
     # Identification
     b = selection(fit,sparse=TRUE)
+    coeff = data$coef
     index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
@@ -79,18 +159,19 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     list(tp=tp, fp=fp)
     
     # Prediction
-    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=TRUE,loss = "L1")
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=TRUE,loss = "L1")
     prediction
 
 #### Example.3 (alternative: non-robust sparse bi-level selection under random intercept -and- slope model)
 
-    fit = mixedBayes(y,e,X,g,w,k,robust=FALSE, quant = NULL,structure = "bi-level")
+    fit = mixedBayes(y,e,X,g,k,robust=FALSE, quant = NULL,structure = "bilevel")
     
     # Estimated coefficients(posterior median)
     fit$coefficient
     
     # Identification
     b = selection(fit,sparse=TRUE)
+    coeff = data$coef
     index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
@@ -98,18 +179,19 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     list(tp=tp, fp=fp)
     
     # Prediction
-    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=TRUE,loss = "L2")
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=TRUE,loss = "L2")
     prediction
     
-#### Example.4 (alternative: robust sparse bi-level selection under random intercept model)
+#### Example.4 (alternative: robust bi-level selection under random intercept -and- slope model)
 
-    fit = mixedBayes(y,e,X,g,w,k,slope=FALSE, structure="bi-level")
+    fit = mixedBayes(y,e,X,g,k,robust=TRUE,sparse = FALSE,structure = "bilevel")
     
     # Estimated coefficients(posterior median)
     fit$coefficient
     
     # Identification
-    b = selection(fit,sparse=TRUE)
+    b = selection(fit,sparse=FALSE)
+    coeff = data$coef
     index = which(coeff!=0)
     pos = which(b != 0)
     tp = length(intersect(index, pos))
@@ -117,10 +199,177 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     list(tp=tp, fp=fp)
     
     # Prediction
-    prediction=predict_mixedBayes(fit,y,X,e,g,w,k,slope=FALSE,loss = "L1")
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=TRUE,loss = "L1")
     prediction
+    
+## Data generation under random intercept model with t(2) error
 
+    library(MASS)
+    library(mixedBayes)
+    Data <- function (n,p,k,q,quant){
+    sigma2=1
+    # Generate genetic factors
+    sig = matrix(0,p,p)
+    for (i in 1:p)
+    {
+    for(j in 1:p)
+    {
+      sig[i,j] = 0.5^abs(i-j)
+    }
+    }
   
+    g = mvrnorm(n,rep(0,p),sig)
+    g = as.matrix(g)
+    g = scale(g)
+  
+    # True main effects for genetic variables 
+    beta_true = rep(0,p)
+    beta_true[c(2,4,7,12)] = runif(4,0.4,0.8)
+  
+    # Generate environmental factors (a group of 3 dummy variables)
+    group <- sample(0:3, size = n, replace = TRUE)
+  
+    e1 <- as.numeric(group == 1)
+    e2 <- as.numeric(group == 2)
+    e3 <- as.numeric(group == 3)
+  
+    e <- cbind(e1, e2, e3)
+    e <- scale(e)
+  
+    # Fixed effects for environmental main effects
+    alpha1= runif(q,0.4,0.8)
+  
+    # Fixed effects for time (polynomial terms)
+    alpha2= runif(3,0.4,0.8)
+  
+    # Interaction terms
+    w = c()
+  
+    for (i in 1:ncol(g))
+    {
+    
+    w = cbind(w,g[,i]*e)
+    
+    }
+  
+    # True interaction effects
+    eta_true <- rep(0, p * q)
+    nz_block <- list(4:6, 10:12, 16:18, 19:21, 34:36, 43:45)
+    for (idx in nz_block) {
+     eta_true[idx] <- runif(q, 0.4, 0.8)
+    }
+  
+    # Combine all coefficients
+    betas_true <- c(beta_true, eta_true)
+  
+    #  Random effects design 
+   
+    z <- rep(1, k)
+  
+    # fixed-effect design for time
+    xi <- cbind(1, 1:k, (1:k)^2)
+    X <- do.call(rbind, replicate(n, xi, simplify = FALSE))
+  
+    # Generate response 
+    y <- matrix(0, n, k)
+    for (i in 1:n) {
+    ata <- runif(1,0,1)
+    ei <- matrix(rep(e[i, ], each = k), nrow = k)
+    gi <- matrix(rep(g[i, ], each = k), nrow = k)
+    wi <- matrix(rep(w[i, ], each = k), nrow = k)
+    error <- rt(k, 2)
+    error <- error -quantile(error, probs = quant)
+    y[i, ] <- ei %*% alpha1 +xi %*% alpha2 +gi %*% beta_true +wi %*% eta_true +z * ata + error
+    }
+  
+    # Convert to long format
+    y = reformat(k,y,type="r");g = reformat(k,g,type="d");e = reformat(k,e,type="d");w = reformat(k,w,type="d")
+    dat <- list(y = y, g = g, e  = e, w  = w ,X  = X, coef = betas_true)
+    return (dat)
+    }
+
+    
+#### Example.1 (proposed method: robust sparse bi-level selection under random intercept model)
+
+    fit = mixedBayes(y,e,X,g,k,slope=FALSE, structure="bilevel")
+    
+    # Estimated coefficients(posterior median)
+    fit$coefficient
+    
+    # Identification
+    b = selection(fit,sparse=TRUE)
+    coeff = data$coef
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
+    fp = length(pos) - tp
+    list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=FALSE,loss = "L1")
+    prediction
+    
+#### Example.2 (alternative: robust sparse individual level selection under random intercept model)
+
+    fit = mixedBayes(y,e,X,g,k,slope=FALSE, structure="individual")
+    
+    # Estimated coefficients(posterior median)
+    fit$coefficient
+    
+    # Identification
+    b = selection(fit,sparse=TRUE)
+    coeff = data$coef
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
+    fp = length(pos) - tp
+    list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=FALSE,loss = "L1")
+    prediction
+
+#### Example.3 (alternative: non-robust sparse bi-level selection under random intercept model)
+
+    fit = mixedBayes(y,e,X,g,k,slope=FALSE,robust=FALSE, quant = NULL,structure = "bilevel")
+    
+    # Estimated coefficients(posterior median)
+    fit$coefficient
+    
+    # Identification
+    b = selection(fit,sparse=TRUE)
+    coeff = data$coef
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
+    fp = length(pos) - tp
+    list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=FALSE,loss = "L2")
+    prediction
+    
+#### Example.4 (alternative: robust bi-level selection under random intercept model)
+
+    fit = mixedBayes(y,e,X,g,k,slope=FALSE,robust=TRUE,sparse = FALSE,structure = "bilevel")
+    
+    # Estimated coefficients(posterior median)
+    fit$coefficient
+    
+    # Identification
+    b = selection(fit,sparse=FALSE)
+    coeff = data$coef
+    index = which(coeff!=0)
+    pos = which(b != 0)
+    tp = length(intersect(index, pos))
+    fp = length(pos) - tp
+    list(tp=tp, fp=fp)
+    
+    # Prediction
+    prediction=predict_mixedBayes(fit,y,X,e,g,k,slope=FALSE,loss = "L1")
+    prediction
+  
+
 ## Methods
 
 This package provides implementation for methods proposed in

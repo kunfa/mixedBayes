@@ -8,14 +8,13 @@
 #' @param X the long-format design matrix, including an intercept and optionally
 #'   time-related covariates.
 #' @param g the long-format matrix of genetic predictors.
-#' @param w the long-format matrix of gene-environment interaction terms.
 #' @param k integer. Number of repeated measurements per subject.
 #' @param slope logical flag. If TRUE, random intercept-and-slope model will be used.
 #' @param loss character string specifying the prediction loss function.
 #'        "L1" for mean absolute error;
 #'        "L2" for mean squared error.
 #'
-#' @usage predict_mixedBayes(object, y, X, e, g, w, k, slope, loss)
+#' @usage predict_mixedBayes(object, y, X, e, g, k, slope, loss)
 #' @return an object of class `mixedBayes.pred' is returned, which is a list with components:
 #' \item{pred_error}{prediction error.}
 #' \item{y_hat}{predicted values of the repeated measured responses.}
@@ -26,16 +25,16 @@
 #' @examples
 #' data(data)
 #'
-#' fit <- mixedBayes(y, e, X, g, w, k, structure = "bi-level")
-#' pred1 <- predict_mixedBayes(fit, y, X, e, g, w, k, slope = TRUE, loss = "L1")
+#' fit <- mixedBayes(y, e, X, g, k, structure = "bilevel")
+#' pred1 <- predict_mixedBayes(fit, y, X, e, g, k, slope = TRUE, loss = "L1")
 #' print(pred1$pred_error)
-#' fit <- mixedBayes(y, e, X, g, w, k, robust =FALSE, quant =NULL,structure = "bi-level")
-#' pred2 <- predict_mixedBayes(fit, y, X, e, g, w, k, slope = TRUE, loss = "L2")
+#' fit <- mixedBayes(y, e, X, g, k, robust =FALSE, quant =NULL,structure = "bilevel")
+#' pred2 <- predict_mixedBayes(fit, y, X, e, g, k, slope = TRUE, loss = "L2")
 #' print(pred2$pred_error)
 #'
 #' @export
 
-predict_mixedBayes <- function(object, y, X, e, g, w, k,
+predict_mixedBayes <- function(object, y, X, e, g, k,
                                slope = TRUE,
                                loss = "L1") {
   if (length(k) != 1 || !is.numeric(k) || is.na(k) || k <= 0 || k %% 1 != 0) {
@@ -50,13 +49,22 @@ predict_mixedBayes <- function(object, y, X, e, g, w, k,
     stop("length(y) must be divisible by k.")
   }
 
-  if (nrow(X) != n || nrow(e) != n || nrow(g) != n || nrow(w) != n) {
-    stop("X, e, g, and w must all have the same number of rows as length(y).")
+  if (nrow(X) != n || nrow(e) != n || nrow(g) != n) {
+    stop("X, e, and g must all have the same number of rows as length(y).")
   }
 
   n1 <- n / k
 
   Zblock <- make_Zblock(k, n1, slope)
+  m = ncol(g)
+  w = c()
+
+  for (i in 1:m)
+  {
+
+    w = cbind(w,g[,i]*e)
+
+  }
 
   y_hat <- X %*% object$coefficient$X +
     e %*% object$coefficient$treatment +
