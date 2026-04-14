@@ -3,9 +3,10 @@
 
 ### mixedBayes 0.2.4 \[2026-04-13\]
 
-- Integrated gene–environment interaction (G×E) modeling into the `mixedBayes` framework.
+- Added automatic generation of gene–environment (G×E) interaction terms in the `mixedBayes` and `predict_mixedBayes` functions.
+- Removed the `GE` function.
 - Added data generation code to the README for reproducible examples.
-- Fixed several minor issues and improved overall stability.
+- Improved efficiency and overall performance.
 
 ### mixedBayes 0.2.3 \[2026-03-17\]
 
