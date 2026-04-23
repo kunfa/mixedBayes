@@ -18,7 +18,10 @@ time-related covariates.}
 \item{e}{the long-format design matrix for environment/treatment effects. In applications,
 this is a group of dummy variables encoding treatment levels.}
 
-\item{g}{the long-format matrix of genetic predictors.}
+\item{g}{the long-format matrix of genetic predictors.
+
+The interaction terms between genetic and environmental factors (G×E) are constructed internally
+within the function and therefore do not need to be provided by the user.}
 
 \item{k}{integer. Number of repeated measurements per subject.}
 

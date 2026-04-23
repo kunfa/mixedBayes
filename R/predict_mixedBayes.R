@@ -8,11 +8,16 @@
 #' @param X the long-format design matrix, including an intercept and optionally
 #'   time-related covariates.
 #' @param g the long-format matrix of genetic predictors.
+#'
+#' The interaction terms between genetic and environmental factors (G×E) are constructed internally
+#' within the function and therefore do not need to be provided by the user.
+#'
 #' @param k integer. Number of repeated measurements per subject.
 #' @param slope logical flag. If TRUE, random intercept-and-slope model will be used.
 #' @param loss character string specifying the prediction loss function.
 #'        "L1" for mean absolute error;
 #'        "L2" for mean squared error.
+#'
 #'
 #' @usage predict_mixedBayes(object, y, X, e, g, k, slope, loss)
 #' @return an object of class `mixedBayes.pred' is returned, which is a list with components:

@@ -116,8 +116,8 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     }
   
     # Convert to long format
-    y = reformat(k,y,type="r");g = reformat(k,g,type="d");e = reformat(k,e,type="d");w = reformat(k,w,type="d")
-    dat <- list(y = y, g = g, e  = e, w  = w ,X  = X, coef = betas_true)
+    y = reformat(k,y,type="r");g = reformat(k,g,type="d");e = reformat(k,e,type="d")
+    dat <- list(y = y, g = g, e  = e, X  = X, coef = betas_true)
     return (dat)
     }
     
@@ -288,8 +288,8 @@ With high-dimensional omics features, repeated measure ANOVA leads to longitudin
     }
   
     # Convert to long format
-    y = reformat(k,y,type="r");g = reformat(k,g,type="d");e = reformat(k,e,type="d");w = reformat(k,w,type="d")
-    dat <- list(y = y, g = g, e  = e, w  = w ,X  = X, coef = betas_true)
+    y = reformat(k,y,type="r");g = reformat(k,g,type="d");e = reformat(k,e,type="d")
+    dat <- list(y = y, g = g, e  = e, X  = X, coef = betas_true)
     return (dat)
     }
 

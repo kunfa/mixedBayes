@@ -20,18 +20,15 @@ mixedBayes(
 )
 }
 \arguments{
-\item{y}{a numeric vector of repeated-measure responses in long format.
-The current version only supports continuous response.}
+\item{y}{a numeric vector of repeated-measure responses in long format. The current version only supports continuous response.}
 
-\item{e}{the long-format design matrix for environment/treatment effects. In applications,
-this is a group of dummy variables encoding treatment levels.}
+\item{e}{the long-format matrix for environmental/treatment effects. In applications, this corresponds to a set of dummy variables encoding treatment levels.}
 
-\item{X}{the long-format design matrix, including an intercept and optionally
-time-related covariates.}
+\item{X}{the long-format matrix, including an intercept term and optionally time covariates.}
 
 \item{g}{the long-format matrix of genetic predictors.}
 
-\item{k}{integer. Number of repeated measurements per subject.}
+\item{k}{a positive integer. Number of repeated measurements per subject.}
 
 \item{iterations}{the number of MCMC iterations. The default value is 10,000.}
 
@@ -50,7 +47,7 @@ time-related covariates.}
 \value{
 An object of class \code{"mixedBayes"} is returned, which is a list with components:
 \item{posterior}{Posterior samples for fixed effects and random effects.}
-\item{coefficient}{Posterior median estimates of coefficients for fixed effects and random effects.}
+\item{coefficient}{Posterior median estimates of fixed effects and random effects.}
 \item{sparse}{Logical value indicating whether spike-and-slab priors were used.}
 \item{robust}{Logical value indicating whether the robust (quantile regression) model was used.}
 \item{slope}{Logical value indicating whether a random intercept-and-slope model was used.}
@@ -66,13 +63,15 @@ fit a Bayesian longitudinal regularized quantile mixed model
 \details{
 \strong{Data layout}
 
-Consider a longitudinal study with repeated measurements per subject. The response vector y
-and the design matrices X, e and g must all be provided in long format and share the same
+Consider a longitudinal study with repeated measurements per subject, where each subject has the same number of repeated measurements.
+
+The response vector y and the design matrices X, e and g must all be provided in long format and share the same
 row ordering. In practice, each row corresponds to one observation from a particular subject at a
 particular time point.
 
 The interaction terms between genetic and environmental factors (G×E) are constructed internally
 within the function and therefore do not need to be provided by the user.
+
 
 \strong{Model}
 

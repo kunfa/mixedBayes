@@ -1,14 +1,11 @@
 #' fit a Bayesian longitudinal regularized quantile mixed model
 #'
 #' @keywords models
-#' @param y a numeric vector of repeated-measure responses in long format.
-#'   The current version only supports continuous response.
-#' @param e the long-format design matrix for environment/treatment effects. In applications,
-#'   this is a group of dummy variables encoding treatment levels.
-#' @param X the long-format design matrix, including an intercept and optionally
-#'   time-related covariates.
+#' @param y a numeric vector of repeated-measure responses in long format. The current version only supports continuous response.
+#' @param e the long-format matrix for environmental/treatment effects. In applications, this corresponds to a set of dummy variables encoding treatment levels.
+#' @param X the long-format matrix, including an intercept term and optionally time covariates.
 #' @param g the long-format matrix of genetic predictors.
-#' @param k integer. Number of repeated measurements per subject.
+#' @param k a positive integer. Number of repeated measurements per subject.
 #' @param iterations the number of MCMC iterations. The default value is 10,000.
 #' @param burn.in the number of iterations for burn-in. If NULL, no burn-in is applied and all MCMC samples are retained. The default value is 5,000.
 #' @param slope logical flag. If TRUE, random intercept-and-slope model will be used. Otherwise, random intercept model will be used. The default value is TRUE.
@@ -18,7 +15,7 @@
 #' @param structure two choices are available. "bilevel" performs selection on both main effects and interaction effects corresponding to individual and group levels, whereas "individual" performs selections only on individual levels by ignoring the group structure.
 #' @return An object of class \code{"mixedBayes"} is returned, which is a list with components:
 #' \item{posterior}{Posterior samples for fixed effects and random effects.}
-#' \item{coefficient}{Posterior median estimates of coefficients for fixed effects and random effects.}
+#' \item{coefficient}{Posterior median estimates of fixed effects and random effects.}
 #' \item{sparse}{Logical value indicating whether spike-and-slab priors were used.}
 #' \item{robust}{Logical value indicating whether the robust (quantile regression) model was used.}
 #' \item{slope}{Logical value indicating whether a random intercept-and-slope model was used.}
@@ -31,13 +28,15 @@
 #' @details
 #' \strong{Data layout}
 #'
-#' Consider a longitudinal study with repeated measurements per subject. The response vector y
-#' and the design matrices X, e and g must all be provided in long format and share the same
+#' Consider a longitudinal study with repeated measurements per subject, where each subject has the same number of repeated measurements.
+#'
+#' The response vector y and the design matrices X, e and g must all be provided in long format and share the same
 #' row ordering. In practice, each row corresponds to one observation from a particular subject at a
 #' particular time point.
 #'
 #' The interaction terms between genetic and environmental factors (G×E) are constructed internally
 #' within the function and therefore do not need to be provided by the user.
+#'
 #'
 #' \strong{Model}
 #'

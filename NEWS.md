@@ -1,6 +1,10 @@
 
 ## News
 
+### mixedBayes 0.2.5 \[2026-04-23\]
+
+- Updated documentation to improve clarity.
+
 ### mixedBayes 0.2.4 \[2026-04-13\]
 
 - Added automatic generation of gene–environment (G×E) interaction terms in the `mixedBayes` and `predict_mixedBayes` functions.
