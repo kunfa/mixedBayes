@@ -22,8 +22,14 @@ NULL
 #' selection() takes a mixedBayes object and returns the variable selection results.
 #'
 #' @references
+#' Fan, K., Li, X., Devnath, S., Olson, B. and Wu, C. (2026). MixedBayes: An R Package for Longitudinal Gene–Environment Interaction Analysis Using Robust Sparse Bayesian Mixed Models.
+#' {\emph{Entropy}, 28(6), 649} \doi{10.3390/e28060649}
+#'
 #' Fan, K., Jiang, Y., Ma, S., Wang, W. and Wu, C. (2025). Robust Sparse Bayesian Regression for Longitudinal Gene-Environment Interactions.
 #' {\emph{Journal of the Royal Statistical Society Series C: Applied Statistics}, 74(5), 1372–1394} \doi{10.1093/jrsssc/qlaf027}
+#'
+#' Li, X., Fan, K., and Wu, C. (2025). Prioritizing Longitudinal Gene–Environment Interactions Using an FDR-Assisted Robust Bayesian Linear Mixed Model.
+#' {\emph{Algorithms}, 18(1), 728} \doi{10.3390/a18110728}
 #'
 #' Zhou, F., Ren, J.,  Li, G., Jiang, Y., Li, X., Wang, W. and Wu, C. (2019). Penalized Variable Selection for Lipid-Environment Interactions in a Longitudinal Lipidomics Study.
 #' {\emph{Genes}, 10(12), 1002} \doi{10.3390/genes10121002}

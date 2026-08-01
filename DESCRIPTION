@@ -1,8 +1,8 @@
 Package: mixedBayes
 Type: Package
 Title: Bayesian Longitudinal Regularized Quantile Mixed Model
-Version: 0.2.5
-Date: 2026-04-23
+Version: 0.2.6
+Date: 2026-08-01
 Authors@R: c( person("Kun", "Fan", role = c("aut", "cre") , email = "fzt0428@gmail.com"),
               person("Shejuty", "Devnath", role = "aut"),
               person("Cen", "Wu", role = "aut"))
@@ -14,4 +14,4 @@ URL: https://github.com/kunfa/mixedBayes
 BugReports: https://github.com/kunfa/mixedBayes/issues
 Imports: Rcpp
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.3.3
+Config/roxygen2/version: 8.0.0

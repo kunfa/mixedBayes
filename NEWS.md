@@ -1,6 +1,10 @@
 
 ## News
 
+### mixedBayes 0.2.6 \[2026-08-01\]
+
+- Updated references.
+
 ### mixedBayes 0.2.5 \[2026-04-23\]
 
 - Updated documentation to improve clarity.
